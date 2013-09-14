@@ -1,0 +1,8 @@
+---
+collections:
+  - files:
+      - chosen
+  - css:
+      - chosen/chosen.css
+  - js:
+      - chosen/chosen.jquery.min.js

@@ -1,0 +1,211 @@
+###
+Dependencies: FiveKit.Dropbox,
+              FiveKit.FileReader,
+              jQuery.exif.js
+###
+
+$ = jQuery
+window.FiveKit = {} unless window.FiveKit
+
+class window.FiveKit.Previewer
+
+  # XXX: we may use dom hash to save these dom element objects
+  # dom: {}
+
+  constructor : (@options) ->
+    @fileInput = $(@options.el)
+    @fieldName = @fileInput.attr('name')
+
+    # create hidden input
+    @hiddenInput = @createHiddenInput(@fieldName)
+
+
+    @widgetContainer = @fileInput.parents(".formkit-widget-thumbimagefile")
+    @cover = @widgetContainer.find(".formkit-image-cover")
+
+    # find cover image (note that cover wrapper can be empty)
+    @coverImage = @cover.find('img')
+
+    @autoresizeCheckbox = @widgetContainer.find('.autoresize-checkbox')
+    @autoresizeTypeSelector = @widgetContainer.find('.autoresize-type-selector')
+
+    @initialize()
+
+  initialize : () ->
+    # .formkit-widget-thumbimagefile (original)
+    @fileInput.on "change", (e) =>
+      @use "file"
+      @renderPreviewImage(e.target.files[0]) if e.target.files?[0]
+      # if the user select file from local, then make 'hidden' Value the same with FileInput
+      # to make sure data key-value table would get the same value
+      #
+      # We have C:\fakepath problem here
+      # Some browsers is preventing users to get file input value from js.
+      # @hiddenInput.val(    )
+    @fileInput.after( @hiddenInput )
+
+
+    # resize preview cover
+    d = @getImageDimension()
+
+    # create dropzone
+    dropzone = $('<div/>').addClass('image-dropzone')
+    @cover.before dropzone
+
+    defaultDimension = { width: 240, height: 120 }
+
+    @cover.css d or defaultDimension
+    dropzone.css d or defaultDimension
+
+    # create image holder
+    if not @coverImage.get(0)
+      @insertImageHolder(d)
+    else
+      @scaleCoverImageByDefault(d) if d
+      # image cover html generated from backend does not contains
+      # remove button and exif button.
+      @initCoverController()
+
+    # Finally, setup the dropbox uploader
+    @initDropbox dropzone
+
+  insertImageHolder: (d) ->
+    return unless d and d?.width and d?.height
+    return if window.navigator.userAgent.match(/MSIE 8/)
+    holdertheme = "social"
+    imageholder = $('<img/>').attr "data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/")
+    @cover.append imageholder
+    Holder.run images: imageholder.get(0)
+
+  getImageDimension: () ->
+    [w, h] = [@fileInput.data('width'), @fileInput.data('height')]
+    if w and h
+      return {
+        width: w
+        height: h
+      }
+
+  removeCoverImage: () -> @cover.empty()
+
+  createHiddenInput: (name) ->
+    # .formkit-widget-thumbimagefile-hidden
+    # create a hiddenFileInput for later use
+    # why we have to reassign name attribute is because the form would use a key-value mapping 
+    # to store fileds' information
+    $input = $('<input type="hidden" class="formkit-widget-thumbimagefile-hidden">')
+    return $input
+
+  initDropbox: (dropzone) ->
+    # set + create DOM
+    progress = $('<div/>').addClass("upload-progress")
+    progress.hide().appendTo @widgetContainer
+
+    @uploader = new FiveKit.DropBoxUploader
+      el : dropzone
+      queueEl : progress
+
+      # hide the queue first
+      onDrop : (e) =>
+        progress.empty().show()
+        @renderPreviewImage(e.dataTransfer.files[0]) if ( e.dataTransfer.files?[0] )
+
+      # change with the img src from server
+      onTransferComplete : (e, result) =>
+        @use('hidden')
+
+        remotePath = result.data?.file
+        if result.success and remotePath
+          @renderUploadImage(remotePath)
+        else if result.error
+          @removeCoverImage()
+          @insertImageHolder( @getImageDimension() )
+
+        # fadeOut progress container after 1.2 second
+        setTimeout (->
+          progress.fadeOut()
+        ), 1200
+
+  # runAction use 'name' attribute to recognize the which feild is going to be sent to server,
+  # so we have to make 'name' attribute unique in previewer
+  use: (type) ->
+    if type is 'hidden'
+      @hiddenInput.attr('name', @fieldName)
+      @fileInput.attr('name', '')
+      @fileInput.hide()
+    else if type is 'file'
+      @fileInput.attr('name', @fieldName)
+      @fileInput.show()
+      @hiddenInput.attr('name', '')
+
+  scaleCoverImageByMaxWidth: (d) ->
+    @coverImage.css { width: '100%', height: 'auto' } if @coverImage.width() > d.width
+
+  scaleCoverImageByMaxHeight: (d) ->
+    @coverImage.css { height: '100%', width: 'auto' } if @coverImage.height() > d.height
+
+  scaleCoverImageByFullScale: (d) ->
+    $(img).css { height: '100%', width: '100%' }
+
+  scaleCoverImageByDefault: (d) ->
+    if d and typeof @coverImage isnt "undefined"
+      if @coverImage.height() > d.height
+        @coverImage.css { height: '100%', width: 'auto' }
+      if @coverImage.width() > d.width
+        @coverImage.css { width: '100%', height: 'auto' }
+
+  # src: image src path
+  renderCoverImage: (src) ->
+    # first cleanup existing cover image
+    @removeCoverImage()
+    self = this
+
+    d = @getImageDimension()
+    @coverImage = $('<img/>').appendTo @cover
+    @coverImage.hide()
+
+    # for IE7 or upper, we should setup the load handler before we set the image source.
+    @coverImage.on 'load', ->
+      $(this).exifLoad()
+      self.scaleCoverImageByDefault(d) if d
+      $(this).fadeIn()
+    @coverImage.attr('src', src)
+    @initCoverController()
+    return @coverImage
+
+  initCoverController: () ->
+    removeButton = $('<div class="close"></div>').css('zIndex', 1000)
+    removeButton.on 'click', (e) =>
+      @removeCoverImage()
+      @use "file"
+      @insertImageHolder( @getImageDimension() )
+    @cover.append removeButton
+
+    if @fileInput.data('exif')
+      exifButton = $('<div/>').addClass('exif').css('zIndex', 1000).appendTo @cover
+      exifButton.on 'click', (e) ->
+      exifData = $(this).exifPretty()
+      if $.isEmptyObject( exifData ) or not exifData
+          exifData = "No EXIF information"
+      alert exifData
+
+  renderUploadImage: (src) ->
+    # the uploaded image path is relative, such as "static/upload/product1.png"
+    # so we should prepend a prefix
+    @renderCoverImage "/" + src
+    @hiddenInput.val src
+
+  # use file api to render preview image before the file is uploaded.
+  # @file: local file path from drop elements
+  renderPreviewImage : (file) ->
+    # we can renderPreviewImage from input.onChange or dropzone.onDrop
+    filereader = new FiveKit.FileReader
+      onLoaded : (e) =>
+        @renderCoverImage( e.target.result )
+        # take off original thumbimagefile input for uploading
+        @fileInput.hide()
+    filereader.read( file )
+
+# combine with formkit
+FormKit.register (e, scopeEl) ->
+  $(scopeEl).find('.formkit-widget-thumbimagefile input[data-droppreview=true]').each (i, fileInput) ->
+    new FiveKit.Previewer {el : $(fileInput)}

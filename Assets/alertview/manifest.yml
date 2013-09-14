@@ -1,0 +1,6 @@
+---
+collections:
+  - js:
+    - alert_view.min.js
+  - css:
+    - alert_view.css

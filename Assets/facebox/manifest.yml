@@ -1,0 +1,8 @@
+---
+collections:
+  - files:
+    - src/
+  - js:
+    - src/facebox.js
+  - css:
+    - src/facebox.css

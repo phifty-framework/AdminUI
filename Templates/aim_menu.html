@@ -1,0 +1,115 @@
+{#
+vim:filetype=htmldjango:
+#}
+<div id="adminAimMenu">
+    <ul id="nav">
+    {% for menuItem in AdminUI.Menu.menuItems %}
+        {% if menuItem.isMenuFolder() %}
+            <li data-submenu="#{{ menuItem.id }}" class="menufolder"><a class="menufolder">{{menuItem.label}}</a></li>
+        {% elseif menuItem.isMenuItem() %}
+            <li class="menuitem"><a class="menuitem" {{menuItem.renderAttributes()|raw}}>{{menuItem.label}}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+
+    <div class="nav-indicator" style="display: none;"> </div>
+
+    {% for menuItem in AdminUI.Menu.menuItems %}
+        {% if menuItem.isMenuFolder() %}
+            <div id="{{menuItem.id}}" class="subnav">
+                {% if menuItem.menuItems %}
+                <ul>
+                {% for subMenuItem in menuItem.menuItems %}
+                    <li class="menuitem">
+                        <a class="menuitem" {{subMenuItem.renderAttributes()|raw}}>{{subMenuItem.label}}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<script type="text/javascript">
+$(function() {
+    var $menuContainer = $('#adminAimMenu');
+    var $menu = $menuContainer.find('ul#nav');
+    var $indicator = $('.nav-indicator');
+
+    $menuContainer.fadeOut();
+    $('#aimMenuStart').click(function(e) {
+        $menuContainer.toggle('fade');
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    // $menu.find('a.menufolder').click(function() { return false; });
+
+    $menuContainer.find('a.menuitem').click(function(e) {
+        var $a = $(this);
+        $menuContainer.find('a.nav-active').removeClass('nav-active');
+        $a.addClass('nav-active');
+        $menuContainer.fadeOut('fast');
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    $(document).click(function() {
+        // Simply hide the submenu on any click. Again, this is just a hacked
+        // together menu/submenu structure to show the use of jQuery-menu-aim.
+        $menuContainer.css("display", "none");
+        $menuContainer.fadeOut('fast');
+    });
+
+    function activateSubmenu(row) {
+        var $row = $(row),
+            offset = $menu.offset(),
+            height = $menu.outerHeight(),
+            width = $menu.outerWidth();
+        var submenuId = $(row).data('submenu')
+        var $submenu = $(submenuId);
+        var rowOffset = $row.offset();
+
+        // Show the submenu
+        $submenu.css({
+            display: "block"
+            // top: offset.top,
+            // top: 0,
+            // left: offset.left + width - 5,  // main should overlay submenu
+            // height: $menu.height()
+        });
+        var $a = $row.find("a");
+
+        if ( $a.hasClass("menufolder") ) {
+            $indicator.css({
+                display: "block",
+                top: rowOffset.top - $indicator.outerHeight() - 4,
+                left: offset.left + width - 20  // main should overlay submenu
+            });
+        } else {
+            $indicator.css({
+                display: "none"
+            });
+        }
+
+        // Keep the currently activated row's highlighted look
+        $a.addClass("nav-hover");
+    }
+    function deactivateSubmenu(row) {
+        var $row = $(row),
+            offset = $menu.offset(),
+            height = $menu.outerHeight(),
+            width = $menu.outerWidth();
+        var submenuId = $(row).data('submenu')
+        var $submenu = $(submenuId);
+        $submenu.hide();
+        $row.find("a").removeClass("nav-hover");
+    }
+
+    // initialize the aim menu
+    $menu.menuAim({
+        activate: activateSubmenu,
+        deactivate: deactivateSubmenu
+    });
+});
+</script>

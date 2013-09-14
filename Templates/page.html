@@ -1,0 +1,94 @@
+{#
+vim:filetype=htmldjango
+#}
+{% extends '@AdminUI/base.html' %}
+
+{% block head %}
+    {{ parent() }}
+    <script>
+        $(function() {
+            // initialize Locale
+            Locale.init({ lang: 'zh_tw' , dict_path: '/static/dict/' });
+            
+            jQuery('.date-picker').datepicker({ dateFormat: 'yy-mm-dd' });
+            Action.plug( ActionGrowler );
+            // jQuery("select, input:submit, input:button, input:text, input:checkbox, input:radio, input:file").uniform();
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+
+{% block header %} {% endblock %}
+
+{% block operation %}
+<div id="operation">  
+
+    {% block menubar %}
+        <div class="left">
+            {% if AdminUI.config('homeLink') %}
+                <a class="button" href="{{ AdminUI.config('homeLink')|raw}}">{% trans 'Home' %}</a>
+            {% endif %}
+            {% if AdminUI.config('menuStyle') == "aim" %}
+                <a id="aimMenuStart" class="button">Menu</a>
+            {% endif %}
+        </div>
+    {% endblock %}
+
+
+    <img class="logo" src="/assets/phifty-core/images/lart-logo.jpg"/>
+    <div class="logo-text"> 
+        {% block logo_text %}
+        {{ appname }} v{{ Kernel.getVersion }}
+        {% endblock %}
+    </div>
+
+
+    {% block operation_buttons %}
+
+    <div class="buttons">
+        <form style=" display: inline; margin:0; padding:0; " name="lang_select" method="post">
+            <input type="hidden" name="action" value="I18N::Action::ChooseLang"/>
+            {% set currentLang = Kernel.locale.current %}
+            {% set langList = Kernel.locale.getLangList %}
+            <select name="lang" onchange=" this.form.submit();" style="margin:0;">
+                {% for langId,label in langList %}
+                    <option value="{{ langId }}" {% if langId == currentLang %} selected {% endif %}>{{ label }} </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        {% if Kernel.currentUser.isLogged() %}
+            <a class="button" href="/bs/logout">{% trans 'Logout' %}</a>
+        {% else %}
+            <a class="button" href="/bs/login">{% trans 'Login' %}</a>
+        {% endif %}
+
+        {# <a href="" onclick=" $('#search-form').slideDown(); return false;" >{% trans 'Search' %}</a> #}
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}
+
+    <div class="clear"> </div>
+
+{% block content %}
+
+    {% if not Request.param('in_window') %}
+        {% include AdminUI.config('menuTemplate') %}
+    {% endif %}
+
+    {# provide #panel, so that we can load by ajax #}
+    <div id="panel" class="admin-panel{% if Request.param('in_window') %}-in-window{% endif %}">
+        {% block admin_panel %}
+            {% if Action.results %}
+                {% for name, result in Action.results %}
+                    {{ Web.render_result( name ) | raw }}
+                {% endfor %}
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% endblock %}{# end of body #}

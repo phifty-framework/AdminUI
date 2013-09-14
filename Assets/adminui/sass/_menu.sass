@@ -1,0 +1,158 @@
+@import "compass/css3"
+
+#adminAimMenu
+  position: absolute
+  left: 2px
+  top: 35px
+  z-index: 1100
+  overflow: visible
+
+  ul#nav
+    border-right: 1px solid #ccc
+    float: left
+    width: 160px
+    z-index: 1000
+    // @include border-radius(5px)
+    @include background-image(linear-gradient(color-stops(#fff,#f2f2f2)))
+    @include box-shadow(0px 0px 5px #555)
+    @include border-radius(5px)
+
+  .subnav
+    z-index: 999
+    float: left
+    // position: absolute
+    // left: 160px
+    display: none
+    background: #fff
+    width: 180px
+    border: 1px solid #ccc
+    @include background-image(linear-gradient(color-stops(#fff,#f2f2f2)))
+    @include box-shadow(0px 0px 5px #555)
+    @include border-radius(5px)
+  .nav-indicator
+    position: absolute
+    width: 13px
+    height: 18px
+    z-index: 1000
+    background: url(../images/nav-indicator.png) center center no-repeat
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+
+  ul > li:first-child a:first-child
+    @include border-radius(5px 5px 0 0)
+  ul > li:last-child a:last-child
+    @include border-radius(0 0 5px 5px)
+
+  ul li
+    color: #333
+    display: block
+    a, a:link, a:active, a:hover
+      padding: 8px 10px
+      display: block
+      color: #333
+      font-size: 14px
+      text-decoration: none
+      background: #fff
+      border-bottom: 1px solid #eee
+    a.menufolder
+      @include background-image(linear-gradient(color-stops(#fff,#f2f2f2)))
+      border-bottom: 1px solid #ccc
+    a.menuitem
+      background: #eee
+
+    a:hover,
+    a.nav-hover
+      color: #62b1d0
+    a.nav-active
+      background: #62b1d0
+      color: #fff
+
+// Default Menu Style
+.admin-menu
+  position: static
+  float: left
+  width: 17%
+  min-width: 180px
+  margin: 0px
+  background-color: #eee
+  border-right: 1px solid #aaaaaa
+  display: block
+  box-shadow: 2px 5px 10px 2px #111111
+  ul
+    margin: 0px
+    padding: 0px
+    list-style: none
+    background-color: #ccc
+    border-radius: 0 0 10px 10px
+  li
+    a
+      display: block
+      text-decoration: none
+    &.subtitle a
+      padding: 4px 8px
+      background: #e8e8e8
+      color: #444
+      text-shadow: #eeeeee 1px 1px
+      border-bottom: 1px solid #cccccc
+      text-transform: uppercase
+      border: 1px solid #3483a6
+      background: #5e87b0
+      color: white
+      font-weight: bold
+      text-shadow: 0 1px 1px #3e6790
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#62b9e0), to(#2c708e))
+      background-image: -webkit-linear-gradient(#62b9e0, #2c708e)
+      background-image: -moz-linear-gradient(#62b9e0, #2c708e)
+      background-image: -ms-linear-gradient(#62b9e0, #2c708e)
+      background-image: -o-linear-gradient(#62b9e0, #2c708e)
+      background-image: linear-gradient(#62b9e0, #2c708e)
+    &.menuitem
+      a
+        font-family: Helvetica, Arial, sans-serif
+        border: 1px solid #cccccc
+        border-width: 0
+        border-bottom-width: 1px
+        background: #eee
+        font-weight: bold
+        color: #222
+        text-shadow: 0 1px 0 white
+        background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#f1f1f1))
+        background-image: -webkit-linear-gradient(white, #f1f1f1)
+        background-image: -moz-linear-gradient(white, #f1f1f1)
+        background-image: -ms-linear-gradient(white, #f1f1f1)
+        background-image: -o-linear-gradient(white, #f1f1f1)
+        background-image: linear-gradient(white, #f1f1f1)
+        font-size: 14px
+        padding: 9px 10px
+        &:hover
+          background-color: #3AA6D0
+          background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#cccccc))
+          background: -webkit-linear-gradient(#99ccdd, #3aa6d0)
+          background: -ms-linear-gradient(#99ccdd, #3aa6d0)
+          background: -moz-linear-gradient(top, #99ccdd, #3aa6d0)
+          background: -o-linear-gradient(#99ccdd, #3aa6d0)
+          background: linear-gradient(#99ccdd, #3aa6d0)
+          /* W3C
+          border-color: #999
+          color: #eee
+          -webkit-text-shadow: #333333 1px 1px
+          -moz-text-shadow: #333333 1px 1px
+          -o-text-shadow: #333333 1px 1px
+          text-shadow: #333333 1px 1px
+      &.active a
+        background-color: #3AA6D0
+        background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#cccccc))
+        background: -webkit-linear-gradient(#99ccdd, #3aa6d0)
+        background: -ms-linear-gradient(#99ccdd, #3aa6d0)
+        background: -moz-linear-gradient(top, #99ccdd, #3aa6d0)
+        background: -o-linear-gradient(#99ccdd, #3aa6d0)
+        background: linear-gradient(#99ccdd, #3aa6d0)
+        /* W3C
+        border-color: #999
+        color: #eee
+        -webkit-text-shadow: #333333 1px 1px
+        -moz-text-shadow: #333333 1px 1px
+        -o-text-shadow: #333333 1px 1px
+        text-shadow: #333333 1px 1px

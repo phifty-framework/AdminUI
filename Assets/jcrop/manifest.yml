@@ -1,0 +1,9 @@
+---
+collections:
+  - files:
+    - css/Jcrop.gif
+  - css:
+    - css/jquery.Jcrop.css
+  - js:
+    - js/jquery.color.js
+    - js/jquery.Jcrop.js

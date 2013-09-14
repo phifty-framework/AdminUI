@@ -1,0 +1,8 @@
+---
+#  resource:
+#    github: krewenki/jquery-lightbox
+collections:
+  - css:
+    - jquery-lightbox/css/lightbox.css
+  - js:
+    - jquery-lightbox/jquery.lightbox.js

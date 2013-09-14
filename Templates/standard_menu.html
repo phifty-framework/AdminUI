@@ -1,0 +1,25 @@
+<div class="admin-menu">
+<ul>
+{% for menuItem in AdminUI.Menu.menuItems %}
+    {% if menuItem.isMenuFolder() %}
+        <li class="subtitle"><a class="menu-title">{{menuItem.label}}</a></li>
+        {% if menuItem.menuItems %}
+        <ul class="menu-section">
+            {% for subMenuItem in menuItem.menuItems %}
+                <li class="menuitem">
+                    <a {{subMenuItem.renderAttributes()|raw}}>{{subMenuItem.label}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% elseif menuItem.isMenuItem() %}
+        <li class="subtitle"><a class="menu-title">{{menuItem.label}}</a></li>
+        <ul class="menu-section">
+        <li class="menuitem">
+            <a {{menuItem.renderAttributes()|raw}}>{{menuItem.label}}</a>
+        </li>
+        </ul>
+    {% endif %}
+{% endfor %}
+</ul>
+</div>

@@ -1,0 +1,10 @@
+---
+collections:
+  - files:
+    - css
+    - images
+  - css:
+    - css/animate.css
+    - css/adminui.css
+  - js:
+    - js/adminui.js

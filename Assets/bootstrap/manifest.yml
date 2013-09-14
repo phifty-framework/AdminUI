@@ -1,0 +1,9 @@
+---
+collections:
+  - files:
+    - img
+  - js:
+    - js/bootstrap.min.js
+  - css:
+    - css/bootstrap.min.css
+    - css/bootstrap-responsive.min.css
