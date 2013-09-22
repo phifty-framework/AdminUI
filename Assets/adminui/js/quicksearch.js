@@ -4,40 +4,70 @@
 
   QuickBox = (function() {
     function QuickBox() {
-      var filterItems, firstMateched, items, li, lis, tHandle, _i, _len,
+      var filterItems, items, li, lis, tHandle, _i, _len,
         _this = this;
-      lis = document.querySelectorAll('.quick-box ul > li');
+      this.selected = 0;
+      this.container = document.querySelector('.quick-box');
+      lis = this.container.querySelectorAll('ul > li');
       items = [];
       for (_i = 0, _len = lis.length; _i < _len; _i++) {
         li = lis[_i];
         items.push(li);
       }
-      firstMateched = null;
+      this.firstMatched = items[0];
+      this.filteredItems = items;
       filterItems = function(keyword) {
-        var desc, item, title, _j, _len1, _results;
-        firstMateched = null;
+        var item, _j, _len1, _results;
+        keyword = keyword.toLowerCase();
+        _this.filteredItems = [];
+        _this.firstMatched = null;
+        _this.selected = 0;
         _results = [];
         for (_j = 0, _len1 = items.length; _j < _len1; _j++) {
           item = items[_j];
-          title = item.querySelector('.title').innerHTML;
-          desc = item.querySelector('.desc').innerHTML;
-          if (title.indexOf(keyword) !== -1 || desc.indexOf(keyword) !== -1) {
-            if (!firstMateched) {
-              firstMateched = item;
+          _results.push((function(item) {
+            var $item, desc, title;
+            $item = $(item);
+            $item.removeClass("select");
+            title = item.querySelector('.title').innerHTML.toLowerCase();
+            desc = item.querySelector('.desc').innerHTML.toLowerCase();
+            if (title.indexOf(keyword) !== -1 || desc.indexOf(keyword) !== -1) {
+              if (!_this.firstMatched) {
+                _this.firstMatched = item;
+              }
+              _this.filteredItems.push(item);
+              return $item.removeClass('out');
+            } else {
+              return $item.addClass('out');
             }
-            _results.push(item.style.display = "block");
-          } else {
-            _results.push(item.style.display = "none");
-          }
+          })(item));
         }
         return _results;
       };
       tHandle = null;
       this.input = $('.quick-box .quicksearch-input');
       this.input.keydown(function(e) {
-        var keyword;
+        var keyword, selected;
         if (e.keyCode === 13) {
-          $(firstMateched).find('a').triggerHandler('click');
+          selected = _this.container.querySelector('li.select');
+          if (selected) {
+            $(selected).find('a').triggerHandler('click');
+            return false;
+          } else {
+            $(_this.firstMatched).find('a').triggerHandler('click');
+            return false;
+          }
+        } else if (e.keyCode === 38) {
+          $(_this.container.querySelector('li.select')).removeClass('select');
+          if (_this.selected > 0) {
+            _this.selected--;
+            $(_this.filteredItems[_this.selected - 1]).addClass('select');
+          }
+          return false;
+        } else if (e.keyCode === 40) {
+          $(_this.container.querySelector('li.select')).removeClass('select');
+          _this.selected++;
+          $(_this.filteredItems[_this.selected - 1]).addClass('select');
           return false;
         }
         keyword = e.currentTarget.value;

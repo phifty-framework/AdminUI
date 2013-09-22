@@ -1,35 +1,62 @@
 # vim:sw=2:ts=2:sts=2:
 class QuickBox
   constructor: () ->
+    @selected = 0
+    @container = document.querySelector('.quick-box')
 
-    lis = document.querySelectorAll('.quick-box ul > li')
+    lis = @container.querySelectorAll('ul > li')
     items = []
-    for li in lis
-        items.push(li)
+    items.push(li) for li in lis
 
-    firstMateched = null
-    filterItems = (keyword) ->
-      firstMateched = null
+    @firstMatched = items[0]
+    @filteredItems = items
+    filterItems = (keyword) =>
+      keyword = keyword.toLowerCase()
+      # reset
+      @filteredItems = []
+      @firstMatched = null
+      @selected = 0
       for item in items
-        title = item.querySelector('.title').innerHTML
-        desc = item.querySelector('.desc').innerHTML
-        if title.indexOf(keyword) != -1 || desc.indexOf(keyword) != -1
-          firstMateched = item unless firstMateched
-          item.style.display = "block"
-        else
-          item.style.display = "none"
+        do (item) =>
+          $item = $(item)
+          $item.removeClass("select")
+          title = item.querySelector('.title').innerHTML.toLowerCase()
+          desc = item.querySelector('.desc').innerHTML.toLowerCase()
+          if title.indexOf(keyword) != -1 || desc.indexOf(keyword) != -1
+            @firstMatched = item unless @firstMatched
+            @filteredItems.push item
+            $item.removeClass('out')
+          else
+            $item.addClass('out')
     tHandle = null
     @input = $('.quick-box .quicksearch-input')
     @input.keydown (e) =>
       if e.keyCode is 13
-        $(firstMateched).find('a').triggerHandler('click')
+        selected = @container.querySelector('li.select')
+        if selected
+          $(selected).find('a').triggerHandler('click')
+          return false
+        else
+          $(@firstMatched).find('a').triggerHandler('click')
+          return false
+      else if e.keyCode is 38
+        $(@container.querySelector('li.select')).removeClass('select')
+        if @selected > 0
+          @selected--
+          $(@filteredItems[ @selected-1 ]).addClass('select')
+        return false
+      else if e.keyCode is 40
+        $(@container.querySelector('li.select')).removeClass('select')
+        @selected++
+        $(@filteredItems[ @selected-1 ]).addClass('select')
         return false
 
+      # update list
       keyword = e.currentTarget.value;
       clearTimeout(tHandle) if tHandle
-      tHandle = setTimeout((=>
-          filterItems(@input.val())
-      ), 50)
+      tHandle = setTimeout (=>
+        filterItems(@input.val())
+      ), 50
 
     $('.quick-box-overlay').click (e) => @hide()
     $('.quick-box a').click (e) =>
@@ -48,6 +75,7 @@ class QuickBox
     $('.quick-box').addClass('in')
     @input.focus()
     @input.select()
+
   hide: () ->
     $('.quick-box').removeClass('in')
     $('.quick-box-wrapper').hide()

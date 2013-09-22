@@ -380,6 +380,15 @@ ul.actionkit-checkbox-view
   100%
     @include transform(rotateY(0deg))
 
+@include keyframes(flip-x-out)
+  0%
+    @include transform(rotateX(180deg))
+    @include opacity(0)
+  100%
+    @include transform(rotateX(0deg))
+    @include opacity(1)
+    display: none
+
 .quick-box-wrapper
   -webkit-perspective: 1000
   perspective: 1000
@@ -428,8 +437,10 @@ ul.actionkit-checkbox-view
     @include animation-duration(0.8s)
     @include opacity(1)
 
+  $roundColor: #cdb96d
+
   .quick-box-inner
-    @include border-radius(20px)
+    @include border-radius(0px)
 
   .quick-box-header
     @include border-radius(20px 20px 0 0)
@@ -447,8 +458,20 @@ ul.actionkit-checkbox-view
       margin: 0
       padding: 4px 0
 
+  .quick-box-footer
+    border-top: 1px solid $roundColor
+    @include border-radius(0 0 20px 20px)
+    background: #ffffff
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%)
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff))
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%)
+    background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%)
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%)
+    background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%)
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 )
+    height: 22px
 
-  $roundColor: #cdb96d
+
 
   .quicksearch-box
     border-top: 1px solid $roundColor
@@ -480,16 +503,35 @@ ul.actionkit-checkbox-view
     color: #b0b0b0
 
   ul
-    @include border-radius(0 0 20px 20px)
+    // @include border-radius(0 0 20px 20px)
+    @include border-radius(0)
     list-style: none
     overflow: auto
     max-height: 400px
-    min-height: 10px
+    min-height: 1px
+    margin: 0
+    padding: 0
 
   li
     list-style: none
     display: block
     border-bottom: 1px solid #c0c0c0
+    height: auto
+    margin: 0
+    padding: 0
+
+    // @include transition(transform 0.5s ease-out)
+    // @include opacity(1)
+    // @include transform(rotateX(0deg))
+
+    &.out
+      // @include animation(flip-x-out 0.5s)
+      display: none
+      // @include opacity(0)
+      // @include transform(rotateX(90deg))
+      // height: 0px
+      // overflow: hidden
+
     a
       color: #666
       text-decoration: none
@@ -506,6 +548,7 @@ ul.actionkit-checkbox-view
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 )
       display: block
 
+    &.select > a,
     a:hover
       color: #fff
       background: #ebf1f6
@@ -534,6 +577,5 @@ ul.actionkit-checkbox-view
       font-size: 12px
       display: block
       margin-left: 42px
-
 
 
