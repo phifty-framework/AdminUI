@@ -13,6 +13,7 @@ vim:filetype=htmldjango:
     <meta name="content" content="Content-Type: text/html; Charset: UTF-8; " />
     <meta name="keywords" content="{{ Page.Keywords }}" />
     <meta name="description" content="{{ Page.Description }}"/>
+    <link href='http://fonts.googleapis.com/css?family=Prociono' rel='stylesheet' type='text/css'>
 
     <title>{% block title %}{{ title|default(appname) }}{% endblock %}</title>
     {{ Web.include_loaded_assets('adminui-page') |raw}}
@@ -30,5 +31,40 @@ vim:filetype=htmldjango:
 {% block body %}
 
 {% endblock %}
+
+<script>
+$(function() {
+    $('.quick-box').addClass('in');
+});
+</script>
+
+<div class="quick-box">
+    <div class="quick-box-inner">
+        <div class="quick-box-header">
+            <h2>Quick Search</h2>
+        </div>
+        <div class="quicksearch-box">
+            <input class="quicksearch-input" type="text" placeholder="Quick Search Here..."/>
+        </div>
+        <ul>
+            {% for i in 1..20 %}
+            <li>
+                <a>
+                    <div class="icon icon-credit-card"> </div>
+                    <span class="title">Product</span>
+                    <span class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices, nibh ac feugiat lacinia, leo tellus hendrerit mi</span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <div class="icon icon-credit-card"> </div>
+                    <span class="title">Product &gt; Product Category</span>
+                    <span class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices, nibh ac feugiat lacinia, leo tellus hendrerit mi</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 </body>
 </html>
