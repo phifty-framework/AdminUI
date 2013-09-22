@@ -1531,7 +1531,8 @@ div.notify {
     border-radius: 0 0 20px 20px;
     list-style: none;
     overflow: auto;
-    height: 400px; }
+    max-height: 400px;
+    min-height: 10px; }
   .quick-box li {
     list-style: none;
     display: block;
