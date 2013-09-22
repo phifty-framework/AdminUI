@@ -1522,9 +1522,9 @@ div.notify {
     padding: 0;
     line-height: 200%; }
   .quick-box input::-webkit-input-placeholder {
-    color: #e0e0e0; }
+    color: #b0b0b0; }
   .quick-box input::-moz-input-placeholder {
-    color: #e0e0e0; }
+    color: #b0b0b0; }
   .quick-box ul {
     -webkit-border-radius: 0;
     -moz-border-radius: 0 0 20px 20px;
