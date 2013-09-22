@@ -1,0 +1,60 @@
+<div class="quick-box-wrapper">
+    <div class="quick-box-overlay"> </div>
+    <div class="quick-box">
+        <div class="quick-box-inner">
+            <div class="quick-box-header">
+                <h2>Quick Search</h2>
+            </div>
+            <div class="quicksearch-box">
+                <input class="quicksearch-input" type="text" placeholder="Quick Search Here..."/>
+            </div>
+            <ul>
+
+                {% for menuItem in AdminUI.Menu.menuItems %}
+
+                    {% if menuItem.isMenuFolder() %}
+                        {% for subMenuItem in menuItem.menuItems %}
+                            <li>
+                                <a {{subMenuItem.renderAttributes()|raw}}>
+                                    <div class="icon icon-credit-card"> </div>
+                                    {# <span class="title">{{menuItem.label}} &gt; {{subMenuItem.label}}</span> #}
+                                    <span class="title">{{subMenuItem.label}}</span>
+                                    <span class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices, nibh ac feugiat lacinia, leo tellus hendrerit mi</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% elseif menuItem.isMenuItem() %}
+                            <li>
+                                <a {{menuItem.renderAttributes()|raw}}>
+                                    <div class="icon icon-credit-card"> </div>
+                                    <span class="title">{{menuItem.label}}</span>
+                                    <span class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices, nibh ac feugiat lacinia, leo tellus hendrerit mi</span>
+                                </a>
+                            </li>
+                    {% endif %}
+
+                {% endfor %}
+
+                {#
+                <li>
+                    <a>
+                        <div class="icon icon-credit-card"> </div>
+                        <span class="title">Product &gt; Product Category</span>
+                        <span class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices, nibh ac feugiat lacinia, leo tellus hendrerit mi</span>
+                    </a>
+                </li>
+                #}
+            </ul>
+            <div class="quick-box-footer"> </div>
+        </div>
+    </div>
+
+</div>
+<script>
+$(function() {
+    var qbox = new QuickBox;
+    $('#menuBtn').click(function() {
+        qbox.show();
+    });
+});
+</script>
