@@ -1321,6 +1321,134 @@ div.notify {
 
   .admin-panel {
     width: 98%; } }
+@-webkit-keyframes flip-in {
+  0% {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+
+  10% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg); }
+
+  100% {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg); } }
+
+@-moz-keyframes flip-in {
+  0% {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+
+  10% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg); }
+
+  100% {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg); } }
+
+@-ms-keyframes flip-in {
+  0% {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+
+  10% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg); }
+
+  100% {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg); } }
+
+@keyframes flip-in {
+  0% {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0; }
+
+  10% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg); }
+
+  100% {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg); } }
+
+.quick-box-wrapper {
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  z-index: 1000; }
+
+.quick-box-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  background: #333333;
+  z-index: 100; }
+
 .quick-box {
   background: white;
   border: 2px solid #d0d0d0;
@@ -1328,43 +1456,29 @@ div.notify {
   top: 20%;
   left: 10%;
   right: 10%;
-  -webkit-perspective: 400px;
-  -webkit-transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  -o-transition: all 0.4s ease-out;
-  transition: all 0.4s ease-out;
-  -webkit-transform: rotateX(80deg);
-  -moz-transform: rotateX(80deg);
-  -ms-transform: rotateX(80deg);
-  -o-transform: rotateX(80deg);
-  transform: rotateX(80deg);
-  -webkit-transform: rotateY(80deg);
-  -moz-transform: rotateY(80deg);
-  -ms-transform: rotateY(80deg);
-  -o-transform: rotateY(80deg);
-  transform: rotateY(80deg);
+  z-index: 101;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
-  -webkit-box-shadow: 0 0 8px 8px #333333;
-  -moz-box-shadow: 0 0 8px 8px #333333;
-  box-shadow: 0 0 8px 8px #333333;
-  -webkit-backface-visibility: visible;
+  -webkit-box-shadow: 0 0 5px white;
+  -moz-box-shadow: 0 0 5px white;
+  box-shadow: 0 0 5px white;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
-  -webkit-transform-style: preserve-3d;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-origin: center center;
   font-family: "Prociono", serif; }
   .quick-box.in {
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg);
-    transform: rotateY(0deg);
-    -webkit-transform: rotateX(0deg);
-    -moz-transform: rotateX(0deg);
-    -ms-transform: rotateX(0deg);
-    -o-transform: rotateX(0deg);
-    transform: rotateX(0deg);
+    -webkit-animation-name: flip-in;
+    -moz-animation-name: flip-in;
+    -o-animation-name: flip-in;
+    animation-name: flip-in;
+    -webkit-animation-duration: 0.8s;
+    -moz-animation-duration: 0.8s;
+    -o-animation-duration: 0.8s;
+    animation-duration: 0.8s;
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
     opacity: 1; }
   .quick-box .quick-box-inner {
@@ -1400,17 +1514,17 @@ div.notify {
   .quick-box .quicksearch-input {
     width: 100%;
     margin: 0;
-    font-size: 24px;
+    font-size: 22px;
     background: none;
     border: 0px;
-    color: #303030;
+    color: white;
     font-family: "Prociono", serif;
     padding: 0;
-    line-height: 150%; }
+    line-height: 200%; }
   .quick-box input::-webkit-input-placeholder {
-    color: #67849b; }
+    color: #e0e0e0; }
   .quick-box input::-moz-input-placeholder {
-    color: #67849b; }
+    color: #e0e0e0; }
   .quick-box ul {
     -webkit-border-radius: 0;
     -moz-border-radius: 0 0 20px 20px;

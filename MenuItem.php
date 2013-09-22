@@ -64,7 +64,7 @@ class MenuItem
                 var a = this;
                 \$(a).parents('ul').find('.active').removeClass('active');
                 \$(a).parent().addClass('active');
-                \$('#panel').asRegion().load('{$r['path']}',$json,function() {  
+                \$('#panel').asRegion().load('{$r['path']}',$json,function() {
                     if(typeof $.scrollTo !== 'undefined') {
                         $.scrollTo( \$('#panel'), 300);
                     }

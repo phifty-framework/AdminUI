@@ -9,7 +9,6 @@ vim:filetype=htmldjango
         $(function() {
             // initialize Locale
             Locale.init({ lang: 'zh_tw' , dict_path: '/static/dict/' });
-            
             jQuery('.date-picker').datepicker({ dateFormat: 'yy-mm-dd' });
             Action.plug( ActionGrowler );
             // jQuery("select, input:submit, input:button, input:text, input:checkbox, input:radio, input:file").uniform();
@@ -30,8 +29,8 @@ vim:filetype=htmldjango
             {% if AdminUI.config('homeLink') %}
                 <a class="button" href="{{ AdminUI.config('homeLink')|raw}}">{% trans 'Home' %}</a>
             {% endif %}
-            {% if AdminUI.config('menuStyle') == "aim" %}
-                <a id="aimMenuStart" class="button">Menu</a>
+            {% if AdminUI.config('menuStyle') == "aim" or AdminUI.config('menuStyle') == "quickbox" %}
+                <a id="menuBtn" class="button">Menu</a>
             {% endif %}
         </div>
     {% endblock %}

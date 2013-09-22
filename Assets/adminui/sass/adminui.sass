@@ -348,6 +348,61 @@ ul.actionkit-checkbox-view
     width: 98%
 
 
+@mixin animation-duration($du)
+  -webkit-animation-duration: $du
+  -moz-animation-duration: $du
+  -o-animation-duration: $du
+  animation-duration: $du
+
+@mixin animation-name($name)
+  -webkit-animation-name: $name
+  -moz-animation-name: $name
+  -o-animation-name: $name
+  animation-name: $name
+
+@mixin keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+@include keyframes(flip-in)
+  0%
+    @include transform(rotateY(180deg))
+    @include opacity(0)
+  10%
+    @include opacity(1)
+    @include transform(rotateY(180deg))
+  100%
+    @include transform(rotateY(0deg))
+
+.quick-box-wrapper
+  -webkit-perspective: 1000
+  perspective: 1000
+  -webkit-transform-style: preserve-3d
+  transform-style: preserve-3d
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  display: none
+  z-index: 1000
+
+.quick-box-overlay
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  @include opacity(0.8)
+  background: #333
+  z-index: 100
+
 .quick-box
   background: #fff
   border: 2px solid #d0d0d0
@@ -355,22 +410,22 @@ ul.actionkit-checkbox-view
   top: 20%
   left: 10%
   right: 10%
+  z-index: 101
 
-  -webkit-perspective: 400px
-  @include transition(all 0.4s ease-out)
-  @include transform(rotateX(80deg))
-  @include transform(rotateY(80deg))
   @include border-radius(20px)
-  @include box-shadow(0 0 8px 8px #333)
-  -webkit-backface-visibility: visible
+  @include box-shadow(0 0 5px #fff)
   @include opacity(0)
-  -webkit-transform-style: preserve-3d
+  box-sizing: border-box
+  backface-visibility: hidden
+  -webkit-backface-visibility: hidden
+  transform-origin: center center
+
 
   font-family: 'Prociono', serif
 
   &.in
-    @include transform(rotateY(0deg))
-    @include transform(rotateX(0deg))
+    @include animation-name(flip-in)
+    @include animation-duration(0.8s)
     @include opacity(1)
 
   .quick-box-inner
@@ -394,6 +449,7 @@ ul.actionkit-checkbox-view
 
 
   $roundColor: #cdb96d
+
   .quicksearch-box
     border-top: 1px solid $roundColor
     border-bottom: 1px solid $roundColor
@@ -405,20 +461,23 @@ ul.actionkit-checkbox-view
   .quicksearch-input
     width: 100%
     margin: 0
-    font-size: 24px
+    font-size: 22px
     // background: #e0e0e0
     // color: #555
     background: none
     border: 0px
-    color: #303030
+    // color: #303030
+    // -webkit-text-stroke: 1px #d0d0d0
+    // -webkit-text-fill-color: #fff
+    color: #fff
     font-family: 'Prociono', serif
     padding: 0
-    line-height: 150%
+    line-height: 200%
 
   input::-webkit-input-placeholder
-    color: #67849b
+    color: #e0e0e0
   input::-moz-input-placeholder
-    color: #67849b
+    color: #e0e0e0
 
   ul
     @include border-radius(0 0 20px 20px)

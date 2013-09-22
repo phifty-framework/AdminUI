@@ -11,13 +11,15 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
     {
         # check permission
         $user = kernel()->currentUser;
-        if( ! $user->isLogged()  ) {
+        /*
+        if( ! $user->isLogged() ) {
             // var_dump( $user->isLogged() );
             // var_dump( $user->hasRole('admin') );
             // die();
             $this->redirect( '/bs/login?' . http_build_query(array(
                 'f' => $_SERVER['PATH_INFO'] )) );
         }
+         */
     }
 
 }
