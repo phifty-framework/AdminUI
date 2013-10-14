@@ -13,12 +13,10 @@ class BaseController extends Controller
         $cUser = kernel()->currentUser;
         // if( ! $cUser->isLogged() && ! $cUser->hasRole('admin') ) {
 
-        /*
         if( ! $cUser->isLogged() ) {
             $this->redirect( '/bs/login?' . http_build_query(array(
                 'f' => $_SERVER['PATH_INFO'] )) );
         }
-        */
     }
 
     // render dashboard here
