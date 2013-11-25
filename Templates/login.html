@@ -1,14 +1,12 @@
 {% extends '@AdminUI/page.html' %}
 {% import '@CoreBundle/phifty/forms.html' as forms %}
-{% block title %}
-    {{ parent() }} - Login
-{% endblock %}
+{% block title %}{{ parent() }} - Login{% endblock %}
 {% block content %}
 <div id="result-container" class="w-400" style=" margin: 0 auto; margin-top: 30px;"> </div>
 <div id="login-box" class="center-box w-400">
     <h1>{% trans 'Login' %}</h1>
     <div>
-        <form id="login-form" method="post">
+        <form id="loginForm" method="post">
             {{ forms.action('User::Action::Login') }}
 
             {% if goto %}
@@ -22,8 +20,8 @@
             <div class="button-group">
                 <input class="button submit" type="submit" value="{% trans 'Login' %}"/>
 
-                {% if Kernel.plugin('User').config('allow_signup') %}
-                    {{ forms.button_link('Signup','signup') }}
+                {% if Kernel.plugin('User').config('allow_register') %}
+                    {{ forms.button_link('註冊','/bs/user/register') }}
                 {% endif %}
             </div>
         </form>
@@ -32,7 +30,7 @@
 
 <script type="text/javascript">
 $(function() {
-    Action.form( $('#login-form') ).plug( ActionMsgbox, { container: $('#result-container').get(0) });
+    Action.form( $('#loginForm') ).plug( ActionMsgbox, { container: $('#result-container').get(0) });
 });
 </script>
 {% endblock %}
