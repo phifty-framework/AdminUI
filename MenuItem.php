@@ -74,7 +74,7 @@ class MenuItem
             unset($this->attributes['region']);
         }
         foreach( $this->attributes as $key => $value ) {
-            $html .= sprintf( '%s="%s"', $key , $value );
+            $html .= sprintf( ' %s="%s"', $key , $value );
         }
         return $html;
     }
