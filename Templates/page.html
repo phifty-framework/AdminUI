@@ -27,10 +27,14 @@ vim:filetype=htmldjango
     {% block menubar %}
         <div class="left">
             {% if AdminUI.config('homeLink') %}
-                <a class="button" href="{{ AdminUI.config('homeLink')|raw}}">{% trans 'Home' %}</a>
+                <a class="button" href="{{ AdminUI.config('homeLink')|raw}}">
+                    <i class="icon icon-home"> </i> {% trans 'Home' %}
+                </a>
             {% endif %}
             {% if AdminUI.config('menuStyle') == "aim" or AdminUI.config('menuStyle') == "quickbox" %}
-                <a id="menuBtn" class="button">Menu</a>
+                <a id="menuBtn" class="button">
+                    <i class="icon icon-th-large"> </i> {% trans 'Menu' %}
+                </a>
             {% endif %}
         </div>
     {% endblock %}
