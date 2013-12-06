@@ -1,3 +1,39 @@
+.clearfix {
+  *zoom: 1; }
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: ""; }
+
+.clearfix:after {
+  clear: both; }
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  background: url(images/background_linen.png) repeat #cccccc; }
+
+body.mceContentBody {
+  font-size: 20px; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+  padding: 0px; }
+
+a {
+  text-decoration: none;
+  color: blue; }
+  a:link, a:visited {
+    text-decoration: none;
+    color: blue; }
+  a:hover {
+    text-decoration: underline; }
+
 .section {
   padding: 10px; }
   .section .hd {
@@ -137,12 +173,10 @@
     margin-top: 12px;
     margin-bottom: 16px; }
   .section h2 {
-    font-size: 28px;
     margin: 0px;
     margin-top: 8px;
     margin-bottom: 12px; }
   .section h3 {
-    font-size: 22px;
     margin: 0px;
     margin-top: 4px;
     margin-bottom: 8px; }
@@ -659,42 +693,6 @@ textarea {
   .region-backbtn:hover {
     border: 1px solid #cccccc; }
 
-body {
-  padding: 0;
-  margin: 0;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 13px;
-  background: url(images/background_linen.png) repeat #cccccc; }
-
-body.mceContentBody {
-  font-size: 20px; }
-
-.clearfix {
-  *zoom: 1; }
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  line-height: 0;
-  content: ""; }
-
-.clearfix:after {
-  clear: both; }
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 0px;
-  padding: 0px; }
-
-a {
-  text-decoration: none;
-  color: blue; }
-  a:link, a:visited {
-    text-decoration: none;
-    color: blue; }
-  a:hover {
-    text-decoration: underline; }
-
 .pull-right {
   float: right; }
 
@@ -1152,6 +1150,10 @@ input.delete-btn {
     height: 80px; }
 
 /* this is used to wrap dropped image and remove button */
+/*.formkit-image-wrapper img {
+ *    width: auto;
+ *    height: 100%;
+ *} */
 .formkit-image-wrapper {
   position: relative; }
   .formkit-image-wrapper .close {
@@ -1172,40 +1174,6 @@ input.delete-btn {
     position: absolute;
     cursor: pointer; }
 
-/*.formkit-image-wrapper img {
- *    width: auto;
- *    height: 100%;
- *} */
-/* see: bundles/CoreBundle/assets/fivekit/fivekit.css */
-.upload-progress {
-  position: absolute;
-  width: 650px;
-  padding: 10px 15px;
-  background: white;
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -o-border-radius: 6px;
-  -ms-border-radius: 6px;
-  border: 1px solid #cccccc;
-  z-index: 999;
-  bottom: -50px;
-  -webkit-box-shadow: 2px 2px 10px 3px #555555;
-  -moz-box-shadow: 2px 2px 10px 3px #555555;
-  box-shadow: 2px 2px 10px 3px #555555; }
-
-.image-dropzone {
-  position: absolute;
-  /* should be the same as image-cover */
-  padding: 2px;
-  width: 120px;
-  height: 80px;
-  text-align: center;
-  z-index: 999; }
-  .image-dropzone.dropbox-drag-over {
-    border: 1px solid #88bb33;
-    background: #ccff66; }
-
 .image-cover .title {
   font-size: 12px;
   margin: 2px;
@@ -1224,6 +1192,36 @@ input.delete-btn {
     position: absolute;
     top: 2px;
     right: 1px; }
+
+/* see: bundles/CoreBundle/assets/fivekit/fivekit.css */
+.upload-progress {
+  position: absolute;
+  width: 650px;
+  padding: 10px 15px;
+  background: white;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 2px 2px 10px 3px #555555;
+  -moz-box-shadow: 2px 2px 10px 3px #555555;
+  box-shadow: 2px 2px 10px 3px #555555;
+  border: 1px solid #cccccc;
+  z-index: 999;
+  bottom: -50px; }
+
+.image-dropzone {
+  position: absolute;
+  /* should be the same as image-cover */
+  padding: 2px;
+  width: 120px;
+  height: 80px;
+  text-align: center;
+  z-index: 999; }
+  .image-dropzone.dropbox-drag-over {
+    border: 1px solid #88bb33;
+    background: #ccff66; }
 
 /******** Tab panel widget ******** */
 /* Usgae:

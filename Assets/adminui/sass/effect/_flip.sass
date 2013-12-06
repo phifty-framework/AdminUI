@@ -1,0 +1,18 @@
+@include keyframes(flip-in)
+  0%
+    @include transform(rotateY(180deg))
+    @include opacity(0)
+  10%
+    @include opacity(1)
+    @include transform(rotateY(180deg))
+  100%
+    @include transform(rotateY(0deg))
+
+@include keyframes(flip-x-out)
+  0%
+    @include transform(rotateX(180deg))
+    @include opacity(0)
+  100%
+    @include transform(rotateX(0deg))
+    @include opacity(1)
+    display: none
