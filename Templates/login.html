@@ -20,7 +20,7 @@
             <div class="button-group">
                 <input class="button submit" type="submit" value="{% trans 'Login' %}"/>
 
-                {% if Kernel.plugin('User').config('allow_register') %}
+                {% if Kernel.bundle('User').config('allow_register') %}
                     {{ forms.button_link('註冊','/bs/user/register') }}
                 {% endif %}
             </div>
