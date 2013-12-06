@@ -40,6 +40,12 @@ a {
 .pull-left {
   float: left; }
 
+.show {
+  display: block; }
+
+.hide {
+  display: none; }
+
 .section {
   padding: 10px; }
   .section .hd {
@@ -1145,9 +1151,6 @@ fieldset {
   border: 1px solid #cccccc;
   padding: 10px 20px;
   margin-top: 15px; }
-
-.show {
-  display: block; }
 
 /* -- admin page div style --- */
 ul#panel-buttons {
