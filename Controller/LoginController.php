@@ -12,7 +12,7 @@ class LoginController extends Controller
         $goto = $this->request->param('f'); /* get both from POST and GET */
         return $this->render( '@AdminUI/login.html' , array( 
             'goto' => $goto , 
-            'Plugin' => $bundle ) );
+            'Bundle' => $bundle ) );
     }
 }
 
