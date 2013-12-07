@@ -146,7 +146,7 @@ body {
   margin: 0;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-  font-size: 13px;
+  font-size: 14px;
   background: url(images/background_linen.png) repeat #cccccc; }
 
 body.mceContentBody {
@@ -1273,8 +1273,8 @@ table.result {
   .v-field .label {
     /*     letter-spacing: 0.1em; */
     /*     margin-left: 0px; */
-    font-size: 16px;
-    padding: 1px 3px;
+    font-size: 1em;
+    padding: 1px 0;
     color: #666666;
     text-shadow: white 1px 1px; }
   .v-field .desc {
@@ -1303,13 +1303,11 @@ table.result {
 
 /* input widget style */
 .input input {
-  font-size: 12px;
+  font-size: 1em;
   padding: 4px 2px;
   border: 1px solid #cccccc;
-  border-radius: 5px;
   background-color: white;
-  text-shadow: white 1px 1px;
-  font-family: Tahoma, sans-serif; }
+  text-shadow: white 1px 1px; }
   .input input:focus {
     background-color: #cccccc;
     text-shadow: white 1px 1px; }
@@ -1383,13 +1381,15 @@ input.button-s {
 
 select {
   border: 1px solid #cccccc;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
   border-radius: 0px;
-  background: white;
-  font-size: 12px; }
+  background: white; }
 
 textarea {
   font-size: 14px;
-  font-family: Tahoma, sans-serif;
   padding: 6px;
   background: white;
   border: 2px ridge #cccccc;
@@ -1420,11 +1420,17 @@ textarea {
     color: #555555;
     background-color: #ffff99;
     border: 1px solid #cccccc;
-    border-radius: 3px;
     font-size: 12px;
+    display: inline-block;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 2px #aaaaaa;
+    -moz-box-shadow: 0 0 2px #aaaaaa;
     box-shadow: 0 0 2px #aaaaaa;
-    text-shadow: 1px 1px white;
-    display: inline-block; }
+    text-shadow: 1px 1px white; }
 
 .region-statusbar {
   position: fixed;
@@ -2352,7 +2358,6 @@ input.delete-btn {
   font-weight: bold;
   width: 120px;
   overflow: hidden;
-  font-family: Tahama, sans-serif;
   float: left;
   /* webkit styles */
   /*     -webkit-text-stroke: 0.05em white; */
