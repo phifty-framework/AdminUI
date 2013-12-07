@@ -2479,9 +2479,6 @@ input.delete-btn {
     border: 1px solid #88bb33;
     background: #ccff66; }
 
-ul.actionkit-checkbox-view {
-  list-style: none; }
-
 /*.section .label { 
  *    border: 1px solid #ccc;
  *    background-color: #fff;
@@ -2532,3 +2529,11 @@ ul ul, ol ul, ul ol, ol ol {
 
 .text-center {
   text-align: center; }
+
+ul.actionkit-checkbox-view {
+  list-style: none; }
+  ul.actionkit-checkbox-view input[type=checkbox] {
+    margin-right: 3px;
+    display: inline-block; }
+  ul.actionkit-checkbox-view ul {
+    margin-left: 20px; }
