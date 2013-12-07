@@ -861,7 +861,7 @@ a {
 
 .section {
   padding: 10px; }
-  .section .hd {
+  .section > .hd {
     position: relative;
     border-top: 1px solid #3aa6d0;
     border-left: 1px solid #3aa6d0;
@@ -877,34 +877,17 @@ a {
     background: -moz-linear-gradient(#62b1d0, #99ccdd);
     background: -ms-linear-gradient(#62b1d0, #99ccdd);
     background: -o-linear-gradient(#62b1d0, #99ccdd);
-    background: linear-gradient(#62b1d0, #99ccdd);
-    -webkit-border-radius: 12px 12px 0px 0px;
-    -moz-border-radius: 12px 12px 0px 0px;
-    -ms-border-radius: 12px 12px 0px 0px;
-    -o-border-radius: 12px 12px 0px 0px;
-    border-radius: 12px 12px 0px 0px;
-    text-shadow: 1px 1px #111111;
-    -webkit-box-shadow: #111111 0px 0px 10px;
-    -moz-box-shadow: #111111 0px 0px 10px;
-    box-shadow: #111111 0px 0px 10px;
-    /* or antialiased; */
-    /*-webkit-font-smoothing: subpixel-antialiased; */
-    /* or 0.01em might be better */
-    /*-webkit-text-stroke: 0.05em white; */ }
-    .section .hd .nav {
+    background: linear-gradient(#62b1d0, #99ccdd); }
+    .section > .hd .nav {
       position: absolute;
       right: 9px;
       top: 3px; }
-  .section .bd {
+  .section > .bd {
     border-left: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;
-    border-radius: 0 0 10px 10px;
     position: relative;
-    background: whitesmoke;
-    -webkit-box-shadow: #111111 0px 0px 10px;
-    -moz-box-shadow: #111111 0px 0px 10px;
-    box-shadow: #111111 0px 0px 10px; }
+    background: whitesmoke; }
   .section .text-block {
     color: black;
     -webkit-text-stroke: white 1px 1px;

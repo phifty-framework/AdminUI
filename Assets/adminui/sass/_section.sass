@@ -9,8 +9,7 @@ $blue2: #62b1d0
 
 .section
   padding: 10px
-  // .hd!, .bd!, .fd!
-  .hd
+  & > .hd
     .nav
       position: absolute
       right: 9px
@@ -31,24 +30,16 @@ $blue2: #62b1d0
     background: -ms-linear-gradient($blue2, $blue)
     background: -o-linear-gradient($blue2, $blue)
     background: linear-gradient($blue2, $blue)
-
-    @include border-radius(12px 12px 0px 0px)
-    @include text-shadow(1px 1px #111111)
-    @include box-shadow(#111111 0px 0px 10px)
-    /* or antialiased;
-    /*
-     *-webkit-font-smoothing: subpixel-antialiased;
-    /* or 0.01em might be better
-    /*
-     *-webkit-text-stroke: 0.05em white;
-  .bd
+    // or antialiased;
+    // -webkit-font-smoothing: subpixel-antialiased;
+    // or 0.01em might be better
+    // -webkit-text-stroke: 0.05em white;
+  & > .bd
     border-left: 1px solid #cccccc
     border-right: 1px solid #cccccc
     border-bottom: 1px solid #cccccc
-    border-radius: 0 0 10px 10px
     position: relative
     background: #f5f5f5
-    @include box-shadow(#111111 0px 0px 10px)
   .text-block
     color: #000
     -webkit-text-stroke: white 1px 1px
