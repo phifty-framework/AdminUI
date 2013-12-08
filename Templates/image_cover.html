@@ -1,0 +1,23 @@
+{#
+    {% include '@AdminUI/image_cover.html' with {
+        ....
+    } %}
+#}
+<div class="image-cover">
+    <input type="hidden" name="image_id" value="{{ item.id }}"/>
+    <div class="cut">
+        <a rel="facebox" target="_blank" href="/{{ item.image }}"><img src="/{{ item.thumb }}"></a>
+    </div>
+    <div class="title">{{ item.title | default('No name') }} </div>
+
+    <div style=" text-align: right;">
+        <input type="button" class="button edit" style=" font-size: 12px; padding:3px 5px; "
+            onclick=" Region.before( $(this).parents('.section').get(0) , '/bs/{{ Handler.crudId }}/crud/edit',{ id: {{ item.id }} });"
+            value="{% trans 'Edit' %}"/>
+    </div>
+    <div class="close" 
+        onclick=" runAction( '{{ Handler.namespace }}::Action::DeleteImage',
+        { id: {{ item.id }}  },
+        { confirm: '確認刪除? ', remove: $(this).parents('.image-cover') } ); ">
+    </div>
+</div>
