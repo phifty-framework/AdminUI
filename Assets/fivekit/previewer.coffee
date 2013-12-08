@@ -189,7 +189,7 @@ class window.FiveKit.Previewer
       alert exifData
 
   renderUploadImage: (src) ->
-    # the uploaded image path is relative, such as "static/upload/product1.png"
+    # the uploaded image path is relative, such as "upload/product1.png"
     # so we should prepend a prefix
     @renderCoverImage "/" + src
     @hiddenInput.val src
