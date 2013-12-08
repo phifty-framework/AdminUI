@@ -18,6 +18,10 @@
             {{ forms.field( 'Password', 'password' , 'password' , '' , 1 ) }}
 
             <div class="button-group">
+                <label>
+                    <input type="checkbox" name="remember" value="1"/> 保持登入 30 天
+                </label>
+
                 <input class="button submit" type="submit" value="{% trans 'Login' %}"/>
 
                 {% if Kernel.bundle('UserBundle').config('allow_register') %}
