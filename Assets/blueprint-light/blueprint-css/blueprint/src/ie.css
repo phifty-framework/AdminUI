@@ -9,7 +9,6 @@
 
 /* Make sure the layout is centered in IE5 */
 body { text-align: center; }
-.container { text-align: left; }
 
 /* Fixes IE margin bugs */
 * html .column, * html .span-1, * html .span-2,
@@ -44,11 +43,6 @@ img { -ms-interpolation-mode:bicubic; }
 
 /* Clearing
 -------------------------------------------------------------- */
-
-/* Makes clearfix actually work in IE */
-.clearfix, .container { display:inline-block; }
-* html .clearfix,
-* html .container { height:1%; }
 
 
 /* Forms

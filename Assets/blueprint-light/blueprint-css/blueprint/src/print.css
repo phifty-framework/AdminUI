@@ -21,10 +21,6 @@ body {
 /* Layout
 -------------------------------------------------------------- */
 
-.container {
-  background: none;
-}
-
 hr {
   background:#ccc;
   color:#ccc;
