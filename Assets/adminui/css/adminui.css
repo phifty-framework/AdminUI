@@ -195,6 +195,26 @@ a {
   min-height: 1px;
   margin-left: 20px; }
 
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto; }
+  .container:before {
+    display: table;
+    content: " "; }
+  .container:after {
+    display: table;
+    content: " ";
+    clear: both; }
+  .container:before {
+    display: table;
+    content: " "; }
+  .container:after {
+    display: table;
+    content: " ";
+    clear: both; }
+
 .row {
   margin-right: -15px;
   margin-left: -15px; }
