@@ -1087,7 +1087,7 @@ table.result {
       background-color: #bbbbbb;
       color: black; }
   table.result td {
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     padding: 3px 0px; }
   table.result th {
@@ -1099,7 +1099,8 @@ table.result {
     min-width: 20px; }
 
 .column-header {
-  position: relative; }
+  position: relative;
+  text-align: center; }
 
 .column-sort-asc {
   float: right;
