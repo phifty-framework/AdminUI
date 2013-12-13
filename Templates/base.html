@@ -25,6 +25,11 @@ vim:filetype=htmldjango:
             jQuery(function() { FormKit.install(); });
         }
     }
+    $(function() {
+        $(document).bind('drop dragover', function (e) {
+            e.preventDefault();
+        });
+    });
     </script>
 </head>
 <body>
