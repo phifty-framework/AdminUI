@@ -34,9 +34,14 @@ class window.FiveKit.Xhr
 
     if @options.onTransferComplete
       @bind 'load', (e) ->
-        console.warn e.srcElement.responseText if window.console
-        result = JSON.parse(e.srcElement.responseText)
-        console.log('result',result) if window.console
+        target = e.srcElement or e.target
+        console.warn target.responseText if window.console
+        result = JSON.parse(target.responseText)
+        if window.console
+          if result.error
+            console.error('result',result)
+          else
+            console.log('result',result)
         self.options.onTransferComplete.call(this,e,result)
         self.dfd.resolve()
     @bind('error', @options.onTransferFailed) if @options.onTransferFailed
@@ -55,18 +60,7 @@ class window.FiveKit.Xhr
 
   send: (file) ->
 
-    # Firefox 3.6 provides a feature sendAsBinary ()
-    if @xhr.sendAsBinary
-      console.log('sendAsBinary',file) if window.console
-      mimeBuilder = new FiveKit.MimeBuilder
-      mimeBuilder.build({
-        file: file
-        onBuilt: (b) =>
-          # use XHR HTTP Request to send file
-          # @xhr.setRequestHeader('content-type', 'multipart/form-data; boundary=' + b.boundary)
-          @xhr.sendAsBinary(b.body)
-      })
-    else
+    if typeof FormData != "undefined"
       console.log("Sending file",file) if window.console
       # Chrome 7 sends data but you must use the base64_decode on the PHP side
       # @xhr.setRequestHeader("Content-Type", "multipart/form-data")
@@ -79,6 +73,21 @@ class window.FiveKit.Xhr
       fd = new FormData
       fd.append "upload",file
       @xhr.send fd
+    else if @xhr.sendAsBinary
+      # Firefox 3.6 provides a feature sendAsBinary ()
+      # sendAsBinary() is NOT a standard and may not be supported in Chrome.
+      # XXX: currently broken because the API changed.
+      console.log('sendAsBinary',file) if window.console
+      mimeBuilder = new FiveKit.MimeBuilder
+      mimeBuilder.build({
+        file: file
+        onBuilt: (b) =>
+          console.log "body", b
+          # use XHR HTTP Request to send file
+          # @xhr.setRequestHeader('content-type', 'multipart/form-data; boundary=' + b.boundary)
+          #
+          @xhr.sendAsBinary(b.body)
+      })
 
     return @dfd
     # bin is from reader.result (binary)

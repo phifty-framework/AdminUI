@@ -39,13 +39,18 @@
       this.dfd = $.Deferred();
       if (this.options.onTransferComplete) {
         this.bind('load', function(e) {
-          var result;
+          var result, target;
+          target = e.srcElement || e.target;
           if (window.console) {
-            console.warn(e.srcElement.responseText);
+            console.warn(target.responseText);
           }
-          result = JSON.parse(e.srcElement.responseText);
+          result = JSON.parse(target.responseText);
           if (window.console) {
-            console.log('result', result);
+            if (result.error) {
+              console.error('result', result);
+            } else {
+              console.log('result', result);
+            }
           }
           self.options.onTransferComplete.call(this, e, result);
           return self.dfd.resolve();
@@ -82,18 +87,7 @@
     Xhr.prototype.send = function(file) {
       var fd, mimeBuilder,
         _this = this;
-      if (this.xhr.sendAsBinary) {
-        if (window.console) {
-          console.log('sendAsBinary', file);
-        }
-        mimeBuilder = new FiveKit.MimeBuilder;
-        mimeBuilder.build({
-          file: file,
-          onBuilt: function(b) {
-            return _this.xhr.sendAsBinary(b.body);
-          }
-        });
-      } else {
+      if (typeof FormData !== "undefined") {
         if (window.console) {
           console.log("Sending file", file);
         }
@@ -104,6 +98,18 @@
         fd = new FormData;
         fd.append("upload", file);
         this.xhr.send(fd);
+      } else if (this.xhr.sendAsBinary) {
+        if (window.console) {
+          console.log('sendAsBinary', file);
+        }
+        mimeBuilder = new FiveKit.MimeBuilder;
+        mimeBuilder.build({
+          file: file,
+          onBuilt: function(b) {
+            console.log("body", b);
+            return _this.xhr.sendAsBinary(b.body);
+          }
+        });
       }
       return this.dfd;
     };

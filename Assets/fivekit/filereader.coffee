@@ -23,7 +23,6 @@ class window.FiveKit.FileReader
       @reader.onprogress = @options.onProgress if @options.onProgress
     @reader.onloadend = (e) ->
   read: (file) ->
-    # @reader.readAsBinaryString(file)
     @reader.readAsDataURL(file)
   isSupported: () ->
     return typeof FileReader isnt 'undefined'
