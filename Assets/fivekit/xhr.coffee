@@ -69,8 +69,8 @@ class window.FiveKit.Xhr
     else
       console.log("Sending file",file) if window.console
       # Chrome 7 sends data but you must use the base64_decode on the PHP side
-      # @xhr.setRequestHeader("Content-Type", "multipart/form-data")
-      @xhr.setRequestHeader("X-UPLOAD-FILENAME", file.name)
+      @xhr.setRequestHeader("Content-Type", "multipart/form-data")
+      @xhr.setRequestHeader("X-UPLOAD-FILENAME", encodeURIComponent(file.name))
       @xhr.setRequestHeader("X-UPLOAD-SIZE", file.size)
       @xhr.setRequestHeader("X-UPLOAD-TYPE", file.type)
       @xhr.setRequestHeader("X-UPLOAD-MODIFIED-DATE", file.lastModifiedDate)
