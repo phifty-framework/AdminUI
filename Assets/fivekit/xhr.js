@@ -97,7 +97,6 @@
         if (window.console) {
           console.log("Sending file", file);
         }
-        this.xhr.setRequestHeader("Content-Type", "multipart/form-data");
         this.xhr.setRequestHeader("X-UPLOAD-FILENAME", encodeURIComponent(file.name));
         this.xhr.setRequestHeader("X-UPLOAD-SIZE", file.size);
         this.xhr.setRequestHeader("X-UPLOAD-TYPE", file.type);
