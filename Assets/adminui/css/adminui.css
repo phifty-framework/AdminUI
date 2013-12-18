@@ -215,6 +215,10 @@ a {
     content: " ";
     clear: both; }
 
+.col-field {
+  float: left;
+  margin-right: 6px; }
+
 .row {
   margin-right: -15px;
   margin-left: -15px; }
