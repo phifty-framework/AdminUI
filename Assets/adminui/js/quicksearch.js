@@ -85,14 +85,6 @@
         _this.hide();
         return false;
       });
-      $(document.body).keydown(function(e) {
-        if (e.keyCode === 191) {
-          _this.show();
-          e.stopPropagation();
-          e.preventDefault();
-          return false;
-        }
-      });
     }
 
     QuickBox.prototype.show = function() {
