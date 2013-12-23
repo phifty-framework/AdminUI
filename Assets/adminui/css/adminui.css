@@ -1093,7 +1093,7 @@ table.result {
   table.result td {
     text-align: left;
     vertical-align: middle;
-    padding: 3px 0px; }
+    padding: 1px 0 1px 8px; }
   table.result th {
     vertical-align: middle;
     font-weight: bold;
