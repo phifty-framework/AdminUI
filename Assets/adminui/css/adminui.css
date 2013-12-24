@@ -1294,7 +1294,7 @@ table.result {
 
 /* vertical field */
 .v-field {
-  margin-top: 12px; }
+  margin-bottom: 10px; }
   .v-field .label {
     /*     letter-spacing: 0.1em; */
     /*     margin-left: 0px; */
