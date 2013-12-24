@@ -13,7 +13,9 @@ vim:filetype=htmldjango:
     <meta name="content" content="Content-Type: text/html; Charset: UTF-8; " />
     <meta name="keywords" content="{{ Page.Keywords }}" />
     <meta name="description" content="{{ Page.Description }}"/>
+    {#
     <link href='http://fonts.googleapis.com/css?family=Prociono' rel='stylesheet' type='text/css'>
+    #}
 
     <title>{% block title %}{{ title|default(appname) }}{% endblock %}</title>
     {{ Web.include_loaded_assets('adminui-page') |raw}}
