@@ -63,13 +63,6 @@ class QuickBox
       @hide()
       return false
 
-    $(document.body).keydown (e) =>
-      if e.keyCode == 191
-        @show()
-        e.stopPropagation()
-        e.preventDefault()
-        return false
-
   show: () ->
     $('.quick-box-wrapper').show()
     $('.quick-box').addClass('in')
