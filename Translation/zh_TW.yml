@@ -1,0 +1,4 @@
+---
+action.file.required: "請上傳 %1 檔案"
+action.param.required: "請輸入 %1 欄位"
+action.validation.error: "請檢查您的輸入"
