@@ -906,10 +906,13 @@ a {
       position: absolute;
       right: 9px;
       top: 3px; }
+  .section > .bd > .bd-inner {
+    padding-left: 10px;
+    padding-right: 10px; }
   .section > .bd {
-    border-left: 1px solid #cccccc;
-    border-right: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
     position: relative;
     background: whitesmoke; }
   .section .text-block {
@@ -2034,8 +2037,6 @@ ul.tab-panel {
         background: #dddddd; }
 
 .admin-panel {
-  width: 98%;
-  min-width: 500px;
   margin: 0 auto;
   margin-top: 10px; }
 
