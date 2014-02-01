@@ -25,14 +25,14 @@ vim:filetype=htmldjango
 <div id="operation">  
 
     {% block menubar %}
-        <div class="left">
+        <div class="btn-group pull-left">
             {% if AdminUI.config('homeLink') %}
-                <a class="button" href="{{ AdminUI.config('homeLink')|raw}}">
+                <a class="btn" href="{{ AdminUI.config('homeLink')|raw}}">
                     <i class="icon icon-home"> </i> {% trans 'Home' %}
                 </a>
             {% endif %}
             {% if AdminUI.config('menuStyle') == "aim" or AdminUI.config('menuStyle') == "quickbox" %}
-                <a id="menuBtn" class="button">
+                <a id="menuBtn" class="btn">
                     <i class="icon icon-th-large"> </i> {% trans 'Menu' %}
                 </a>
             {% endif %}
@@ -50,7 +50,9 @@ vim:filetype=htmldjango
 
     {% block operation_buttons %}
 
-    <div class="buttons">
+    <div class="btn-group pull-right">
+
+        {#
         <form style=" display: inline; margin:0; padding:0; " name="lang_select" method="post">
             <input type="hidden" name="action" value="I18N::Action::ChooseLang"/>
             {% set currentLang = Kernel.locale.current %}
@@ -61,11 +63,12 @@ vim:filetype=htmldjango
                 {% endfor %}
             </select>
         </form>
+        #}
 
         {% if Kernel.currentUser.isLogged() %}
-            <a class="button" href="/bs/logout">{% trans 'Logout' %}</a>
+            <a class="btn" href="/bs/logout">{% trans 'Logout' %}</a>
         {% else %}
-            <a class="button" href="/bs/login">{% trans 'Login' %}</a>
+            <a class="btn" href="/bs/login">{% trans 'Login' %}</a>
         {% endif %}
 
         {# <a href="" onclick=" $('#search-form').slideDown(); return false;" >{% trans 'Search' %}</a> #}

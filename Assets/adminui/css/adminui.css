@@ -871,16 +871,17 @@ a {
 
   .col-lg-offset-0 {
     margin-left: 0; } }
-.clearfix {
+.clearfix, .btn-group {
   *zoom: 1; }
 
-.clearfix:before,
-.clearfix:after {
+.clearfix:before, .btn-group:before,
+.clearfix:after,
+.btn-group:after {
   display: table;
   line-height: 0;
   content: ""; }
 
-.clearfix:after {
+.clearfix:after, .btn-group:after {
   clear: both; }
 
 .section {
@@ -1356,9 +1357,7 @@ table.result {
     background: -ms-linear-gradient(#eeeeee, white);
     background: -o-linear-gradient(#eeeeee, white);
     background: linear-gradient(#eeeeee, #ffffff);
-    -pie-background: linear-gradient(#eeeeee, #ffffff);
-    text-shadow: white 1px 1px;
-    /*     behavior: url(/ph/core/css/pie/PIE.htc); */ }
+    text-shadow: white 1px 1px; }
 
 .button-group {
   margin: 10px;
@@ -1380,14 +1379,15 @@ input.button, input.button-s {
   background: -ms-linear-gradient(white, #cccccc);
   background: -o-linear-gradient(white, #cccccc);
   background: linear-gradient(#ffffff, #cccccc);
-  -pie-background: linear-gradient(#ffffff, #cccccc);
-  -moz-box-shadow: inset 0 0 10px white;
   -webkit-box-shadow: inset 0 0 10px white;
+  -moz-box-shadow: inset 0 0 10px white;
   box-shadow: inset 0 0 10px white;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
   border-radius: 5px;
-  text-shadow: white 1px 1px;
-  /*     box-shadow: #888 0px 0px 2px; */
-  /*     behavior: url(/ph/core/css/pie/PIE.htc); */ }
+  text-shadow: white 1px 1px; }
   input.button:hover, input.button-s:hover {
     background: white;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#eeeeee), to(#aaaaaa));
@@ -2268,25 +2268,27 @@ input.delete-btn {
     text-shadow: #333333 1px 1px; }
 
 /****** Admin UI operation bar ***** */
+#operation .btn-group {
+  margin-top: 2px; }
+#operation .btn-group.pull-left {
+  margin-left: 2px; }
+#operation .btn-group.pull-right {
+  margin-right: 2px; }
+
 #operation {
-  float: left;
-  text-align: right;
-  height: 36px;
+  height: 35px;
   width: 100%;
   /*     margin-bottom: 18px; */
   -webkit-box-shadow: #111111 0px 2px 3px;
   -moz-box-shadow: #111111 0px 2px 3px;
-  box-shadow: #111111 0px 2px 10px;
+  box-shadow: #111111 0px 2px 3px;
   background: white;
   background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#dddddd));
   background: -webkit-linear-gradient(white, #dddddd);
   background: -moz-linear-gradient(white, #dddddd);
   background: -ms-linear-gradient(white, #dddddd);
   background: -o-linear-gradient(white, #dddddd);
-  background: linear-gradient(#ffffff, #dddddd);
-  -pie-background: linear-gradient(#ffffff, #dddddd);
-  border-bottom: 1px solid #888888;
-  /*behavior: url(/assets/phifty-core/css/pie/PIE.htc); */ }
+  background: linear-gradient(#ffffff, #dddddd); }
   #operation img.logo {
     width: 24px;
     height: 24px;
@@ -2299,47 +2301,9 @@ input.delete-btn {
     font-size: 16px;
     float: left;
     color: #333333;
-    -webkit-text-shadow: white 1px 1px;
-    -moz-text-shadow: white 1px 1px;
     text-shadow: white 1px 1px; }
   #operation .lang-selector {
     display: inline; }
-  #operation .buttons {
-    float: right; }
-  #operation a.button {
-    text-decoration: none;
-    margin: 3px;
-    display: inline-block;
-    /*     float: right; */
-    border: 1px solid #bbbbbb;
-    border-radius: 5px;
-    background: white;
-    color: black;
-    padding: 5px 6px;
-    font-weight: bold;
-    -webkit-text-shadow: white 1px 1px;
-    -moz-text-shadow: white 1px 1px;
-    text-shadow: white 1px 1px;
-    -webkit-box-shadow: #aaaaaa 0px 0px 3px;
-    -moz-box-shadow: #aaaaaa 0px 0px 3px;
-    /*     box-shadow: #aaa 0px 0px 3px; */
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#d0d0d0));
-    background: -webkit-linear-gradient(white, #d0d0d0);
-    background: -moz-linear-gradient(white, #d0d0d0);
-    background: -ms-linear-gradient(white, #d0d0d0);
-    background: -o-linear-gradient(white, #d0d0d0);
-    background: linear-gradient(#ffffff, #d0d0d0);
-    -pie-background: linear-gradient(#ffffff, #d0d0d0);
-    behavior: url(/ph/CoreBundle/css/pie/PIE.htc); }
-  #operation a:hover {
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#e0e0e0));
-    background: -webkit-linear-gradient(white, #e0e0e0);
-    background: -moz-linear-gradient(white, #e0e0e0);
-    background: -ms-linear-gradient(white, #e0e0e0);
-    background: -o-linear-gradient(white, #e0e0e0);
-    background: linear-gradient(#ffffff, #e0e0e0);
-    -pie-background: linear-gradient(#ffffff, #e0e0e0);
-    behavior: url(/ph/CoreBundle/css/pie/PIE.htc); }
 
 #operation a.admin-menu-button {
   display: none;
@@ -2571,3 +2535,53 @@ ul.actionkit-checkbox-view {
     display: inline-block; }
   ul.actionkit-checkbox-view ul {
     margin-left: 20px; }
+
+.btn,
+a.btn {
+  text-decoration: none;
+  margin: 0 2px 0 0px;
+  padding: 4px 6px;
+  display: inline-block;
+  border: 1px solid #bbbbbb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background: #a0a0a0;
+  color: #303030;
+  text-shadow: white 1px 1px;
+  -webkit-box-shadow: inset white 0px 0px 2px;
+  -moz-box-shadow: inset white 0px 0px 2px;
+  box-shadow: inset white 0px 0px 2px;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#d0d0d0));
+  background: -webkit-linear-gradient(white, #d0d0d0);
+  background: -moz-linear-gradient(white, #d0d0d0);
+  background: -ms-linear-gradient(white, #d0d0d0);
+  background: -o-linear-gradient(white, #d0d0d0);
+  background: linear-gradient(#ffffff, #d0d0d0); }
+
+.btn:hover,
+a.btn:hover {
+  -webkit-box-shadow: inset #b0b0b0 0px 1px 2px;
+  -moz-box-shadow: inset #b0b0b0 0px 1px 2px;
+  box-shadow: inset #b0b0b0 0px 1px 2px;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(silver));
+  background: -webkit-linear-gradient(white, silver);
+  background: -moz-linear-gradient(white, silver);
+  background: -ms-linear-gradient(white, silver);
+  background: -o-linear-gradient(white, silver);
+  background: linear-gradient(#ffffff, #c0c0c0); }
+
+.btn-group .btn {
+  margin: 0;
+  float: left;
+  border-radius: 0px; }
+.btn-group .btn:first-child,
+.btn-group a.btn:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px; }
+.btn-group .btn:last-child,
+.btn-group a.btn:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px; }

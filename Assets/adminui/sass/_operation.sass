@@ -1,13 +1,18 @@
 /******* Admin UI operation bar *****
 #operation
-  float: left
-  text-align: right
-  height: 36px
+  .btn-group
+    margin-top: 2px
+  .btn-group.pull-left
+    margin-left: 2px
+  .btn-group.pull-right
+    margin-right: 2px
+
+#operation
+  height: 35px
   width: 100%
   /*     margin-bottom: 18px;
-  -webkit-box-shadow: #111111 0px 2px 3px
-  -moz-box-shadow: #111111 0px 2px 3px
-  box-shadow: #111111 0px 2px 10px
+  @include box-shadow(#111111 0px 2px 3px)
+
   background: #fff
   background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#dddddd))
   background: -webkit-linear-gradient(white, #dddddd)
@@ -15,10 +20,6 @@
   background: -ms-linear-gradient(white, #dddddd)
   background: -o-linear-gradient(white, #dddddd)
   background: linear-gradient(white, #dddddd)
-  -pie-background: linear-gradient(white, #dddddd)
-  border-bottom: 1px solid #888888
-  /*
-   *behavior: url(/assets/phifty-core/css/pie/PIE.htc);
   img.logo
     width: 24px
     height: 24px
@@ -31,48 +32,9 @@
     font-size: 16px
     float: left
     color: #333
-    -webkit-text-shadow: white 1px 1px
-    -moz-text-shadow: white 1px 1px
-    text-shadow: white 1px 1px
+    @include text-shadow(white 1px 1px)
   .lang-selector
     display: inline
-  .buttons
-    float: right
-  a
-    &.button
-      text-decoration: none
-      margin: 3px
-      display: inline-block
-      /*     float: right;
-      border: 1px solid #bbbbbb
-      border-radius: 5px
-      background: #fff
-      color: #000
-      padding: 5px 6px
-      font-weight: bold
-      -webkit-text-shadow: white 1px 1px
-      -moz-text-shadow: white 1px 1px
-      text-shadow: white 1px 1px
-      -webkit-box-shadow: #aaaaaa 0px 0px 3px
-      -moz-box-shadow: #aaaaaa 0px 0px 3px
-      /*     box-shadow: #aaa 0px 0px 3px;
-      background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#d0d0d0))
-      background: -webkit-linear-gradient(white, #d0d0d0)
-      background: -moz-linear-gradient(white, #d0d0d0)
-      background: -ms-linear-gradient(white, #d0d0d0)
-      background: -o-linear-gradient(white, #d0d0d0)
-      background: linear-gradient(white, #d0d0d0)
-      -pie-background: linear-gradient(white, #d0d0d0)
-      behavior: url(/ph/CoreBundle/css/pie/PIE.htc)
-    &:hover
-      background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#e0e0e0))
-      background: -webkit-linear-gradient(white, #e0e0e0)
-      background: -moz-linear-gradient(white, #e0e0e0)
-      background: -ms-linear-gradient(white, #e0e0e0)
-      background: -o-linear-gradient(white, #e0e0e0)
-      background: linear-gradient(white, #e0e0e0)
-      -pie-background: linear-gradient(white, #e0e0e0)
-      behavior: url(/ph/CoreBundle/css/pie/PIE.htc)
 
 #operation a.admin-menu-button
   display: none
