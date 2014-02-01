@@ -2540,7 +2540,8 @@ ul.actionkit-checkbox-view {
 a.btn {
   text-decoration: none;
   margin: 0 2px 0 0px;
-  padding: 4px 6px;
+  padding: 4px 8px;
+  font-size: 15px;
   display: inline-block;
   border: 1px solid #bbbbbb;
   -webkit-border-radius: 4px;
@@ -2550,7 +2551,6 @@ a.btn {
   border-radius: 4px;
   background: #a0a0a0;
   color: #303030;
-  text-shadow: white 1px 1px;
   -webkit-box-shadow: inset white 0px 0px 2px;
   -moz-box-shadow: inset white 0px 0px 2px;
   box-shadow: inset white 0px 0px 2px;
