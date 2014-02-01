@@ -2563,15 +2563,15 @@ a.btn {
 
 .btn:hover,
 a.btn:hover {
-  -webkit-box-shadow: inset #b0b0b0 0px 1px 2px;
-  -moz-box-shadow: inset #b0b0b0 0px 1px 2px;
-  box-shadow: inset #b0b0b0 0px 1px 2px;
-  background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(silver));
-  background: -webkit-linear-gradient(white, silver);
-  background: -moz-linear-gradient(white, silver);
-  background: -ms-linear-gradient(white, silver);
-  background: -o-linear-gradient(white, silver);
-  background: linear-gradient(#ffffff, #c0c0c0); }
+  -webkit-box-shadow: inset #909090 0px 1px 1px;
+  -moz-box-shadow: inset #909090 0px 1px 1px;
+  box-shadow: inset #909090 0px 1px 1px;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#f0f0f0), to(silver));
+  background: -webkit-linear-gradient(#f0f0f0, silver);
+  background: -moz-linear-gradient(#f0f0f0, silver);
+  background: -ms-linear-gradient(#f0f0f0, silver);
+  background: -o-linear-gradient(#f0f0f0, silver);
+  background: linear-gradient(#f0f0f0, #c0c0c0); }
 
 .btn-group .btn {
   margin: 0;
