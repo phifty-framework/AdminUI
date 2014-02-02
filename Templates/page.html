@@ -28,7 +28,7 @@ vim:filetype=htmldjango
         <div class="btn-group pull-left">
             {% if AdminUI.config('homeLink') %}
                 <a class="btn" href="{{ AdminUI.config('homeLink')|raw}}">
-                    <i class="icon icon-home"> </i> {% trans 'Home' %}
+                    <i class="icon icon-home"> </i> {{appname}}
                 </a>
             {% endif %}
             {% if AdminUI.config('menuStyle') == "aim" or AdminUI.config('menuStyle') == "quickbox" %}
@@ -38,15 +38,6 @@ vim:filetype=htmldjango
             {% endif %}
         </div>
     {% endblock %}
-
-
-    <img class="logo" src="/assets/phifty-core/images/lart-logo.jpg"/>
-    <div class="logo-text"> 
-        {% block logo_text %}
-        {{ appname }} v{{ Kernel.getVersion }}
-        {% endblock %}
-    </div>
-
 
     {% block operation_buttons %}
 
