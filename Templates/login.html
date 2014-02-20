@@ -19,7 +19,7 @@
 
             <div class="button-group">
                 <label>
-                    <input type="checkbox" name="remember" value="1"/> 保持登入 30 天
+                    <input type="checkbox" name="session_expiry" value="{{ 3600 * 24 *30 }}"/> 保持登入 30 天
                 </label>
 
                 <input class="button submit" type="submit" value="{% trans 'Login' %}"/>
