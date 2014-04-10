@@ -68,7 +68,7 @@ class window.FiveKit.Xhr
       # @xhr.setRequestHeader("X-UPLOAD-FILENAME", file.name)
       @xhr.setRequestHeader("X-UPLOAD-SIZE", file.size)
       @xhr.setRequestHeader("X-UPLOAD-TYPE", file.type)
-      @xhr.setRequestHeader("X-UPLOAD-MODIFIED-DATE", file.lastModifiedDate)
+      @xhr.setRequestHeader("X-UPLOAD-MODIFIED-DATE", encodeURIComponent(file.lastModifiedDate.toISOString()))
 
       fd = new FormData
       fd.append "upload",file

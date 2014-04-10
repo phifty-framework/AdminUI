@@ -94,7 +94,7 @@
         this.xhr.setRequestHeader("X-UPLOAD-FILENAME", encodeURIComponent(file.name));
         this.xhr.setRequestHeader("X-UPLOAD-SIZE", file.size);
         this.xhr.setRequestHeader("X-UPLOAD-TYPE", file.type);
-        this.xhr.setRequestHeader("X-UPLOAD-MODIFIED-DATE", file.lastModifiedDate);
+        this.xhr.setRequestHeader("X-UPLOAD-MODIFIED-DATE", encodeURIComponent(file.lastModifiedDate.toISOString()));
         fd = new FormData;
         fd.append("upload", file);
         this.xhr.send(fd);
