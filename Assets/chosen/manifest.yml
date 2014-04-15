@@ -3,6 +3,6 @@ collections:
   - files:
       - chosen
   - css:
-      - chosen/chosen.css
+      - chosen/chosen.min.css
   - js:
       - chosen/chosen.jquery.min.js
