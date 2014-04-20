@@ -1,6 +1,6 @@
 ---
 collections:
   - css:
-    - font-awesome/font-awesome.min.css
+    - font-awesome-4.0.3/css/font-awesome.min.css
   - files:
-    - font
+    - font-awesome-4.0.3/fonts
