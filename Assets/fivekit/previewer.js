@@ -75,8 +75,8 @@ Dependencies: FiveKit.Dropbox,
 
     Previewer.prototype.scalePreviewDimension = function(d) {
       var r;
-      if (d.width > 400) {
-        r = 400 / d.width;
+      if (d.width > 350) {
+        r = 350 / d.width;
         d.width *= r;
         d.height *= r;
       }
