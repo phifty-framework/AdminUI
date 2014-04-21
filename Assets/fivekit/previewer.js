@@ -48,13 +48,14 @@ Dependencies: FiveKit.Dropbox,
         width: 240,
         height: 120
       };
+      this.widgetContainer.css({
+        display: 'inline-block'
+      });
       this.updateCover(d);
       if (d) {
-        this.widgetContainer.css(this.scalePreviewDimension(d));
         this.cover.css(this.scalePreviewDimension(d));
         $dropzone.css(this.scalePreviewDimension(d));
       } else {
-        this.widgetContainer.css(defaultDimension);
         this.cover.css(defaultDimension);
         $dropzone.css(defaultDimension);
       }

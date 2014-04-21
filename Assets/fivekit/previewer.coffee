@@ -56,15 +56,15 @@ class window.FiveKit.Previewer
 
     defaultDimension = { width: 240, height: 120 }
 
+    @widgetContainer.css({ display: 'inline-block' })
+
     # create image holder
     @updateCover(d)
 
     if d
-      @widgetContainer.css( @scalePreviewDimension(d) )
       @cover.css( @scalePreviewDimension(d) )
       $dropzone.css( @scalePreviewDimension( d ) )
     else
-      @widgetContainer.css( defaultDimension )
       @cover.css(defaultDimension)
       $dropzone.css(defaultDimension)
 
