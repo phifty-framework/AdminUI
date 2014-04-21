@@ -31,6 +31,8 @@ class AdminUI extends Bundle
         if ( isset($config['menuStyle']) && ! isset($config['menuTemplate']) ) {
             if ( $config['menuStyle'] === "aim" ) {
                 $config['menuTemplate'] = '@AdminUI/aim_menu.html';
+            } elseif ( $config['menuStyle'] === "quickbox" ) {
+                $config['menuTemplate'] = '@AdminUI/quickbox.html';
             } elseif ( $config['menuStyle'] === "standard" ) {
                 $config['menuTemplate'] = '@AdminUI/standard_menu.html';
             }
