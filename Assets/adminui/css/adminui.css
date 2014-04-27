@@ -2471,6 +2471,26 @@ input.delete-btn {
       position: absolute;
       top: 2px;
       right: 1px; }
+  .cover.x-small-width > img {
+    max-width: 100px; }
+  .cover.small-width > img {
+    max-width: 130px; }
+  .cover.medium-width > img {
+    max-width: 180px; }
+  .cover.large-width > img {
+    max-width: 300px; }
+  .cover.x-large-width > img {
+    max-width: 420px; }
+  .cover.x-small-height > img {
+    max-height: 100px; }
+  .cover.small-height > img {
+    max-height: 130px; }
+  .cover.medium-height > img {
+    max-height: 180px; }
+  .cover.large-height > img {
+    max-height: 300px; }
+  .cover.x-large-height > img {
+    max-height: 420px; }
 
 .dropzone.fill {
   position: absolute;
@@ -2478,21 +2498,6 @@ input.delete-btn {
   left: 0;
   right: 0;
   bottom: 0; }
-
-.cover.x-small-height > img {
-  max-height: 100px; }
-
-.cover.small-height > img {
-  max-height: 130px; }
-
-.cover.medium-height > img {
-  max-height: 180px; }
-
-.cover.large-height > img {
-  max-height: 300px; }
-
-.cover.x-large-height > img {
-  max-height: 420px; }
 
 /* see: bundles/CoreBundle/assets/fivekit/fivekit.css */
 .upload-progress {
