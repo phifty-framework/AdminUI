@@ -21,9 +21,11 @@
         target: '_blank',
         href: '/' + opts.image
       });
-      $image = $('<img/>').attr({
-        src: '/' + opts.thumb
-      }).appendTo($a);
+      if (opts.thumb) {
+        $image = $('<img/>').attr({
+          src: '/' + opts.thumb
+        }).appendTo($a);
+      }
       $cut = $('<div/>').addClass('cut').append($a).appendTo($imageCover);
       $title = $('<div/>').addClass('title').html(opts.title || '未命名').appendTo($imageCover);
       if (opts.onClose) {
