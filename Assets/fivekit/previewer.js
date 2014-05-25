@@ -52,7 +52,7 @@ Dependencies: FiveKit.Dropbox,
         display: 'inline-block'
       });
       this.updateCover(d);
-      if (d) {
+      if (d && d.width && d.height) {
         this.cover.css(this.scalePreviewDimension(d));
         $dropzone.css(this.scalePreviewDimension(d));
       } else {
@@ -89,17 +89,31 @@ Dependencies: FiveKit.Dropbox,
     };
 
     Previewer.prototype.insertImageHolder = function(d) {
-      var $imageholder, holdertheme;
-      if (!(d && (d != null ? d.width : void 0) && (d != null ? d.height : void 0))) {
-        return;
-      }
+      var $imageholder, holdertheme, text;
       if (window.navigator.userAgent.match(/MSIE 8/)) {
         return;
       }
       holdertheme = "auto";
-      $imageholder = $('<img/>').attr("data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/"));
-      d = this.scalePreviewDimension(d);
-      $imageholder.css(d);
+      if (d && d.width && d.height) {
+        $imageholder = $('<img/>').attr("data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/"));
+        d = this.scalePreviewDimension(d);
+        $imageholder.css(d);
+      } else if (d && (d.width || d.height)) {
+        text = d && d.width ? d.width : "Any";
+        text += " x ";
+        text += d && d.height ? d.height : "Any";
+        $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:" + text, holdertheme].join("/"));
+        $imageholder.css({
+          width: 240,
+          height: 120
+        });
+      } else {
+        $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:Any Size", holdertheme].join("/"));
+        $imageholder.css({
+          width: 240,
+          height: 120
+        });
+      }
       this.cover.append($imageholder);
       return Holder.run({
         images: $imageholder.get(0)
@@ -107,14 +121,15 @@ Dependencies: FiveKit.Dropbox,
     };
 
     Previewer.prototype.getImageDimension = function() {
-      var h, w, _ref;
-      _ref = [this.fileInput.data('width'), this.fileInput.data('height')], w = _ref[0], h = _ref[1];
-      if (w && h) {
-        return {
-          width: w,
-          height: h
-        };
+      var d;
+      d = {};
+      if (this.fileInput.data('width')) {
+        d.width = this.fileInput.data('width');
       }
+      if (this.fileInput.data('height')) {
+        d.height = this.fileInput.data('height');
+      }
+      return d;
     };
 
     Previewer.prototype.removeCoverImage = function() {

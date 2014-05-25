@@ -19,7 +19,9 @@ Phifty.AdminUI =
     # insert image id into product field
     $imageCover = $('<div/>').addClass('image-cover')
     $a = $('<a/>').attr( target: '_blank', href: '/' + opts.image )
-    $image = $('<img/>').attr( src: '/' + opts.thumb ).appendTo($a)
+
+    $image = $('<img/>').attr( src: '/' + opts.thumb ).appendTo($a) if opts.thumb
+
     $cut = $('<div/>').addClass('cut').append($a).appendTo($imageCover)
     $title = $('<div/>').addClass('title').html( opts.title || '未命名' ).appendTo($imageCover)
     if opts.onClose

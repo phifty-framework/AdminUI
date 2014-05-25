@@ -61,7 +61,7 @@ class window.FiveKit.Previewer
     # create image holder
     @updateCover(d)
 
-    if d
+    if d and d.width and d.height
       @cover.css( @scalePreviewDimension(d) )
       $dropzone.css( @scalePreviewDimension( d ) )
     else
@@ -95,26 +95,35 @@ class window.FiveKit.Previewer
     return d
 
   insertImageHolder: (d) ->
-    return unless d and d?.width and d?.height
+    # return unless d and d?.width and d?.height
     return if window.navigator.userAgent.match(/MSIE 8/)
     # holdertheme = "social"
     holdertheme = "auto"
-    $imageholder = $('<img/>').attr("data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/"))
 
-    d = @scalePreviewDimension(d)
+    if d and d.width and d.height
+      $imageholder = $('<img/>').attr("data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/"))
 
-    # resize the image if the size is too large.
-    $imageholder.css(d)
+      # resize the image if the size is too large.
+      d = @scalePreviewDimension(d)
+      $imageholder.css(d)
+    else if d and (d.width or d.height)
+      text = if d and d.width then d.width else "Any"
+      text += " x "
+      text += if d and d.height then d.height else "Any"
+      $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:" + text, holdertheme].join("/"))
+      $imageholder.css({ width: 240, height: 120 })
+    else
+      $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:Any Size", holdertheme].join("/"))
+      $imageholder.css({ width: 240, height: 120 })
+
     @cover.append $imageholder
     Holder.run images: $imageholder.get(0)
 
   getImageDimension: () ->
-    [w, h] = [@fileInput.data('width'), @fileInput.data('height')]
-    if w and h
-      return {
-        width: w
-        height: h
-      }
+    d = { }
+    d.width = @fileInput.data('width') if @fileInput.data('width')
+    d.height = @fileInput.data('height') if @fileInput.data('height')
+    return d
 
   removeCoverImage: () -> @cover.empty()
 
