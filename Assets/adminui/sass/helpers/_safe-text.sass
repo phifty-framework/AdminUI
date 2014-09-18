@@ -1,0 +1,23 @@
+@for $i from 1 to 12
+  .safe-text-#{$i}
+    white-space: nowrap
+    text-overflow: ellipsis
+    max-width: $i * 30px
+    overflow: hidden
+    display: inline-block
+    vertical-align: bottom
+
+@for $i from 1 to 12
+  .safe-text-md-#{$i}
+    white-space: nowrap
+    text-overflow: ellipsis
+    max-width: percentage($i / 12)
+    overflow: hidden
+
+@for $i from 1 to 12
+  .safe-text-scroll-#{$i}
+    overflow: auto
+    white-space: nowrap
+    max-width: $i * 30px
+    display: inline-block
+    vertical-align: bottom
