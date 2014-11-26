@@ -69,6 +69,7 @@ class AdminUI extends Bundle
             'formkit',
             'fivekit',
             'adminui',
+            'font-awesome-3.2',
             'font-awesome-4.2',
         );
     }
