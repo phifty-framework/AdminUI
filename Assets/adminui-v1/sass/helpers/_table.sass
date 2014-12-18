@@ -1,0 +1,19 @@
+/*
+ * Different table layout algorithm can resize the table width based on the
+ * content or the column width.
+ *
+ * auto: Automatic table layout algorithm (this is default):
+ *       The column width is set by the widest unbreakable content in the cells
+ *       Can be slow, since it needs to read through all the content in the
+ *       table, before determining the final layout
+ *
+ * fixed: Fixed table layout algorithm:
+ *       The horizontal layout only depends on the table's width and the width
+ *       of the columns, not the contents of the cells Allows a browser to lay
+ *       out the table faster than the automatic table layout The browser can
+ *       begin to display the table once the first row has been received
+table
+  &.table-layout-fixed
+    table-layout: fixed
+  &.table-layout-auto
+    table-layout: auto

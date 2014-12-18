@@ -1,0 +1,68 @@
+
+// Reset
+body
+  padding: 0
+  margin: 0
+
+  // better helvetica font
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
+  font-weight: 300
+
+  // this setup font em size
+  font-size: 14px
+  background: url(images/background_linen.png) repeat #cccccc
+
+
+// tinyMCE content styling
+body.mceContentBody
+  font-size: 20px
+
+
+// reset headers
+h1, h2, h3, h4, h5, h6
+  margin: 0px
+  padding: 0px
+
+
+a
+  text-decoration: none
+  color: blue
+  &:link, &:visited
+    text-decoration: none
+    color: blue
+  &:hover
+    text-decoration: underline
+
+
+
+// Default background
+.pull-right
+  float: right
+.pull-left
+  float: left
+
+.show
+  display: block
+
+.hide
+  display: none
+
+
+.row
+  margin-left: -20px
+  *zoom: 1
+  &:before
+    display: table
+    line-height: 0
+    content: ""
+  &:after
+    display: table
+    line-height: 0
+    content: ""
+    clear: both
+
+[class*="span"]
+  float: left
+  min-height: 1px
+  margin-left: 20px
+

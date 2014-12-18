@@ -1,0 +1,335 @@
+@import "compass/css3"
+
+// section contains a header block, body block
+//   <div class="section">
+//      <div class="hd">  </div>
+//      <div class="bd">  </div>
+$blue:  #99ccdd
+$blue2: #62b1d0
+
+.section
+  padding: 10px
+  & > .hd
+    .nav
+      position: absolute
+      right: 9px
+      top: 3px
+    position: relative
+    border-top: 1px solid #3aa6d0
+    border-left: 1px solid #3aa6d0
+    border-right: 1px solid $blue2
+    border-bottom: 1px solid #888888
+    padding: 7px 10px 7px 10px
+    color: #fff
+    font-size: 13px
+    /* css3 attributes
+    background-color: #62B1D0
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from($blue2), to($blue))
+    background: -webkit-linear-gradient($blue2, $blue)
+    background: -moz-linear-gradient($blue2, $blue)
+    background: -ms-linear-gradient($blue2, $blue)
+    background: -o-linear-gradient($blue2, $blue)
+    background: linear-gradient($blue2, $blue)
+    // or antialiased;
+    // -webkit-font-smoothing: subpixel-antialiased;
+    // or 0.01em might be better
+    // -webkit-text-stroke: 0.05em white;
+  & > .bd > .bd-inner
+    padding-left: 10px
+    padding-right: 10px
+  & > .bd
+    border-left: 1px solid #c0c0c0
+    border-right: 1px solid #c0c0c0
+    border-bottom: 1px solid #c0c0c0
+    position: relative
+    background: #f5f5f5
+  .text-block
+    color: #000
+    -webkit-text-stroke: white 1px 1px
+    -moz-text-shadow: white 1px 1px
+    text-shadow: white 1px 1px
+    font-size: 14px
+    line-height: 160%
+  ul.inner-tabs
+    list-style: none
+    margin: 10px 10px
+    padding: 10px 10px
+    background: #333
+    @include border-radius(10px)
+    @include box-shadow(#888888 0px 0px 6px)
+    background-color: #888
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#888888), to(#333333))
+    background: -webkit-linear-gradient(#888888, #333333)
+    background: -moz-linear-gradient(#888888, #333333)
+    background: -ms-linear-gradient(#888888, #333333)
+    background: -o-linear-gradient(#888888, #333333)
+    background: linear-gradient(#888888, #333333)
+    -pie-background: linear-gradient(#888888, #333333)
+    // behavior: url(/assets/phifty-core/css/pie/PIE.htc);
+  .inner-tabs li
+    display: inline
+    margin: 0px
+    padding: 0px
+    a
+      text-decoration: none
+      margin: 0px
+      padding: 10px 5px
+      color: #eee
+      @include text-shadow(black 1px 1px)
+      &:hover
+        background-color: #62B1D0
+        background: -webkit-gradient(linear, 0 0, 0 bottom, from($blue2), to(#333333))
+        background: -webkit-linear-gradient($blue2, #333333)
+        background: -moz-linear-gradient($blue2, #333333)
+        background: -ms-linear-gradient($blue2, #333333)
+        background: -o-linear-gradient($blue2, #333333)
+        background: linear-gradient($blue2, #333333)
+        -pie-background: linear-gradient($blue2, #333333)
+        /*     behavior: url(/assets/phifty-core/css/pie/PIE.htc);
+  .inner-body
+    border-top: 1px solid #cccccc
+    border-left: 1px solid #cccccc
+    border-right: 1px solid #aaaaaa
+    border-bottom: 1px solid #aaaaaa
+    padding: 6px
+    background-color: #eee
+
+    @include box-shadow(#999999 0px 0px 3px)
+    @include border-radius(6px)
+    // behavior: url(/assets/phifty-core/css/pie/PIE.htc);
+  .bd .section
+    padding: 5px
+    >
+      .bd
+        @include border-radius(0 0 5px 5px)
+        @include box-shadow(none)
+      .hd
+        @include border-radius(5px 5px 0px 0px)
+        @include box-shadow(none)
+  h1, h2, h3, h4, h5
+    color: #333
+    text-shadow: white 1px 2px
+    font-weight: bold
+
+  // toolbar styling
+  .toolbar
+    height: 32px
+    background-image: linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
+    background-image: -o-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
+    background-image: -moz-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
+    background-image: -webkit-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
+    background-image: -ms-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.1, rgb(190, 190, 190)), color-stop(0.2, rgb(200, 200, 200)), color-stop(0.9, rgb(242, 242, 242)))
+    padding: 0px
+    color: #000
+    border-bottom: 1px solid #888888
+    @include text-shadow(1px 1px 1px white)
+    @include box-shadow(0px 3px 3px 0px #cccccc)
+
+  .toolbar-label > .label
+    float: left
+    padding-top: 9px
+    padding-left: 6px
+    padding-right: 6px
+  .toolbar-control
+    padding: 4px 5px 4px 5px
+    float: left
+  .toolbar-control > .label
+    float: left
+    line-height: 22px
+    margin-right: 6px
+  .toolbar-control.pull-right
+    float: right
+    /*     border: 1px solid #ccc;
+  .toolbar-divider
+    float: left
+    height: 32px
+    margin-left: 3px
+    margin-right: 3px
+    border-left: 1px solid #aaaaaa
+    border-right: 1px solid white
+  .toolbar-divider.pull-right
+    float: right
+  .corner-controll
+    background: #fff
+    background: white
+    padding: 3px
+    border: 1px solid #aaaaaa
+    border-radius: 6px
+    display: block
+    float: left
+    margin-bottom: 10px
+  .block
+    margin: 6px
+    border: 1px solid #aaaaaa
+    padding: 8px
+    background: #fff
+    border-radius: 10px
+    .title
+      font-size: 14px
+      font-weight: bold
+      margin-bottom: 3px
+      border-bottom: 1px dotted #cccccc
+      padding-bottom: 3px
+  .bd .notice
+    margin: 30px
+    border: 1px solid #cccccc
+    background-color: #fffda9
+    padding: 20px 20px
+
+// admin sections
+table.result
+  background: #f8f8f8
+  border: 1px solid #bbbbbb
+  border-collapse: 0px
+  border-spacing: 0px
+  @include border-radius(10px)
+  padding: 5px
+  margin-bottom: 2px
+  margin-top: 2px
+  tr
+    height: 28px
+    &.even
+      background: #fff
+    &.old
+      background: #e5e5e5
+    &:hover
+      background-color: #ade
+      color: #000
+    &.selected
+      background-color: #bbb
+      color: #000
+  td
+    text-align: left
+    vertical-align: middle
+    // we use text-align left, so don't pad the right side.
+    padding: 1px 0 1px 8px
+  th
+    vertical-align: middle
+    font-weight: bold
+    border-bottom: 1px dotted #888888
+    padding: 3px 0px
+    border-right: 1px solid #aaaaaa
+    min-width: 20px
+
+.column-header
+  position: relative
+  text-align: center
+
+.column-sort-asc
+  float: right
+  margin-right: 1px
+  display: inline-block
+  width: 16px
+  height: 16px
+
+.column-sort-desc
+  float: right
+  margin-right: 1px
+  display: inline-block
+  width: 16px
+  height: 16px
+  background: url(images/sort-desc.png) 1px 1px no-repeat
+
+.column-sort-asc
+  background: url(images/sort-asc.png) 1px 1px no-repeat
+  &:hover
+    right: 4px
+    top: 2px
+
+.column-sort-desc:hover
+  right: 4px
+  top: 2px
+
+/* =====================
+ * span classes 
+ * =====================
+ *
+
+.price
+  text-shadow: white 1px 1px
+  font-weight: bold
+  border-bottom: 1px dotted #aaaaaa
+  /*     behavior: url(css/pie/PIE.htc);
+
+.quantity
+  font-size: 110%
+  font-family: Courier New
+  font-weight: bold
+  -webkit-text-stroke: white 1px 1px
+  -moz-text-shadow: white 1px 1px
+  text-shadow: white 1px 1px
+
+.company
+  color: #333
+  font-weight: bold
+  text-shadow: white 1px 1px
+  font-style: italic
+
+.discount
+  color: #532
+
+.degree
+  border: 1px solid #aaaaaa
+  background: #fff
+  padding: 2px 4px
+  font-family: Helvetica,Arial,sans-serif
+  font-weight: bold
+  -webkit-border-radius: 8px
+  -moz-border-radius: 8px
+  border-radius: 8px
+  background: #fff
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#eeeeee))
+  background: -webkit-linear-gradient(white, #eeeeee)
+  background: -moz-linear-gradient(white, #eeeeee)
+  background: -ms-linear-gradient(white, #eeeeee)
+  background: -o-linear-gradient(white, #eeeeee)
+  background: linear-gradient(white, #eeeeee)
+  -pie-background: linear-gradient(white, #eeeeee)
+  -webkit-text-shadow: white 0px 1px
+  -moz-text-shadow: white 0px 1px
+  /* text-shadow: #fff 0px 1px;
+  /*     behavior: url(css/pie/PIE.htc);
+
+@import "pager"
+
+.section .divider
+  border-bottom: 1px solid #dddddd
+  border-top: 1px solid #bbbbbb
+  margin: 10px 2px
+
+/**
+ * jquery collapse styles
+
+.collapse-section h3
+  margin: 0
+  background-color: #62B1D0
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from($blue2), to(#55ccdd))
+  background: -webkit-linear-gradient($blue2, #55ccdd)
+  background: -moz-linear-gradient($blue2, #55ccdd)
+  background: -ms-linear-gradient($blue2, #55ccdd)
+  background: -o-linear-gradient($blue2, #55ccdd)
+  background: linear-gradient($blue2, #55ccdd)
+  font-size: 14px
+  a
+    background: url("images/sprite.png") 15px 13px no-repeat
+    display: block
+    padding: 10px
+    font-size: 14px
+    padding-left: 32px
+    padding-top: 12px
+    margin: 0
+    color: #fff
+    text-decoration: none
+    font-weight: normal
+    /*   border-bottom: 1px solid $blue2;
+    text-shadow: 1px 1px 1px black
+  &:hover
+    background: #aaddee
+  &.open
+    background: $blue2
+    a
+      background-position: 13px -25px
+  + div
+    padding: 10px
+    background-color: #eee

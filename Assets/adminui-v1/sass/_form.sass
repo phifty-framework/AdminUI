@@ -1,0 +1,182 @@
+/* ====================
+ * AdminUI form widgets
+ * ====================
+ *
+.field
+  margin-top: 5px
+  .label
+    width: 70px
+    margin: 4px
+    float: left
+    text-align: right
+    font-size: 16px
+    padding: 1px 3px
+    color: #666
+    text-shadow: #fff 1px 1px
+  .input
+    float: left
+  label.checkbox
+    width: 130px
+    margin: 10px 4px
+    font-size: 14px
+    padding: 1px 3px
+    color: #666
+    text-shadow: #fff 1px 1px
+
+/* vertical field
+
+.v-field
+  margin-bottom: 10px
+  .label
+    /*     letter-spacing: 0.1em;
+    /*     margin-left: 0px;
+    font-size: 1em
+    padding: 1px 0
+    color: #666
+    text-shadow: #fff 1px 1px
+  .desc
+    margin-top: 6px
+    margin-right: 10px
+    margin-left: 6px
+    margin-bottom: 6px
+    padding: 8px
+    color: #666
+    font-size: 14px
+    text-shadow: #fff 1px 1px
+    border-radius: 6px
+    background: #eee
+  .hint
+    padding: 3px 5px
+    margin-top: 3px
+    margin-bottom: 6px
+    color: #555
+    background-color: #FFFF99
+    border: 1px solid #ccc
+    border-radius: 3px
+    font-size: 12px
+    box-shadow: 0 0 2px #aaa
+    text-shadow: 1px 1px #fff
+    display: inline-block
+
+/* input widget style
+
+.input input
+  font-size: 1em
+  padding: 4px 2px
+  border: 1px solid #ccc
+  background-color: #fff
+  text-shadow: #fff 1px 1px
+  &:focus
+    background-color: #ccc
+    text-shadow: #fff 1px 1px
+  &.text, &.password, &[type="text"], &[type="password"]
+    background-color: #fff
+
+.input input[readonly]
+  background-color: #ccc
+
+.section input.text
+  background-color: #fff
+  &:focus
+    color: #000
+    background: #eee
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#eeeeee), to(white))
+    background: -webkit-linear-gradient(#eeeeee, white)
+    background: -moz-linear-gradient(#eeeeee, white)
+    background: -ms-linear-gradient(#eeeeee, white)
+    background: -o-linear-gradient(#eeeeee, white)
+    background: linear-gradient(#eeeeee, white)
+    text-shadow: #fff 1px 1px
+
+.button-group
+  margin: 10px
+  text-align: right
+
+input.button
+  color: #000
+  background-color: #f3f3f3
+  border-top: 1px solid #aaa
+  border-left: 1px solid #aaa
+  border-right: 1px solid #888
+  border-bottom: 1px solid #888
+  padding: 6px 9px
+  font-size: 16px
+  background: #fff
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(white), to(#cccccc))
+  background: -webkit-linear-gradient(white, #cccccc)
+  background: -moz-linear-gradient(white, #cccccc)
+  background: -ms-linear-gradient(white, #cccccc)
+  background: -o-linear-gradient(white, #cccccc)
+  background: linear-gradient(white, #cccccc)
+  @include box-shadow(inset 0 0 10px #fff)
+  @include border-radius(5px)
+  text-shadow: #fff 1px 1px
+  &:hover
+    background: #fff
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#eee), to(#aaa))
+    background: -webkit-linear-gradient(#eee, #aaa)
+    background: -moz-linear-gradient(#eee, #aaa)
+    background: -ms-linear-gradient(#eee, #aaa)
+    background: -o-linear-gradient(#eee, #aaa)
+    background: linear-gradient(#eee, #aaa)
+
+input.button
+  &.create, &.submit
+    font-weight: bold
+  &.cancel!
+  &.delete
+    color: red
+
+input.button-s
+  @extend input.button
+  font-size: 14px
+  font-weight: bold
+  padding: 5px 8px
+
+select
+  border: 1px solid #ccc
+  @include border-radius(0px)
+  background: #fff
+  height: 27px
+  line-height: 27px
+
+
+textarea
+  font-size: 14px
+  padding: 6px
+  background: #fff
+  border: 2px ridge #CCC
+  line-height: 180%
+  border-radius: 5px
+
+/* for formkit, action-view
+
+.formkit-layout-fieldset
+  padding: 8px
+  margin: 0px
+  border-top: 1px solid #ddd
+  border-left: 1px solid #ddd
+  border-right: 1px solid #ccc
+  border-bottom: 1px solid #bbb
+  border-radius: 3px
+  background-color: #f6f6f6
+  label
+    float: left
+    width: 20%
+    text-align: right
+    margin-top: 0.3em
+    margin-right: 0.5em
+  .formkit-hint
+    margin-left: 22%
+    padding: 3px 5px
+    margin-top: 3px
+    margin-bottom: 5px
+    color: #555
+    background-color: #FFFF99
+    border: 1px solid #ccc
+    font-size: 12px
+    display: inline-block
+    @include border-radius(3px)
+    @include box-shadow(0 0 2px #aaa)
+    @include text-shadow(1px 1px #fff)
+

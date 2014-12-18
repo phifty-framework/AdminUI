@@ -1,0 +1,39 @@
+/************* Message styles *************
+.message
+  width: 92%
+  margin: 10px auto
+  padding: 10px 12px
+  @include border-radius(10px)
+  @include box-shadow(#555555 1px 1px 6px)
+
+  position: relative
+  font-size: 14px
+  behavior: url(/ph/CoreBundle/css/pie/PIE.htc)
+  .text
+    margin-left: 25px
+  .desc
+    margin-top: 8px
+    margin-left: 25px
+    font-size: 12px
+  &.waiting
+    border: 1px solid #cccccc
+    background: #DDD
+    color: #333
+    -moz-text-shadow: white 1px 1px
+    -webkit-text-stroke: white 1px 1px
+    text-shadow: white 1px 1px
+  &.success
+    border: 1px solid #c5dbec
+    background: #DFEFFC
+    color: #333
+    -webkit-text-stroke: white 1px 1px
+    -moz-text-stroke: white 1px 1px
+    @include text-shadow(white 1px 1px)
+    .desc
+      color: #666
+  &.invalid
+    background: #fff
+    color: #a60000
+  &.error
+    background: #fff
+    color: #c23e3e
