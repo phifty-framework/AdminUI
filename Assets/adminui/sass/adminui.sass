@@ -6,15 +6,17 @@
 @import "clearfix"
 
 @import "section"
-@import "table"
 @import "form"
 @import "region"
 @import "mixin"
-@import "effect/flip"
+
 @import "quickbox"
 @import "message"
 @import "jgrowl"
 @import "helpers"
+
+@import "effects"
+@import "components"
 
 fieldset
   border: 1px solid #ccc
@@ -63,10 +65,6 @@ input.delete-btn
 @import "operation"
 @import "login"
 
-@import "components/image-cover"
-@import "components/upload-progress"
-@import "components/image-dropzone"
-@import "components/text-tag"
 
 
 /*
@@ -80,6 +78,16 @@ input.delete-btn
  *    float: left;
  *}
 
+
+ul.actionkit-checkbox-view
+  list-style: none
+  input[type=checkbox]
+    margin-right: 3px
+    display: inline-block
+  ul
+    margin-left: 20px
+
+
 @media screen and (max-width: 880px)
   #operation a.admin-menu-button
     display: block
@@ -90,43 +98,3 @@ input.delete-btn
     z-index: 99
   .admin-panel
     width: 98%
-
-
-
-ul, ol
-  margin-top: 0
-  margin-bottom: 10px
-
-ul ul, ol ul, ul ol, ol ol
-  margin-bottom: 0
-
-.list-unstyled
-  padding-left: 0
-  list-style: none
-
-.list-inline
-  padding-left: 0
-  list-style: none
-  > li
-    display: inline-block
-    padding-right: 5px
-    padding-left: 5px
-    &:first-child
-      padding-left: 0
-
-.text-left
-  text-align: left
-.text-right
-  text-align: right
-.text-center
-  text-align: center
-
-ul.actionkit-checkbox-view
-  list-style: none
-  input[type=checkbox]
-    margin-right: 3px
-    display: inline-block
-  ul
-    margin-left: 20px
-
-@import "button"
