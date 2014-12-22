@@ -2458,7 +2458,8 @@ div.notify {
   -ms-user-select: none;
   user-select: none;
   background-image: none;
-  border: 1px solid transparent;
+  border: 1px solid #ddd;
+  background-color: #fff;
   border-radius: 2px; }
 
 .btn:focus,
@@ -2802,7 +2803,7 @@ fieldset[disabled] .btn-link:focus {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 3px; }
+  border-radius: 2px; }
 
 .btn-sm,
 .btn-group-sm > .btn {
