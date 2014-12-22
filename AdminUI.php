@@ -51,6 +51,7 @@ class AdminUI extends Bundle
     {
         return array(
             // 'bootstrap',
+            'font-awesome-4.2',
             'blueprint-light',
             'jquery-ui-1.9',
             'jquery-bsm-select-js',
