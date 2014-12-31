@@ -23,7 +23,7 @@ Usage
     <img src="css/blueprint/plugins/buttons/icons/tick.png" alt=""/> Save
   </button>
 
-  <a class="button" href="/password/reset/">
+  <a class="btn" href="/password/reset/">
     <img src="css/blueprint/plugins/buttons/icons/key.png" alt=""/> Change Password
   </a>
 

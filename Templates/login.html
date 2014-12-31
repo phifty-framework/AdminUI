@@ -13,15 +13,30 @@
                 <input type="hidden" name="redirect" value="{{ goto }}"/>
             {% endif %}
 
-            {{ forms.field( 'Account', 'text' , 'account' , '' , 1 ) }}
+            <div class="v-field">
+                <div class="label">
+                    Account
+                </div>
+                <div class="input">
+                    <input class="input" type="text" name="account" autofocus="true" placeholder="Your Account"/>
+                </div>
+            </div>
 
-            {{ forms.field( 'Password', 'password' , 'password' , '' , 1 ) }}
+            <div class="v-field">
+                <div class="label">
+                    Password
+                </div>
+                <div class="input">
+                    <input type="password" name="password"/>
+                </div>
+            </div>
 
             <div class="button-group">
+                {#
                 <label>
                     <input type="checkbox" name="session_expiry" value="{{ 3600 * 24 *30 }}"/> 保持登入 30 天
                 </label>
-
+                #}
                 <input class="button submit" type="submit" value="{% trans 'Login' %}"/>
 
                 {% if Kernel.bundle('UserBundle').config('allow_register') %}

@@ -26,6 +26,8 @@ class window.FiveKit.Previewer
     # find cover image (note that cover wrapper can be empty)
     @coverImage = @cover.find('img')
 
+    @cover.wrap('<a class="cover-preview-image" target="_blank" href="' + @coverImage.attr('src') + '"></a>')
+
     @autoresizeCheckbox = @widgetContainer.find('.autoresize-checkbox')
     @autoresizeTypeSelector = @widgetContainer.find('.autoresize-type-selector')
 
@@ -49,41 +51,79 @@ class window.FiveKit.Previewer
     d = @getImageDimension()
 
     # create dropzone
-    dropzone = $('<div/>').addClass('image-dropzone')
-    @cover.before dropzone
+    $dropzone = $('<div/>').addClass('image-dropzone')
+    @cover.before $dropzone
 
     defaultDimension = { width: 240, height: 120 }
 
-    @cover.css d or defaultDimension
-    dropzone.css d or defaultDimension
+    @widgetContainer.css({ display: 'inline-block' })
 
     # create image holder
+    @updateCover(d)
+
+    if d and d.width and d.height
+      @cover.css( @scalePreviewDimension(d) )
+      $dropzone.css( @scalePreviewDimension( d ) )
+    else
+      @cover.css(defaultDimension)
+      $dropzone.css(defaultDimension)
+
+
+
+    # Finally, setup the dropbox uploader
+    @initDropbox $dropzone
+
+  updateCover: (d) ->
     if not @coverImage.get(0)
       @insertImageHolder(d)
     else
       @scaleCoverImageByDefault(d) if d
+
       # image cover html generated from backend does not contains
       # remove button and exif button.
       @initCoverController()
 
-    # Finally, setup the dropbox uploader
-    @initDropbox dropzone
+  scalePreviewDimension: (d) ->
+    if d.width > 350
+      r = 350 / d.width
+      d.width  *= r
+      d.height *= r
+    if d.height > 300
+      r = 300 / d.height
+      d.width  *= r
+      d.height  *= r
+    return d
 
   insertImageHolder: (d) ->
-    return unless d and d?.width and d?.height
+    # return unless d and d?.width and d?.height
     return if window.navigator.userAgent.match(/MSIE 8/)
-    holdertheme = "social"
-    imageholder = $('<img/>').attr "data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/")
-    @cover.append imageholder
-    Holder.run images: imageholder.get(0)
+    # holdertheme = "social"
+    holdertheme = "auto"
+
+    if d and d.width and d.height
+      $imageholder = $('<img/>').attr("data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/"))
+
+      # resize the image if the size is too large.
+      d = @scalePreviewDimension(d)
+      $imageholder.css(d)
+    else if d and (d.width or d.height)
+      text = if d and d.width then d.width else "Any"
+      text += " x "
+      text += if d and d.height then d.height else "Any"
+      $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:" + text, holdertheme].join("/"))
+      $imageholder.css({ width: 240, height: 120 })
+    else
+      $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:Any Size", holdertheme].join("/"))
+      $imageholder.css({ width: 240, height: 120 })
+
+    @cover.append $imageholder
+    Holder.run images: $imageholder.get(0)
 
   getImageDimension: () ->
-    [w, h] = [@fileInput.data('width'), @fileInput.data('height')]
-    if w and h
-      return {
-        width: w
-        height: h
-      }
+    d = { }
+    d.width = @fileInput.data('width') if @fileInput.data('width')
+    d.height = @fileInput.data('height') if @fileInput.data('height')
+    return d
 
   removeCoverImage: () -> @cover.empty()
 
@@ -147,11 +187,13 @@ class window.FiveKit.Previewer
     $(img).css { height: '100%', width: '100%' }
 
   scaleCoverImageByDefault: (d) ->
-    if d and typeof @coverImage isnt "undefined"
-      if @coverImage.height() > d.height
-        @coverImage.css { height: '100%', width: 'auto' }
-      if @coverImage.width() > d.width
-        @coverImage.css { width: '100%', height: 'auto' }
+    if d and @coverImage.get(0)
+      d = @scalePreviewDimension(d)
+      @coverImage.css(d)
+      # if @coverImage.height() > d.height
+      #   @coverImage.css { height: '100%', width: 'auto' }
+      # if @coverImage.width() > d.width
+      #   @coverImage.css { width: '100%', height: 'auto' }
 
   # src: image src path
   renderCoverImage: (src) ->
@@ -175,9 +217,12 @@ class window.FiveKit.Previewer
   initCoverController: () ->
     removeButton = $('<div class="close"></div>').css('zIndex', 1000)
     removeButton.on 'click', (e) =>
+      e.stopPropagation()
+
       @removeCoverImage()
       @use "file"
       @insertImageHolder( @getImageDimension() )
+      return false
     @cover.append removeButton
 
     if @fileInput.data('exif')

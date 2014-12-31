@@ -72,11 +72,11 @@ $(function() {
 
         // Show the submenu
         $submenu.css({
-            display: "block"
-            // top: offset.top,
+            display: "block",
+            top: offset.top,
+            left: offset.left + width - 5,  // main should overlay submenu
+            height: $menu.height()
             // top: 0,
-            // left: offset.left + width - 5,  // main should overlay submenu
-            // height: $menu.height()
         });
         var $a = $row.find("a");
 

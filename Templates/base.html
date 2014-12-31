@@ -15,7 +15,12 @@ vim:filetype=htmldjango:
     #}
 
     <title>{% block title %}{{ title|default(appname) }}{% endblock %}</title>
+
+    <script src="/assets/phifty-core/js/tinymce/tiny_mce.js"> </script>
+    <script src="/assets/phifty-core/js/tinymce_helper.js"> </script>
+
     {{ Web.include_loaded_assets('adminui-page') |raw}}
+
     {% endblock %}
 
     <script>

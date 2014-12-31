@@ -1,4 +1,5 @@
 ---
 collections:
-  - js:
+  - compressors: ['no']
+    javascript:
     - coffeekup.js

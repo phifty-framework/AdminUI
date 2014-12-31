@@ -7,5 +7,6 @@ collections:
     - css/animate.css
     - css/adminui.css
   - js:
+    - js/modal.js
     - js/adminui.js
     - js/quicksearch.js

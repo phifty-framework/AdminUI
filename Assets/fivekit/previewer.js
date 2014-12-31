@@ -24,13 +24,14 @@ Dependencies: FiveKit.Dropbox,
       this.widgetContainer = this.fileInput.parents(".formkit-widget-thumbimagefile");
       this.cover = this.widgetContainer.find(".formkit-image-cover");
       this.coverImage = this.cover.find('img');
+      this.cover.wrap('<a class="cover-preview-image" target="_blank" href="' + this.coverImage.attr('src') + '"></a>');
       this.autoresizeCheckbox = this.widgetContainer.find('.autoresize-checkbox');
       this.autoresizeTypeSelector = this.widgetContainer.find('.autoresize-type-selector');
       this.initialize();
     }
 
     Previewer.prototype.initialize = function() {
-      var d, defaultDimension, dropzone,
+      var $dropzone, d, defaultDimension,
         _this = this;
       this.fileInput.on("change", function(e) {
         var _ref;
@@ -41,50 +42,94 @@ Dependencies: FiveKit.Dropbox,
       });
       this.fileInput.after(this.hiddenInput);
       d = this.getImageDimension();
-      dropzone = $('<div/>').addClass('image-dropzone');
-      this.cover.before(dropzone);
+      $dropzone = $('<div/>').addClass('image-dropzone');
+      this.cover.before($dropzone);
       defaultDimension = {
         width: 240,
         height: 120
       };
-      this.cover.css(d || defaultDimension);
-      dropzone.css(d || defaultDimension);
+      this.widgetContainer.css({
+        display: 'inline-block'
+      });
+      this.updateCover(d);
+      if (d && d.width && d.height) {
+        this.cover.css(this.scalePreviewDimension(d));
+        $dropzone.css(this.scalePreviewDimension(d));
+      } else {
+        this.cover.css(defaultDimension);
+        $dropzone.css(defaultDimension);
+      }
+      return this.initDropbox($dropzone);
+    };
+
+    Previewer.prototype.updateCover = function(d) {
       if (!this.coverImage.get(0)) {
-        this.insertImageHolder(d);
+        return this.insertImageHolder(d);
       } else {
         if (d) {
           this.scaleCoverImageByDefault(d);
         }
-        this.initCoverController();
+        return this.initCoverController();
       }
-      return this.initDropbox(dropzone);
+    };
+
+    Previewer.prototype.scalePreviewDimension = function(d) {
+      var r;
+      if (d.width > 350) {
+        r = 350 / d.width;
+        d.width *= r;
+        d.height *= r;
+      }
+      if (d.height > 300) {
+        r = 300 / d.height;
+        d.width *= r;
+        d.height *= r;
+      }
+      return d;
     };
 
     Previewer.prototype.insertImageHolder = function(d) {
-      var holdertheme, imageholder;
-      if (!(d && (d != null ? d.width : void 0) && (d != null ? d.height : void 0))) {
-        return;
-      }
+      var $imageholder, holdertheme, text;
       if (window.navigator.userAgent.match(/MSIE 8/)) {
         return;
       }
-      holdertheme = "social";
-      imageholder = $('<img/>').attr("data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/"));
-      this.cover.append(imageholder);
+      holdertheme = "auto";
+      if (d && d.width && d.height) {
+        $imageholder = $('<img/>').attr("data-src", ["holder.js", d.width + "x" + d.height, holdertheme].join("/"));
+        d = this.scalePreviewDimension(d);
+        $imageholder.css(d);
+      } else if (d && (d.width || d.height)) {
+        text = d && d.width ? d.width : "Any";
+        text += " x ";
+        text += d && d.height ? d.height : "Any";
+        $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:" + text, holdertheme].join("/"));
+        $imageholder.css({
+          width: 240,
+          height: 120
+        });
+      } else {
+        $imageholder = $('<img/>').attr("data-src", ["holder.js", "240x120", "text:Any Size", holdertheme].join("/"));
+        $imageholder.css({
+          width: 240,
+          height: 120
+        });
+      }
+      this.cover.append($imageholder);
       return Holder.run({
-        images: imageholder.get(0)
+        images: $imageholder.get(0)
       });
     };
 
     Previewer.prototype.getImageDimension = function() {
-      var h, w, _ref;
-      _ref = [this.fileInput.data('width'), this.fileInput.data('height')], w = _ref[0], h = _ref[1];
-      if (w && h) {
-        return {
-          width: w,
-          height: h
-        };
+      var d;
+      d = {};
+      if (this.fileInput.data('width')) {
+        d.width = this.fileInput.data('width');
       }
+      if (this.fileInput.data('height')) {
+        d.height = this.fileInput.data('height');
+      }
+      return d;
     };
 
     Previewer.prototype.removeCoverImage = function() {
@@ -167,19 +212,9 @@ Dependencies: FiveKit.Dropbox,
     };
 
     Previewer.prototype.scaleCoverImageByDefault = function(d) {
-      if (d && typeof this.coverImage !== "undefined") {
-        if (this.coverImage.height() > d.height) {
-          this.coverImage.css({
-            height: '100%',
-            width: 'auto'
-          });
-        }
-        if (this.coverImage.width() > d.width) {
-          return this.coverImage.css({
-            width: '100%',
-            height: 'auto'
-          });
-        }
+      if (d && this.coverImage.get(0)) {
+        d = this.scalePreviewDimension(d);
+        return this.coverImage.css(d);
       }
     };
 
@@ -207,9 +242,11 @@ Dependencies: FiveKit.Dropbox,
         _this = this;
       removeButton = $('<div class="close"></div>').css('zIndex', 1000);
       removeButton.on('click', function(e) {
+        e.stopPropagation();
         _this.removeCoverImage();
         _this.use("file");
-        return _this.insertImageHolder(_this.getImageDimension());
+        _this.insertImageHolder(_this.getImageDimension());
+        return false;
       });
       this.cover.append(removeButton);
       if (this.fileInput.data('exif')) {

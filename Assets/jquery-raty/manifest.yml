@@ -1,0 +1,6 @@
+---
+collections:
+  - js:
+    - jquery.raty.min.js
+  - files:
+    - images

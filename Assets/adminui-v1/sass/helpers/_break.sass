@@ -1,0 +1,5 @@
+$wordBreakValues: keep-all, normal, break-all
+
+@each $val in $wordBreakValues
+  .break-#{$val}
+    word-break: $val

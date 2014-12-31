@@ -1,0 +1,4 @@
+---
+collections:
+  - js:
+    - waypoints.min.js

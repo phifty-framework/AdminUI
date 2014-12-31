@@ -2,7 +2,6 @@
 vim:filetype=htmldjango
 #}
 {% extends '@AdminUI/base.html' %}
-
 {% block head %}
     {{ parent() }}
     <script>
@@ -19,7 +18,8 @@ vim:filetype=htmldjango
 {% block body %}
 
 
-{% block header %} {% endblock %}
+{% block header %}
+{% endblock %}
 
 {% block operation %}
 <div id="operation">  
@@ -28,7 +28,7 @@ vim:filetype=htmldjango
         <div class="btn-group pull-left">
             {% if AdminUI.config('homeLink') %}
                 <a class="btn" href="{{ AdminUI.config('homeLink')|raw}}">
-                    <i class="icon icon-home"> </i> {{appname}}
+                    <i class="icon fa-home"> </i> {{appname}}
                 </a>
             {% endif %}
             {% if AdminUI.config('menuStyle') == "aim" or AdminUI.config('menuStyle') == "quickbox" %}
@@ -68,10 +68,9 @@ vim:filetype=htmldjango
 </div>
 {% endblock %}
 
-    <div class="clear"> </div>
+<div class="clear"> </div>
 
 {% block content %}
-
     {% if not Request.param('in_window') %}
         {% include AdminUI.config('menuTemplate') %}
     {% endif %}
@@ -86,6 +85,6 @@ vim:filetype=htmldjango
             {% endif %}
         {% endblock %}
     </div>
-{% endblock %}
+{% endblock %}{# end of content #}
 
 {% endblock %}{# end of body #}

@@ -31,6 +31,8 @@ class AdminUI extends Bundle
         if ( isset($config['menuStyle']) && ! isset($config['menuTemplate']) ) {
             if ( $config['menuStyle'] === "aim" ) {
                 $config['menuTemplate'] = '@AdminUI/aim_menu.html';
+            } elseif ( $config['menuStyle'] === "quickbox" ) {
+                $config['menuTemplate'] = '@AdminUI/quickbox.html';
             } elseif ( $config['menuStyle'] === "standard" ) {
                 $config['menuTemplate'] = '@AdminUI/standard_menu.html';
             }
@@ -49,9 +51,9 @@ class AdminUI extends Bundle
     {
         return array(
             // 'bootstrap',
+            'font-awesome-4.2',
             'blueprint-light',
             'jquery-ui-1.9',
-            'jquery-lightbox',
             'jquery-bsm-select-js',
             'jquery-collapse-7ea0f00',
             'jquery-exif',
@@ -59,14 +61,15 @@ class AdminUI extends Bundle
             'jquery-menu-aim',
             'coffeekup',
             'facebox',
-            'ckeditor',
+            'lightbox2',
+            // 'ckeditor',
             'jcrop',
+            'chosen',
             'crystal-icons',
             'holder',
             'formkit',
             'fivekit',
             'adminui',
-            'font-awesome',
         );
     }
 
