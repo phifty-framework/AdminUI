@@ -5,10 +5,10 @@ window.Phifty = {} unless window.Phifty
 
 
 
-Phifty.AdminUI =
+AdminUI =
   ###
 
-  $imageCover = Phifty.AdminUI.createImageCover { image:..., thumb: ..., title:...  },
+  $imageCover = AdminUI.createImageCover { image:..., thumb: ..., title:...  },
     onClose: (e) ->
       runAction 'Product::Action::DeleteProductImage',
         { id: data.id },
@@ -84,7 +84,7 @@ Phifty.News = {} unless Phifty.News
 
 # XXX: refactor this to news asset later.
 Phifty.News.createImageCover = (data) ->
-  $imageCover = Phifty.AdminUI.createImageCover
+  $imageCover = AdminUI.createImageCover
     image: data.image,
     thumb: data.thumb,
     title: data.title,
@@ -102,7 +102,7 @@ Phifty.News.createImageCover = (data) ->
   return $imageCover
 
 Phifty.News.createResourceCover = (data) ->
-  $tag = Phifty.AdminUI.createResourceCover data,
+  $tag = AdminUI.createResourceCover data,
     onClose: (e) ->
       runAction('News::Action::DeleteResource',
           { id: data.id },

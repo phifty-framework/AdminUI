@@ -4,11 +4,11 @@
     window.Phifty = {};
   }
 
-  Phifty.AdminUI = {
+  AdminUI = {
 
     /*
     
-    $imageCover = Phifty.AdminUI.createImageCover { image:..., thumb: ..., title:...  },
+    $imageCover = AdminUI.createImageCover { image:..., thumb: ..., title:...  },
       onClose: (e) ->
         runAction 'Product::Action::DeleteProductImage',
           { id: data.id },
@@ -111,7 +111,7 @@
 
   Phifty.News.createImageCover = function(data) {
     var $id, $imageCover;
-    $imageCover = Phifty.AdminUI.createImageCover({
+    $imageCover = AdminUI.createImageCover({
       image: data.image,
       thumb: data.thumb,
       title: data.title,
@@ -134,7 +134,7 @@
 
   Phifty.News.createResourceCover = function(data) {
     var $id, $tag;
-    $tag = Phifty.AdminUI.createResourceCover(data, {
+    $tag = AdminUI.createResourceCover(data, {
       onClose: function(e) {
         return runAction('News::Action::DeleteResource', {
           id: data.id
