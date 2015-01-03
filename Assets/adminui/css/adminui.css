@@ -2280,16 +2280,24 @@ div.notify {
 
 .text-tag {
   position: relative;
-  padding: 6px;
-  margin: 3px;
+  padding: 6px 9px;
+  margin-right: 3px;
+  display: inline-block;
   border: 1px solid #cccccc;
   border-radius: 5px;
   background: #fff;
   color: #333;
-  font-weight: bold;
-  width: 120px;
-  overflow: hidden;
-  float: left; }
+  font-weight: 100; }
+  .text-tag .name {
+    max-width: 140px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    margin-right: 24px;
+    vertical-align: middle; }
+  .text-tag .fa-remove {
+    vertical-align: middle; }
   .text-tag .close {
     background: url(images/dialog_close_button.png);
     width: 20px;
@@ -2301,6 +2309,89 @@ div.notify {
       position: absolute;
       top: 2px;
       right: 1px; }
+
+.tag {
+  position: relative;
+  display: inline-block;
+  padding: 0px 8px;
+  border: 1px solid #A9A9A9;
+  color: #505050;
+  background: #fff;
+  line-height: 24px;
+  height: 24px;
+  margin-right: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+  -moz-transition: 1s;
+  -o-transition: 1s;
+  -webkit-transition: 1s;
+  transition: 1s;
+  -moz-transition-property: color, background, border, width;
+  -o-transition-property: color, background, border, width;
+  -webkit-transition-property: color, background, border, width;
+  transition-property: color, background, border, width;
+  margin-bottom: 6px;
+  font-size: 1em; }
+  .tag.selected {
+    color: #1780B5;
+    background: #d9edf8;
+    border: 1px solid #add8f1; }
+  .tag i {
+    cursor: pointer; }
+    .tag i:hover {
+      color: #da4f49; }
+  .tag i.icon-search {
+    cursor: default; }
+    .tag i.icon-search:hover {
+      color: inherit; }
+  .tag .label {
+    vertical-align: top;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px; }
+  .tag .icon {
+    height: 24px;
+    line-height: 24px;
+    vertical-align: top;
+    display: inline-block;
+    margin-right: 3px; }
+  .tag .control {
+    margin-left: 3px; }
+  .tag input[type=password],
+  .tag input[type=text] {
+    display: inline-block;
+    background: none;
+    font-size: 1em;
+    font-weight: normal;
+    padding: 0 0 0 5px;
+    margin: 0;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: top;
+    color: #0088cc;
+    width: 120px;
+    border: 0;
+    outline: 0;
+    border-radius: 0;
+    box-shadow: none;
+    -moz-transition: 1s;
+    -o-transition: 1s;
+    -webkit-transition: 1s;
+    transition: 1s;
+    -moz-transition-property: color, background, border, width;
+    -o-transition-property: color, background, border, width;
+    -webkit-transition-property: color, background, border, width;
+    transition-property: color, background, border, width; }
+  .tag:hover {
+    background: #eef7fb;
+    border: 1px solid #c3e2f5; }
+    .tag:hover input[type=text] {
+      background: #b7ddf0; }
+    .tag:hover .filter-tag-date-input {
+      border-color: #9adcea; }
+  .tag:focus {
+    background: white;
+    border: 1px solid #d9edf8; }
 
 .modal .close {
   float: right;

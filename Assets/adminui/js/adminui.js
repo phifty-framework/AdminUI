@@ -42,12 +42,21 @@
       }
       return $imageCover;
     },
-    createTextCover: function(data, options) {
+    createTag: function(settings) {
+      var $name, $tag;
+      $tag = $('<div/>').addClass('tag');
+      $name = $('<div/>').addClass('label').html(settings.label).appendTo($tag);
+      if (settings.onRemove) {
+        $('<i/>').addClass('control fa fa-remove').click(settings.onRemove).appendTo($tag);
+      }
+      return $tag;
+    },
+    createTextTag: function(data, options) {
       var $close, $name, $tag;
       $tag = $('<div/>').addClass('text-tag');
-      $name = $('<div/>').addClass('name').html(data.name).appendTo($tag);
+      $name = $('<div/>').addClass('name').html(data.title || data.name).appendTo($tag);
       if (options.onClose) {
-        $close = $('<div/>').addClass('close').click(options.onClose);
+        $close = $('<i/>').addClass('fa fa-remove').click(options.onClose);
         $close.appendTo($tag);
       }
       return $tag;

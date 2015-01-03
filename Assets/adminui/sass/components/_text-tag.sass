@@ -1,16 +1,24 @@
 
 .text-tag
   position: relative
-  padding: 6px
-  margin: 3px
+  padding: 6px 9px
+  margin-right: 3px
+  display: inline-block
   border: 1px solid #cccccc
   border-radius: 5px
   background: #fff
   color: #333
-  font-weight: bold
-  width: 120px
-  overflow: hidden
-  float: left
+  font-weight: 100
+  .name
+    max-width: 140px
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+    display: inline-block
+    margin-right: 24px
+    vertical-align: middle
+  .fa-remove
+    vertical-align: middle
   .close
     background: url(images/dialog_close_button.png)
     width: 20px

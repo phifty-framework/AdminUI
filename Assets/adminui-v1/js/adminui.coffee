@@ -34,7 +34,7 @@ AdminUI =
       })
     return $imageCover
 
-  createTextCover: (data,options) ->
+  createTextTag: (data,options) ->
     $tag = $('<div/>').addClass( 'text-tag' )
 
     $name = $('<div/>').addClass( 'name' ).html( data.name ).appendTo($tag)

@@ -42,7 +42,7 @@
       }
       return $imageCover;
     },
-    createTextCover: function(data, options) {
+    createTextTag: function(data, options) {
       var $close, $name, $tag;
       $tag = $('<div/>').addClass('text-tag');
       $name = $('<div/>').addClass('name').html(data.name).appendTo($tag);

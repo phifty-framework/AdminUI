@@ -30,11 +30,18 @@ window.AdminUI =
       })
     return $imageCover
 
-  createTextCover: (data,options) ->
+  createTag: (settings) ->
+    $tag = $('<div/>').addClass('tag')
+    $name = $('<div/>').addClass('label').html(settings.label).appendTo($tag)
+    if settings.onRemove
+      $('<i/>').addClass('control fa fa-remove').click(settings.onRemove).appendTo($tag)
+    return $tag
+
+  createTextTag: (data,options) ->
     $tag = $('<div/>').addClass( 'text-tag' )
-    $name = $('<div/>').addClass( 'name' ).html( data.name ).appendTo($tag)
+    $name = $('<div/>').addClass( 'name' ).html( data.title or data.name ).appendTo($tag)
     if options.onClose
-      $close = $('<div/>').addClass('close').click(options.onClose)
+      $close = $('<i/>').addClass('fa fa-remove').click(options.onClose)
       $close.appendTo($tag)
     return $tag
 
