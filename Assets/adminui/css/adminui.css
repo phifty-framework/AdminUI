@@ -2393,6 +2393,10 @@ div.notify {
     background: white;
     border: 1px solid #d9edf8; }
 
+.tag-list > .tag {
+  display: block;
+  list-style: none; }
+
 .modal .close {
   float: right;
   font-size: 21px;
