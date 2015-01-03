@@ -1,7 +1,7 @@
 
 window.Phifty = {} unless window.Phifty
 
-AdminUI =
+window.AdminUI =
   ###
 
   $imageCover = AdminUI.createImageCover { image:..., thumb: ..., title:...  },
@@ -32,7 +32,6 @@ AdminUI =
 
   createTextCover: (data,options) ->
     $tag = $('<div/>').addClass( 'text-tag' )
-
     $name = $('<div/>').addClass( 'name' ).html( data.name ).appendTo($tag)
     if options.onClose
       $close = $('<div/>').addClass('close').click(options.onClose)
