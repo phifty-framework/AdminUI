@@ -2557,6 +2557,15 @@ div.notify {
   background-color: #fff;
   border-radius: 2px; }
 
+.btn-group-separator {
+  line-height: 28px;
+  height: 28px;
+  border-left: 1px solid #c0c0c0;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-left: 5px; }
+
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
