@@ -996,52 +996,42 @@ a {
     text-shadow: white 1px 2px;
     font-weight: bold; }
   .section .toolbar {
-    height: 32px;
-    background-image: linear-gradient(to top, #b8b8b8 10%, #dedede 60%, #f2f2f2 94%);
-    background-image: -o-linear-gradient(bottom, #b8b8b8 10%, #dedede 60%, #f2f2f2 94%);
-    background-image: -moz-linear-gradient(bottom, #b8b8b8 10%, #dedede 60%, #f2f2f2 94%);
-    background-image: -webkit-linear-gradient(bottom, #b8b8b8 10%, #dedede 60%, #f2f2f2 94%);
-    background-image: -ms-linear-gradient(bottom, #b8b8b8 10%, #dedede 60%, #f2f2f2 94%);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.1, #bebebe), color-stop(0.2, #c8c8c8), color-stop(0.9, #f2f2f2));
+    height: 36px;
+    line-height: 36px;
+    vertical-align: middle;
     padding: 0px;
     color: #000;
-    border-bottom: 1px solid #888888;
     text-shadow: 1px 1px 1px white;
     -moz-box-shadow: 0px 3px 3px 0px #cccccc;
     -webkit-box-shadow: 0px 3px 3px 0px #cccccc;
     box-shadow: 0px 3px 3px 0px #cccccc; }
+  .section .toolbar-label, .section .toolbar-control, .section .toolbar-divider {
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+    box-sizing: border-box; }
   .section .toolbar-label > .label {
-    float: left;
-    padding-top: 9px;
     padding-left: 6px;
     padding-right: 6px; }
   .section .toolbar-control {
-    padding: 4px 5px 4px 5px;
-    float: left; }
+    display: inline-block; }
   .section .toolbar-control > .label {
-    float: left;
+    display: inline-block;
     line-height: 22px;
     margin-right: 6px; }
-  .section .toolbar-control.pull-right {
-    float: right;
-    /*     border: 1px solid #ccc; */ }
   .section .toolbar-divider {
-    float: left;
-    height: 32px;
     margin-left: 3px;
     margin-right: 3px;
     border-left: 1px solid #aaaaaa;
     border-right: 1px solid white; }
-  .section .toolbar-divider.pull-right {
-    float: right; }
   .section .corner-controll {
     background: #fff;
     background: white;
-    padding: 3px;
     border: 1px solid #aaaaaa;
     border-radius: 6px;
     display: block;
-    float: left;
+    display: inline-block;
     margin-bottom: 10px; }
   .section .block {
     margin: 6px;

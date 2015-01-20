@@ -113,51 +113,41 @@ $blue2: #62b1d0
 
   // toolbar styling
   .toolbar
-    height: 32px
-    background-image: linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
-    background-image: -o-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
-    background-image: -moz-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
-    background-image: -webkit-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
-    background-image: -ms-linear-gradient(bottom, rgb(184, 184, 184) 10%, rgb(222, 222, 222) 60%, rgb(242, 242, 242) 94%)
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.1, rgb(190, 190, 190)), color-stop(0.2, rgb(200, 200, 200)), color-stop(0.9, rgb(242, 242, 242)))
+    height: 36px
+    line-height: 36px
+    vertical-align: middle
     padding: 0px
     color: #000
-    border-bottom: 1px solid #888888
     @include text-shadow(1px 1px 1px white)
     @include box-shadow(0px 3px 3px 0px #cccccc)
 
+  .toolbar-label, .toolbar-control, .toolbar-divider
+    display: inline-block
+    height: 32px
+    line-height: 32px
+    vertical-align: middle
+    box-sizing: border-box
   .toolbar-label > .label
-    float: left
-    padding-top: 9px
     padding-left: 6px
     padding-right: 6px
   .toolbar-control
-    padding: 4px 5px 4px 5px
-    float: left
+    display: inline-block
   .toolbar-control > .label
-    float: left
+    display: inline-block
     line-height: 22px
     margin-right: 6px
-  .toolbar-control.pull-right
-    float: right
-    /*     border: 1px solid #ccc;
   .toolbar-divider
-    float: left
-    height: 32px
     margin-left: 3px
     margin-right: 3px
     border-left: 1px solid #aaaaaa
     border-right: 1px solid white
-  .toolbar-divider.pull-right
-    float: right
   .corner-controll
     background: #fff
     background: white
-    padding: 3px
     border: 1px solid #aaaaaa
     border-radius: 6px
     display: block
-    float: left
+    display: inline-block
     margin-bottom: 10px
   .block
     margin: 6px
