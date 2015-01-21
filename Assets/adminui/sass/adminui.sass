@@ -15,8 +15,8 @@
 @import "effects"
 @import "components"
 
-html
-  overflow-x: hidden
+@import "layouts/panel"
+
 
 fieldset
   border: 1px solid #ccc
@@ -40,11 +40,7 @@ ul#panel-buttons
         border: 1px solid #ddd000
         color: #dd5000
 
-// This is for aim menu
-.admin-panel
-  margin: 0 auto
-  margin-top: 10px
-  transition: transform ease 1s
+
 
 input.submit-btn
   font-size: 20px
@@ -55,8 +51,6 @@ input.delete-btn
   font-weight: normal
   padding: 8px
 
-.admin-panel-in-window
-  width: 100%
 
 
 @import "widget"

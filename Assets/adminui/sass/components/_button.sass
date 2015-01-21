@@ -47,6 +47,7 @@ $buttonRadius: 4px
 //    a.btn:last-child
 //      border-top-right-radius: $buttonRadius
 //      border-bottom-right-radius: $buttonRadius
+a.btn,
 .btn
   display: inline-block
   padding: 6px 12px
@@ -64,10 +65,11 @@ $buttonRadius: 4px
   -moz-user-select: none
   -ms-user-select: none
   user-select: none
+  color: #303030
   background-image: none
   border: 1px solid #ddd
   background-color: #fff
-  border-radius: 2px
+  border-radius: $buttonRadius
 
 .btn-group-separator
   line-height: 28px
@@ -91,8 +93,9 @@ $buttonRadius: 4px
 .btn:hover,
 .btn:focus,
 .btn.focus
-  color: #333
   text-decoration: none
+  color: #fff
+  background: $blue2
 
 .btn:active,
 .btn.active
@@ -419,21 +422,21 @@ fieldset[disabled] .btn-link:focus
   padding: 10px 16px
   font-size: 18px
   line-height: 1.33
-  border-radius: 2px
+  border-radius: $buttonRadius
 
 .btn-sm,
 .btn-group-sm > .btn
   padding: 5px 10px
   font-size: 12px
   line-height: 1.5
-  border-radius: 2px
+  border-radius: $buttonRadius
 
 .btn-xs,
 .btn-group-xs > .btn
   padding: 1px 5px
   font-size: 12px
   line-height: 1.5
-  border-radius: 2px
+  border-radius: $buttonRadius
 
 .btn-block
   display: block

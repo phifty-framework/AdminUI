@@ -1,0 +1,10 @@
+.content-panel
+  margin: 0 auto
+  margin-top: 10px
+  transition: transform ease 1s
+  &.in-window
+    width: 100%
+
+.content-panel.offcanvas,
+.offcanvas ~ .content-panel
+  transform: translateX(200px)

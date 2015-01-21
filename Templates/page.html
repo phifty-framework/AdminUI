@@ -27,12 +27,12 @@ vim:filetype=htmldjango
         <div class="btn-group pull-left">
             {% if AdminUI.config('homeLink') %}
                 <a class="btn" href="{{ AdminUI.config('homeLink')|raw}}">
-                    <i class="icon fa-home"> </i> {{appname}}
+                    <i class="fa fa-home"> </i> {{appname}}
                 </a>
             {% endif %}
             {% if AdminUI.config('menuStyle') == "aim" or AdminUI.config('menuStyle') == "quickbox" %}
                 <a id="menuBtn" class="btn">
-                    <i class="icon icon-th-large"> </i> {% trans 'Menu' %}
+                    <i class="fa fa-list"> </i>
                 </a>
             {% endif %}
         </div>
@@ -75,7 +75,7 @@ vim:filetype=htmldjango
     {% endif %}
 
     {# provide #panel, so that we can load by ajax #}
-    <div id="panel" class="admin-panel{% if Request.param('in_window') %}-in-window{% endif %}">
+    <div id="panel" class="content-panel {% if Request.param('in_window') %}-in-window{% endif %}">
         {% block admin_panel %}
             {% if Action.results %}
                 {% for name, result in Action.results %}

@@ -142,6 +142,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+html {
+  overflow-x: hidden; }
+
 body {
   padding: 0;
   margin: 0;
@@ -2079,6 +2082,7 @@ textarea {
 @media (min-width: 992px) {
   .modal-lg {
     width: 900px; } }
+a.btn,
 .btn {
   display: inline-block;
   padding: 6px 12px;
@@ -2096,10 +2100,11 @@ textarea {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: #303030;
   background-image: none;
   border: 1px solid #ddd;
   background-color: #fff;
-  border-radius: 2px; }
+  border-radius: 4px; }
 
 .btn-group-separator {
   line-height: 28px;
@@ -2123,8 +2128,9 @@ textarea {
 .btn:hover,
 .btn:focus,
 .btn.focus {
-  color: #333;
-  text-decoration: none; }
+  text-decoration: none;
+  color: #fff;
+  background: #62b1d0; }
 
 .btn:active,
 .btn.active {
@@ -2451,21 +2457,21 @@ fieldset[disabled] .btn-link:focus {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 2px; }
+  border-radius: 4px; }
 
 .btn-sm,
 .btn-group-sm > .btn {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 2px; }
+  border-radius: 4px; }
 
 .btn-xs,
 .btn-group-xs > .btn {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 2px; }
+  border-radius: 4px; }
 
 .btn-block {
   display: block;
@@ -3012,8 +3018,16 @@ div.notify {
   display: inline-block;
   margin-bottom: 10px; }
 
-html {
-  overflow-x: hidden; }
+.content-panel {
+  margin: 0 auto;
+  margin-top: 10px;
+  transition: transform ease 1s; }
+  .content-panel.in-window {
+    width: 100%; }
+
+.content-panel.offcanvas,
+.offcanvas ~ .content-panel {
+  transform: translateX(200px); }
 
 fieldset {
   border: 1px solid #ccc;
@@ -3036,11 +3050,6 @@ ul#panel-buttons {
       border: 1px solid #ddd000;
       color: #dd5000; }
 
-.admin-panel {
-  margin: 0 auto;
-  margin-top: 10px;
-  transition: transform ease 1s; }
-
 input.submit-btn {
   font-size: 20px;
   font-weight: bold;
@@ -3050,9 +3059,6 @@ input.delete-btn {
   font-size: 20px;
   font-weight: normal;
   padding: 8px; }
-
-.admin-panel-in-window {
-  width: 100%; }
 
 .widget {
   -moz-border-radius: 5px;
