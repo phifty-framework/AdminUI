@@ -42,7 +42,7 @@ $blue2: #62b1d0
     border-right: 1px solid #c0c0c0
     border-bottom: 1px solid #c0c0c0
     position: relative
-    background: #f5f5f5
+    background: rgba(255,255,255,0.88)
   .text-block
     color: #000
     -webkit-text-stroke: white 1px 1px
@@ -50,53 +50,6 @@ $blue2: #62b1d0
     text-shadow: white 1px 1px
     font-size: 14px
     line-height: 160%
-  ul.inner-tabs
-    list-style: none
-    margin: 10px 10px
-    padding: 10px 10px
-    background: #333
-    @include border-radius(10px)
-    @include box-shadow(#888888 0px 0px 6px)
-    background-color: #888
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#888888), to(#333333))
-    background: -webkit-linear-gradient(#888888, #333333)
-    background: -moz-linear-gradient(#888888, #333333)
-    background: -ms-linear-gradient(#888888, #333333)
-    background: -o-linear-gradient(#888888, #333333)
-    background: linear-gradient(#888888, #333333)
-    -pie-background: linear-gradient(#888888, #333333)
-    // behavior: url(/assets/phifty-core/css/pie/PIE.htc);
-  .inner-tabs li
-    display: inline
-    margin: 0px
-    padding: 0px
-    a
-      text-decoration: none
-      margin: 0px
-      padding: 10px 5px
-      color: #eee
-      @include text-shadow(black 1px 1px)
-      &:hover
-        background-color: #62B1D0
-        background: -webkit-gradient(linear, 0 0, 0 bottom, from($blue2), to(#333333))
-        background: -webkit-linear-gradient($blue2, #333333)
-        background: -moz-linear-gradient($blue2, #333333)
-        background: -ms-linear-gradient($blue2, #333333)
-        background: -o-linear-gradient($blue2, #333333)
-        background: linear-gradient($blue2, #333333)
-        -pie-background: linear-gradient($blue2, #333333)
-        /*     behavior: url(/assets/phifty-core/css/pie/PIE.htc);
-  .inner-body
-    border-top: 1px solid #cccccc
-    border-left: 1px solid #cccccc
-    border-right: 1px solid #aaaaaa
-    border-bottom: 1px solid #aaaaaa
-    padding: 6px
-    background-color: #eee
-
-    @include box-shadow(#999999 0px 0px 3px)
-    @include border-radius(6px)
-    // behavior: url(/assets/phifty-core/css/pie/PIE.htc);
   .bd .section
     padding: 5px
     >
@@ -111,44 +64,6 @@ $blue2: #62b1d0
     text-shadow: white 1px 2px
     font-weight: bold
 
-  // toolbar styling
-  .toolbar
-    height: 36px
-    line-height: 36px
-    vertical-align: middle
-    padding: 0px
-    color: #000
-    @include text-shadow(1px 1px 1px white)
-    @include box-shadow(0px 3px 3px 0px #cccccc)
-
-  .toolbar-label, .toolbar-control, .toolbar-divider
-    display: inline-block
-    height: 32px
-    line-height: 32px
-    vertical-align: middle
-    box-sizing: border-box
-  .toolbar-label > .label
-    padding-left: 6px
-    padding-right: 6px
-  .toolbar-control
-    display: inline-block
-  .toolbar-control > .label
-    display: inline-block
-    line-height: 22px
-    margin-right: 6px
-  .toolbar-divider
-    margin-left: 3px
-    margin-right: 3px
-    border-left: 1px solid #aaaaaa
-    border-right: 1px solid white
-  .corner-controll
-    background: #fff
-    background: white
-    border: 1px solid #aaaaaa
-    border-radius: 6px
-    display: block
-    display: inline-block
-    margin-bottom: 10px
   .block
     margin: 6px
     border: 1px solid #aaaaaa
@@ -166,75 +81,6 @@ $blue2: #62b1d0
     border: 1px solid #cccccc
     background-color: #fffda9
     padding: 20px 20px
-
-// admin sections
-table.result
-  background: #f8f8f8
-  border: 1px solid #bbbbbb
-  border-collapse: 0px
-  border-spacing: 0px
-  @include border-radius(10px)
-  padding: 5px
-  margin-bottom: 2px
-  margin-top: 2px
-  tr
-    height: 28px
-    &.even
-      background: #fff
-    &.old
-      background: #e5e5e5
-    &:hover
-      background-color: #ade
-      color: #000
-    &.selected
-      background-color: #bbb
-      color: #000
-  td
-    text-align: left
-    vertical-align: middle
-    // we use text-align left, so don't pad the right side.
-    padding: 1px 0 1px 8px
-  th
-    vertical-align: middle
-    font-weight: bold
-    border-bottom: 1px dotted #888888
-    padding: 3px 0px
-    border-right: 1px solid #aaaaaa
-    min-width: 20px
-
-.column-header
-  position: relative
-  text-align: center
-
-.column-sort-asc
-  float: right
-  margin-right: 1px
-  display: inline-block
-  width: 16px
-  height: 16px
-
-.column-sort-desc
-  float: right
-  margin-right: 1px
-  display: inline-block
-  width: 16px
-  height: 16px
-  background: url(images/sort-desc.png) 1px 1px no-repeat
-
-.column-sort-asc
-  background: url(images/sort-asc.png) 1px 1px no-repeat
-  &:hover
-    right: 4px
-    top: 2px
-
-.column-sort-desc:hover
-  right: 4px
-  top: 2px
-
-/* =====================
- * span classes 
- * =====================
- *
 
 .price
   text-shadow: white 1px 1px
@@ -281,8 +127,6 @@ table.result
   /* text-shadow: #fff 0px 1px;
   /*     behavior: url(css/pie/PIE.htc);
 
-@import "pager"
-
 .section .divider
   border-bottom: 1px solid #dddddd
   border-top: 1px solid #bbbbbb
@@ -290,7 +134,6 @@ table.result
 
 /**
  * jquery collapse styles
-
 .collapse-section h3
   margin: 0
   background-color: #62B1D0

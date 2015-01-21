@@ -1,0 +1,72 @@
+// Admin sections
+table.result
+  background: #fafafa
+  border-collapse: 0px
+  border-spacing: 0px
+  padding: 5px
+  margin-bottom: 2px
+  margin-top: 2px
+  thead
+    th
+  tr
+    height: 30px
+    &.even
+      background: #fafafa
+    &.old
+      background: adjust-lightness($blue2,35)
+    &:hover
+      background-color: #ade
+      color: #000
+    &.selected
+      background-color: adjust-lightness($blue2, -10)
+      color: #f0f0f0
+  thead
+    th
+      vertical-align: middle
+      font-weight: bold
+      padding: 3px 3px
+      min-width: 20px
+      border-right: 1px solid #b0b0b0
+      border-top: 1px solid #b0b0b0
+      border-bottom: 1px solid #b0b0b0
+      color: #a0a0a0
+      // color: adjust-lightness($blue2,-10)
+  tbody
+    td
+      text-align: left
+      vertical-align: middle
+      // we use text-align left, so don't pad the right side.
+      padding: 1px 0 1px 8px
+    tr > td:first-child
+      padding: 3px 3px
+
+.column-header
+  position: relative
+  text-align: center
+
+
+.column-sort-asc
+  float: right
+  margin-right: 1px
+  display: inline-block
+  width: 16px
+  height: 16px
+
+.column-sort-desc
+  float: right
+  margin-right: 1px
+  display: inline-block
+  width: 16px
+  height: 16px
+  background: url(images/sort-desc.png) 1px 1px no-repeat
+
+.column-sort-asc
+  background: url(images/sort-asc.png) 1px 1px no-repeat
+  &:hover
+    right: 4px
+    top: 2px
+
+.column-sort-desc:hover
+  right: 4px
+  top: 2px
+

@@ -8,7 +8,6 @@ vim:filetype=htmldjango
         $(function() {
             // initialize Locale
             Locale.init({ lang: 'zh_tw' , dict_path: '/static/dict/' });
-            jQuery('.date-picker').datepicker({ dateFormat: 'yy-mm-dd' });
             Action.plug( ActionGrowler );
             // jQuery("select, input:submit, input:button, input:text, input:checkbox, input:radio, input:file").uniform();
         });

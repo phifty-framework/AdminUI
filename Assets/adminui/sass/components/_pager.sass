@@ -5,9 +5,9 @@
   margin: 10px 10px
   a
     text-decoration: none
-    color: #303030
     border: 1px solid $blue
-    background: #fff
+    background: $blue2
+    color: #fff
     padding: 3px 7px
     display: inline-block
     border-radius: 5px
@@ -16,5 +16,5 @@
       background: adjust-lightness($blue2, 5)
       color: #fff
     &.active, &:active
-      background: $blue2
+      background: adjust-lightness($blue2, 15)
       color: #fff

@@ -1,0 +1,45 @@
+.toolbar
+  height: 36px
+  line-height: 36px
+  vertical-align: middle
+  padding: 0px 3px
+  box-sizing: border-box
+  color: #000
+  @include text-shadow(1px 1px 1px white)
+  @include box-shadow(0px 3px 3px 0px #cccccc)
+
+.toolbar-label, .toolbar-control, .toolbar-divider
+  display: inline-block
+  height: 36px
+  line-height: 36px
+  vertical-align: top
+  box-sizing: border-box
+.toolbar-control
+  display: inline-block
+.toolbar-label > .label, .toolbar-control > .label
+  padding-left: 6px
+  padding-right: 6px
+  line-height: 36px
+  height: 36px
+  margin-right: 6px
+  vertical-align: top
+  display: inline-block
+.toolbar-control
+  input[type=text]
+    line-height: 24px
+    padding: 0 7px
+    margin: 0 5px
+
+.toolbar-divider
+  margin-left: 3px
+  margin-right: 3px
+  border-left: 1px solid #aaaaaa
+  border-right: 1px solid white
+.corner-controll
+  background: #fff
+  background: white
+  border: 1px solid #aaaaaa
+  border-radius: 6px
+  display: block
+  display: inline-block
+  margin-bottom: 10px
