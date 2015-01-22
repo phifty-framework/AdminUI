@@ -1669,6 +1669,42 @@ textarea {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
     display: none; } }
+.navigator {
+  position: fixed;
+  left: 0;
+  top: 36px;
+  width: 200px;
+  background: #303030;
+  z-index: 99;
+  transition: transform ease 800ms;
+  transform: rotateY(-180deg);
+  transform-origin: 0 0;
+  box-shadow: 0px 8px 8px #000; }
+  .navigator.offcanvas {
+    transform: rotateY(0deg); }
+  .navigator .header {
+    background: linear-gradient(#293f47, #435e67);
+    color: #f0f0f0;
+    display: block;
+    padding: 2px 6px;
+    border-bottom: 1px solid #4F7786; }
+  .navigator > ul {
+    list-style: none; }
+    .navigator > ul a {
+      text-decoration: none;
+      color: #fff;
+      display: block;
+      padding: 9px; }
+    .navigator > ul li {
+      list-style: none; }
+    .navigator > ul li.folder > a {
+      border-bottom: 1px solid #4F7786;
+      background: linear-gradient(#293f47, #435e67); }
+    .navigator > ul li.folder > ul > li > a.menuitem {
+      padding-left: 20px; }
+    .navigator > ul a:hover {
+      background: linear-gradient(#103d45, #094651); }
+
 /* AdminUI image-cover widget */
 .image-cover {
   float: left;
@@ -3239,6 +3275,9 @@ div.notify {
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
+.panel-container {
+  padding: 10px; }
+
 .content-panel {
   margin: 0 auto;
   margin-top: 10px;
@@ -3572,46 +3611,5 @@ ul.actionkit-checkbox-view {
     display: inline-block; }
   ul.actionkit-checkbox-view ul {
     margin-left: 20px; }
-
-.panel-container {
-  position: relative;
-  padding: 10px; }
-
-.navigator {
-  position: fixed;
-  left: 0;
-  top: 36px;
-  bottom: 0;
-  width: 200px;
-  background: #303030;
-  z-index: 99;
-  transition: transform ease 800ms;
-  transform: rotateY(-180deg);
-  transform-origin: 0 0;
-  box-shadow: 0px 8px 8px #000; }
-  .navigator.offcanvas {
-    transform: rotateY(0deg); }
-  .navigator .header {
-    background: linear-gradient(#293f47, #435e67);
-    color: #f0f0f0;
-    display: block;
-    padding: 2px 6px;
-    border-bottom: 1px solid #4F7786; }
-  .navigator > ul {
-    list-style: none; }
-    .navigator > ul a {
-      text-decoration: none;
-      color: #fff;
-      display: block;
-      padding: 9px; }
-    .navigator > ul li {
-      list-style: none; }
-    .navigator > ul li.folder > a {
-      border-bottom: 1px solid #4F7786;
-      background: linear-gradient(#293f47, #435e67); }
-    .navigator > ul li.folder > ul > li > a.menuitem {
-      padding-left: 20px; }
-    .navigator > ul a:hover {
-      background: linear-gradient(#103d45, #094651); }
 
 /*# sourceMappingURL=adminui.css.map */
