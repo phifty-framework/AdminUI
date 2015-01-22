@@ -3,6 +3,7 @@ namespace AdminUI\Action\View;
 use FormKit;
 use FormKit\Layout\FieldsetLayout;
 use FormKit\Widget\HiddenInput;
+use FormKit\Element;
 use DOMText;
 use ActionKit;
 
@@ -77,25 +78,27 @@ class StackView extends ActionKit\View\StackView
         $recordId = $record ? $record->id : null;
         $isCreate = ! $recordId;
 
-        $buttonGroup = new \FormKit\Element('div');
+        $buttonGroup = new Element('div');
         $buttonGroup->setAttributes(array('class' => 'button-group') );
 
-        if( $isCreate ) {
-            $submit = new \FormKit\Widget\SubmitInput( null, array( 
-                'class' => 'formkit-widget formkit-widget-submit create button',
-                'value' => $this->option('submit_label') ?: _('Create'),
-            ));
-            $buttonGroup->addChild($submit);
-        } else {
-            $submit = new \FormKit\Widget\SubmitInput( null, array( 
-                'class' => 'formkit-widget formkit-widget-submit create button',
-                'value' => $this->option('submit_label') ?: _('Save'),
-            ));
-            $buttonGroup->addChild($submit);
+        if ($this->option('submit_button')) {
+            if ($isCreate) {
+                $submit = new \FormKit\Widget\SubmitInput(null, array(
+                    'class' => 'formkit-widget formkit-widget-submit create button',
+                    'value' => $this->option('submit_label') ?: _('Create'),
+                ));
+                $buttonGroup->addChild($submit);
+            } else {
+                $submit = new \FormKit\Widget\SubmitInput( null, array( 
+                    'class' => 'formkit-widget formkit-widget-submit create button',
+                    'value' => $this->option('submit_label') ?: _('Save'),
+                ));
+                $buttonGroup->addChild($submit);
+            }
         }
 
         // button for closing edit region
-        if( $this->option('close_button') ) {
+        if ($this->option('close_button')) {
             $fadeRemoveButton = new FormKit\Widget\ButtonInput( null, array( 
                 'class' => 'formkit-widget formkit-widget-button button record-close-btn',
                 'value' => $this->option('cancel_label') ?: _('Cancel'),

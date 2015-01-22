@@ -154,13 +154,7 @@ body {
   background-image: url(../images/iron_texture1745.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
-  -webkit-perspective-origin: 50% 90%;
-  perspective-origin: 50% 90%;
-  -webkit-perspective: 600;
-  perspective: 600;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d; }
+  background-attachment: fixed; }
 
 body.mceContentBody {
   font-size: 20px; }
@@ -1674,7 +1668,7 @@ textarea {
 .navigator {
   position: fixed;
   left: 0;
-  top: 36px;
+  top: 0;
   width: 200px;
   background: #303030;
   z-index: 99;
@@ -3278,7 +3272,13 @@ div.notify {
   border-top-right-radius: 0; }
 
 .panel-container {
-  padding: 10px; }
+  padding: 10px;
+  -webkit-perspective-origin: 50% 90%;
+  perspective-origin: 50% 90%;
+  -webkit-perspective: 600;
+  perspective: 600;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d; }
 
 .content-panel {
   margin: 0 auto;
