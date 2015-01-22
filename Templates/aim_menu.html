@@ -2,9 +2,11 @@
 vim:filetype=htmldjango:
 #}
 <div id="navigator" class="navigator">
+    <!--
     <div class="header">
         <div class="close-menu"><i class="fa fa-angle-double-left"> </i> Menu </div>
     </div>
+    -->
     <ul>
     {% for menuItem in AdminUI.Menu.menuItems %}
         {% if menuItem.isMenuFolder() %}
