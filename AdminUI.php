@@ -57,6 +57,7 @@ class AdminUI extends Bundle
             'jquery-bsm-select-js',
             'jquery-collapse-7ea0f00',
             'jquery-exif',
+            // 'jquery-easytabs',
             'jquery-oembed',
             'jquery-menu-aim',
             'coffeekup',

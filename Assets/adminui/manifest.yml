@@ -7,6 +7,7 @@ collections:
     - css/animate.css
     - css/adminui.css
   - js:
-    - js/bootstrap-modal.js
+    - js/bootstrap3.3/modal.js
+    - js/bootstrap3.3/tab.js
     - js/adminui.js
     - js/quicksearch.js
