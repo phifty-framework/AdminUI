@@ -80,14 +80,43 @@ ul.actionkit-checkbox-view
   ul
     margin-left: 20px
 
+.panel-container
+  position: relative
+  padding: 10px
 
-@media screen and (max-width: 880px)
-  #operation a.admin-menu-button
+.navigator
+  position: fixed
+  left: 0
+  top: 0
+  bottom: 0
+  width: 200px
+  background: #303030
+  z-index: 99
+  transition: transform ease 1s
+  transform: rotateY(-180deg)
+  transform-origin: 0 0
+  box-shadow: 0px 0px 10px #000
+  &.offcanvas
+    transform: rotateY(0deg)
+  .header
+    background: linear-gradient(#293F47, #435E67)
+    color: #f0f0f0
     display: block
-  .admin-menu
-    display: none
-    position: absolute
-    top: 32px
-    z-index: 99
-  .admin-panel
-    width: 98%
+    padding: 2px 6px
+    border-bottom: 1px solid #4F7786
+  > ul
+    list-style: none
+    a
+      text-decoration: none
+      color: #fff
+      display: block
+      padding: 9px
+    li
+      list-style: none
+    li.folder > a
+      border-bottom: 1px solid #4F7786
+      background: linear-gradient(#293F47, #435E67)
+    li.folder > ul > li > a.menuitem
+      padding-left: 20px
+    a:hover
+      background: linear-gradient(#103D45, #094651)

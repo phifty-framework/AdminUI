@@ -1,22 +1,16 @@
 {#
 vim:filetype=htmldjango:
 #}
-<div id="adminAimMenu">
-    <ul id="nav">
+<div id="navigator" class="navigator">
+    <div class="header">
+        <div class="close-menu"><i class="fa fa-angle-double-left"> </i> Menu </div>
+    </div>
+    <ul>
     {% for menuItem in AdminUI.Menu.menuItems %}
         {% if menuItem.isMenuFolder() %}
-            <li data-submenu="#{{ menuItem.id }}" class="menufolder"><a class="menufolder">{{menuItem.label}}</a></li>
-        {% elseif menuItem.isMenuItem() %}
-            <li class="menuitem"><a class="menuitem" {{menuItem.renderAttributes()|raw}}>{{menuItem.label}}</a></li>
-        {% endif %}
-    {% endfor %}
-    </ul>
+            <li class="folder">
+                <a href="#">{{menuItem.label}}</a>
 
-    <div class="nav-indicator" style="display: none;"> </div>
-
-    {% for menuItem in AdminUI.Menu.menuItems %}
-        {% if menuItem.isMenuFolder() %}
-            <div id="{{menuItem.id}}" class="subnav">
                 {% if menuItem.menuItems %}
                 <ul>
                 {% for subMenuItem in menuItem.menuItems %}
@@ -26,10 +20,15 @@ vim:filetype=htmldjango:
                 {% endfor %}
                 </ul>
                 {% endif %}
-            </div>
+            </li>
+        {% elseif menuItem.isMenuItem() %}
+            <li class="menuitem"><a class="menuitem" {{menuItem.renderAttributes()|raw}}>{{menuItem.label}}</a></li>
         {% endif %}
     {% endfor %}
+    </ul>
 </div>
+
+{#
 <script type="text/javascript">
 $(function() {
     var $menuContainer = $('#adminAimMenu');
@@ -110,6 +109,34 @@ $(function() {
     $menu.menuAim({
         activate: activateSubmenu,
         deactivate: deactivateSubmenu
+    });
+});
+</script>
+#}
+<script>
+$(function() {
+    var $nav = $('#navigator');
+    $nav.find('.close-menu').click(function() {
+        $nav.removeClass('offcanvas');
+    });
+    $('#menuBtn').click(function(e) {
+        $nav.toggleClass('offcanvas');
+    });
+    $nav.find('a').click(function() {
+        var a = this;
+        $nav.find('.active').removeClass('active');
+        $(a).parent().addClass('active'); // get li element
+
+        var path = $(this).data('region-path');
+        var crudId = $(this).data('crud-id');
+
+        $('#panel').asRegion().load(path, {},function() {
+            if (typeof $.scrollTo !== 'undefined') {
+                $.scrollTo( $('#panel'), 300);
+            }
+        });
+        $nav.removeClass('offcanvas');
+        return false;
     });
 });
 </script>

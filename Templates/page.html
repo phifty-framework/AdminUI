@@ -67,22 +67,22 @@ vim:filetype=htmldjango
 </div>
 {% endblock %}
 
-<div class="clear"> </div>
-
 {% block content %}
-    {% if not Request.param('in_window') %}
-        {% include AdminUI.config('menuTemplate') %}
-    {% endif %}
+    <div class="panel-container">
+        {% if not Request.param('in_window') %}
+            {% include AdminUI.config('menuTemplate') %}
+        {% endif %}
 
-    {# provide #panel, so that we can load by ajax #}
-    <div id="panel" class="content-panel {% if Request.param('in_window') %}-in-window{% endif %}">
-        {% block admin_panel %}
-            {% if Action.results %}
-                {% for name, result in Action.results %}
-                    {{ Web.render_result( name ) | raw }}
-                {% endfor %}
-            {% endif %}
-        {% endblock %}
+        {# provide #panel, so that we can load by ajax #}
+        <div id="panel" class="content-panel {% if Request.param('in_window') %}-in-window{% endif %}">
+            {% block admin_panel %}
+                {% if Action.results %}
+                    {% for name, result in Action.results %}
+                        {{ Web.render_result( name ) | raw }}
+                    {% endfor %}
+                {% endif %}
+            {% endblock %}
+        </div>
     </div>
 {% endblock %}{# end of content #}
 

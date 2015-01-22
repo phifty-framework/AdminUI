@@ -91,9 +91,10 @@ class AdminUI extends Bundle
      */
     public function getMenu()
     {
-        if ( $this->menu ) {
+        if ($this->menu) {
             return $this->menu;
         }
+
         $this->menu = new Menu;
         kernel()->event->trigger('adminui.init_menu', $this->menu);
 

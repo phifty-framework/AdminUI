@@ -4,17 +4,17 @@
   text-align: right
   margin: 10px 10px
   a
-    text-decoration: none
-    border: 1px solid $blue
-    background: $blue2
-    color: #fff
     padding: 3px 7px
     display: inline-block
-    border-radius: 5px
+    text-decoration: none
+    color: #29636E
+    border-radius: $buttonRadius
+    border: 1px solid #93C7CD
+    background: rgba(255, 255, 255, 0.81)
+    transition: all ease 300ms
+
     &:hover
       text-decoration: none
-      background: adjust-lightness($blue2, 5)
-      color: #fff
+      background: rgba(195, 237, 242, 0.81)
     &.active, &:active
-      background: adjust-lightness($blue2, 15)
-      color: #fff
+      background: rgba(195, 237, 242, 0.81)

@@ -49,7 +49,7 @@ class MenuItem
     public function renderAttributes()
     {
         $active = '';
-        if ( isset($_SERVER['PATH_INFO']) ) {
+        if (isset($_SERVER['PATH_INFO'])) {
             if ( isset($this->attributes['href']) && $_SERVER['PATH_INFO'] == $this->attributes['href'] ) {
                 $active = ' active';
             }
@@ -60,6 +60,7 @@ class MenuItem
         if ( isset($this->attributes['region']) ) {
             $r = $this->attributes['region'];
             $json = isset($r['attributes']) ? json_encode($r['attributes']) : '{}';
+            /*
             $this->attributes['onclick'] = "
                 var a = this;
                 \$(a).parents('ul').find('.active').removeClass('active');
@@ -71,8 +72,10 @@ class MenuItem
                 });
                 return false;
             ";
+            */
             unset($this->attributes['region']);
         }
+
         foreach( $this->attributes as $key => $value ) {
             $html .= sprintf( ' %s="%s"', $key , $value );
         }
