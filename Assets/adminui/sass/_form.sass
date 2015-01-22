@@ -60,7 +60,7 @@
 
 /* input widget style
 
-.input input
+.input > input
   font-size: 1em
   padding: 4px 2px
   border: 1px solid #ccc
@@ -69,14 +69,17 @@
   &:focus
     background-color: #ccc
     text-shadow: #fff 1px 1px
-  &.text, &.password, &[type="text"], &[type="password"]
-    background-color: #fff
+  &[type="text"], &[type="password"]
+    color: #3D8184
+    background-color: #E9F4F5
+    &:focus
+      color: #396266
+      background-color: #C3E1E4
 
-.input input[readonly]
+.input > input[readonly]
   background-color: #ccc
 
 .section input.text
-  background-color: #fff
   &:focus
     color: #000
     background: #eee

@@ -1115,33 +1115,35 @@ a {
     display: inline-block; }
 
 /* input widget style */
-.input input {
+.input > input {
   font-size: 1em;
   padding: 4px 2px;
   border: 1px solid #ccc;
   background-color: #fff;
   text-shadow: #fff 1px 1px; }
-  .input input:focus {
+  .input > input:focus {
     background-color: #ccc;
     text-shadow: #fff 1px 1px; }
-  .input input.text, .input input.password, .input input[type="text"], .input input[type="password"] {
-    background-color: #fff; }
+  .input > input[type="text"], .input > input[type="password"] {
+    color: #3D8184;
+    background-color: #E9F4F5; }
+    .input > input[type="text"]:focus, .input > input[type="password"]:focus {
+      color: #396266;
+      background-color: #C3E1E4; }
 
-.input input[readonly] {
+.input > input[readonly] {
   background-color: #ccc; }
 
-.section input.text {
-  background-color: #fff; }
-  .section input.text:focus {
-    color: #000;
-    background: #eee;
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#eeeeee), to(white));
-    background: -webkit-linear-gradient(#eeeeee, white);
-    background: -moz-linear-gradient(#eeeeee, white);
-    background: -ms-linear-gradient(#eeeeee, white);
-    background: -o-linear-gradient(#eeeeee, white);
-    background: linear-gradient(#eeeeee, #ffffff);
-    text-shadow: #fff 1px 1px; }
+.section input.text:focus {
+  color: #000;
+  background: #eee;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#eeeeee), to(white));
+  background: -webkit-linear-gradient(#eeeeee, white);
+  background: -moz-linear-gradient(#eeeeee, white);
+  background: -ms-linear-gradient(#eeeeee, white);
+  background: -o-linear-gradient(#eeeeee, white);
+  background: linear-gradient(#eeeeee, #ffffff);
+  text-shadow: #fff 1px 1px; }
 
 .button-group {
   margin: 10px;
