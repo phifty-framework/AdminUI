@@ -81,7 +81,7 @@ class StackView extends ActionKit\View\StackView
         $buttonGroup = new Element('div');
         $buttonGroup->setAttributes(array('class' => 'button-group') );
 
-        if ($this->option('submit_button')) {
+        if ($this->option('submit_btn')) {
             if ($isCreate) {
                 $submit = new \FormKit\Widget\SubmitInput(null, array(
                     'class' => 'formkit-widget formkit-widget-submit create button',
@@ -98,7 +98,7 @@ class StackView extends ActionKit\View\StackView
         }
 
         // button for closing edit region
-        if ($this->option('close_button')) {
+        if ($this->option('close_btn')) {
             $fadeRemoveButton = new FormKit\Widget\ButtonInput( null, array( 
                 'class' => 'formkit-widget formkit-widget-button button record-close-btn',
                 'value' => $this->option('cancel_label') ?: _('Cancel'),

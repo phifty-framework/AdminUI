@@ -1,7 +1,3 @@
-/* ====================
- * AdminUI form widgets
- * ====================
- *
 .field
   margin-top: 5px
   .label
@@ -11,8 +7,6 @@
     text-align: right
     font-size: 16px
     padding: 1px 3px
-    color: #666
-    text-shadow: #fff 1px 1px
   .input
     float: left
   label.checkbox
@@ -130,19 +124,12 @@ input.button
   &.delete
     color: red
 
-input.button-s
-  @extend input.button
-  font-size: 14px
-  font-weight: bold
-  padding: 5px 8px
-
 select
   border: 1px solid #ccc
   @include border-radius(0px)
   background: #fff
   height: 27px
   line-height: 27px
-
 
 textarea
   font-size: 14px
@@ -152,34 +139,5 @@ textarea
   line-height: 180%
   border-radius: 5px
 
-/* for formkit, action-view
-
-.formkit-layout-fieldset
-  padding: 8px
-  margin: 0px
-  border-top: 1px solid #ddd
-  border-left: 1px solid #ddd
-  border-right: 1px solid #ccc
-  border-bottom: 1px solid #bbb
-  border-radius: 3px
-  background-color: #f6f6f6
-  label
-    float: left
-    width: 20%
-    text-align: right
-    margin-top: 0.3em
-    margin-right: 0.5em
-  .formkit-hint
-    margin-left: 22%
-    padding: 3px 5px
-    margin-top: 3px
-    margin-bottom: 5px
-    color: #555
-    background-color: #FFFF99
-    border: 1px solid #ccc
-    font-size: 12px
-    display: inline-block
-    @include border-radius(3px)
-    @include box-shadow(0 0 2px #aaa)
-    @include text-shadow(1px 1px #fff)
-
+@import "formkit/layouts/fieldset"
+@import "formkit/widgets/checkbox"

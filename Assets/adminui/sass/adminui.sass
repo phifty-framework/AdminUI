@@ -5,8 +5,6 @@
 @import "grid"
 @import "clearfix"
 
-@import "section"
-@import "form"
 @import "region"
 @import "mixin"
 
@@ -14,51 +12,19 @@
 
 @import "effects"
 @import "components"
-
-@import "layouts/panel"
-
-
-fieldset
-  border: 1px solid #ccc
-  padding: 4px 12px
-  margin-top: 15px
-
-ul#panel-buttons
-  margin: 10px 10px 0px 10px
-  padding-top: 10px
-  padding-left: 10px
-  padding-bottom: 4px
-  width: 70%
-  li
-    a
-      font-size: 18px
-      padding: 7px 15px
-      display: inline
-      color: #000
-      border: 1px solid #aaaaaa
-      &:hover
-        border: 1px solid #ddd000
-        color: #dd5000
-
-
-
-input.submit-btn
-  font-size: 20px
-  font-weight: bold
-  padding: 8px
-input.delete-btn
-  font-size: 20px
-  font-weight: normal
-  padding: 8px
-
-
+@import "layouts"
 
 @import "widget"
 @import "menu"
 @import "operation"
 @import "login"
 
+@import "actionkit/checkbox-view"
 
+fieldset
+  border: 1px solid #ccc
+  padding: 4px 12px
+  margin-top: 15px
 
 /*
  *.section .label { 
@@ -72,11 +38,8 @@ input.delete-btn
  *}
 
 
-ul.actionkit-checkbox-view
-  list-style: none
-  input[type=checkbox]
-    margin-right: 3px
-    display: inline-block
-  ul
-    margin-left: 20px
-
+.dark
+  background-color: #254D52
+  border: 1px solid #373131
+  border-top: 0
+  color: #B5D5D5
