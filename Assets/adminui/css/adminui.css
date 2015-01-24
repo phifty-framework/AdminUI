@@ -142,12 +142,10 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-html {
-  overflow-x: hidden; }
-
 body {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 500;
   font-size: 13px;
@@ -1656,7 +1654,7 @@ a {
   background: transparent;
   border: 0; }
 
-.modal-open {
+body.modal-open {
   overflow: hidden; }
 
 .modal {
@@ -1736,7 +1734,7 @@ a {
 
 .modal-body {
   position: relative;
-  padding: 15px; }
+  padding: 10px; }
 
 .modal-footer {
   padding: 15px;
@@ -1756,6 +1754,44 @@ a {
   width: 50px;
   height: 50px;
   overflow: scroll; }
+
+.modal.side-modal.in .modal-dialog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  width: 600px; }
+  .modal.side-modal.in .modal-dialog .modal-content {
+    margin: 0;
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0; }
+    .modal.side-modal.in .modal-dialog .modal-content > .modal-header {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 50px; }
+    .modal.side-modal.in .modal-dialog .modal-content > .modal-body {
+      box-sizing: border-box;
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 50px;
+      bottom: 64px;
+      overflow: auto; }
+    .modal.side-modal.in .modal-dialog .modal-content > .modal-footer {
+      box-sizing: border-box;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 64px; }
 
 @media (min-width: 768px) {
   .modal-dialog {
