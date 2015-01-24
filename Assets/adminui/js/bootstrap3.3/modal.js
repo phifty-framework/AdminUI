@@ -38,7 +38,7 @@
   Modal.DEFAULTS = {
     backdrop: true,
     keyboard: true,
-    side: true,
+    side: false,
     show: true
   }
 
