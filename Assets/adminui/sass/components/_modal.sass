@@ -28,8 +28,7 @@
     border: 0
 
 
-
-.modal-open
+body.modal-open
   overflow: hidden
 
 .modal
@@ -68,6 +67,8 @@
   width: auto
   margin: 10px
 
+
+
 .modal-content
   position: relative
   background-color: #fff
@@ -99,6 +100,7 @@
   min-height: 16.42857143px
   padding: 15px
   border-bottom: 1px solid #e5e5e5
+  // background-color: #f0f0f0
 
 .modal-header .close
   margin-top: -2px
@@ -109,7 +111,7 @@
 
 .modal-body
   position: relative
-  padding: 15px
+  padding: 10px
 
 .modal-footer
   padding: 15px
@@ -133,6 +135,58 @@
   height: 50px
   overflow: scroll
 
+@mixin stretch()
+  position: absolute
+  top: 0
+  right: 0
+  left: 0
+  bottom: 0
+
+@mixin stretch-stick-top($height)
+  position: absolute
+  top: 0
+  right: 0
+  left: 0
+  height: $height
+
+@mixin stretch-stick-bottom($height)
+  position: absolute
+  bottom: 0
+  right: 0
+  left: 0
+  height: $height
+
+@mixin stretch-stick-middle($top, $bottom)
+  position: absolute
+  right: 0
+  left: 0
+  top: $top
+  bottom: $bottom
+
+// side modal style
+.modal.side-modal.in
+  .modal-dialog
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    margin: 0
+    width: 600px
+    .modal-content
+      margin: 0
+      border-radius: 0
+      @include stretch()
+      > .modal-header
+        box-sizing: border-box
+        @include stretch-stick-top(50px)
+      > .modal-body
+        box-sizing: border-box
+        @include stretch-stick-middle(50px, 64px)
+        overflow: auto
+      > .modal-footer
+        box-sizing: border-box
+        @include stretch-stick-bottom(64px)
+
 @media (min-width: 768px)
   .modal-dialog
     width: 600px
@@ -146,3 +200,4 @@
 @media (min-width: 992px)
   .modal-lg
     width: 900px
+
