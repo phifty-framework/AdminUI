@@ -38,6 +38,7 @@
   Modal.DEFAULTS = {
     backdrop: true,
     keyboard: true,
+    side: true,
     show: true
   }
 
@@ -70,6 +71,9 @@
       if (!that.$element.parent().length) {
         that.$element.appendTo(that.$body) // don't move modals dom position
       }
+
+      if (that.options.side)
+        that.$element.addClass('side-modal')
 
       that.$element
         .show()
