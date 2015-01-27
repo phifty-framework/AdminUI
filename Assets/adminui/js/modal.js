@@ -53,29 +53,74 @@ And the actual HTML structure:
  */
 
 (function() {
+  var FoldManager, fm;
+
+  FoldManager = (function() {
+    function FoldManager() {
+      this.folds = [];
+    }
+
+    FoldManager.prototype.setContainer = function(container) {
+      this.container = container;
+    };
+
+    FoldManager.prototype.fold = function($modalContainer) {
+      var $dialog, f;
+      $modalContainer.modal('hide');
+      $dialog = $modal.find('.modal-dialog');
+      $dialog.hide();
+      f = {
+        dialog: $dialog
+      };
+      return this.folds.push(f);
+    };
+
+    return FoldManager;
+
+  })();
+
+  fm = new FoldManager;
+
   window.Modal = {};
 
   window.Modal.ajax = function(url, args, opts) {};
 
-  window.Modal.create = function(opts) {
-    var body, closeBtn, content, controlOpts, dialog, eventPayload, footer, header, modal, _fn, _i, _len, _ref;
+  window.Modal.createContainer = function() {
+    var modal;
     modal = document.createElement("div");
     modal.classList.add("modal");
+    return modal;
+  };
+
+  window.Modal.createDialog = function($container, opts) {
+    var body, closeBtn, content, controlOpts, dialog, eventPayload, foldBtn, footer, header, headerControls, _fn, _i, _len, _ref;
     dialog = document.createElement("div");
     dialog.classList.add("modal-dialog");
     content = document.createElement("div");
     content.classList.add("modal-content");
     header = document.createElement("div");
     header.classList.add("modal-header");
+    headerControls = document.createElement("div");
+    headerControls.classList.add("modal-header-controls");
+    header.appendChild(headerControls);
+    if (1 || opts.foldable) {
+      foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn");
+      foldBtn.append($("<span/>").addClass("fa fa-minus-square"));
+      foldBtn.append($("<span/>").addClass("sr-only").text('Fold'));
+      foldBtn.appendTo(headerControls);
+      foldBtn.click(function(e) {
+        return fm.fold($container);
+      });
+    }
     closeBtn = $("<button/>").attr("type", "button").addClass("close");
-    closeBtn.append($("<span/>").html("&times;"));
+    closeBtn.append($("<span/>").addClass("fa fa-remove"));
     closeBtn.append($("<span/>").addClass("sr-only").text('Close'));
-    closeBtn.appendTo(header);
+    closeBtn.appendTo(headerControls);
     closeBtn.click(function(e) {
-      return $(modal).modal("hide");
+      return $container.modal("hide");
     });
     if (opts != null ? opts.side : void 0) {
-      modal.classList.add("side-modal");
+      dialog.classList.add("side-modal");
     }
     if (opts != null ? opts.size : void 0) {
       if (opts.size === "large") {
@@ -94,7 +139,7 @@ And the actual HTML structure:
     footer = document.createElement('div');
     footer.classList.add('modal-footer');
     eventPayload = {
-      modal: $(modal),
+      modal: $container,
       body: $(body),
       header: $(header)
     };
@@ -114,7 +159,7 @@ And the actual HTML structure:
           }
           if (controlOpts.close) {
             $btn.click(function(e) {
-              $(modal).modal('hide');
+              $container.modal('hide');
               if (controlOpts.onClose) {
                 return controlOpts.onClose(e, eventPayload);
               }
@@ -132,8 +177,6 @@ And the actual HTML structure:
     content.appendChild(body);
     content.appendChild(footer);
     dialog.appendChild(content);
-    modal.appendChild(dialog);
-    document.body.appendChild(modal);
     if (opts.ajax) {
       if (!opts.ajax.url) {
         alert("opts.ajax.url is not defined.");
@@ -144,11 +187,29 @@ And the actual HTML structure:
         }
       });
     }
-    $(modal).on('hidden.bs.modal', function(e) {
-      return $(modal).remove();
-    });
+    return dialog;
+  };
+
+  window.Modal.create = function(opts) {
+    var dialog, modal;
+    modal = this.createContainer();
+    dialog = this.createDialog($(modal), opts);
+    modal.appendChild(dialog);
+    document.body.appendChild(modal);
+
+    /*
+    $(modal).on 'hidden.bs.modal', (e) ->
+      $(modal).remove()
+     */
     return modal;
   };
+
+  $(function() {
+    var container;
+    container = Modal.createContainer();
+    $(document.body).append(container);
+    return fm.setContainer(container);
+  });
 
 
   /*

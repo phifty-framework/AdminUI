@@ -1,7 +1,34 @@
 
-
 // We currently limit the close button style in modal. (the class name was used in elsewhere)
 .modal-header
+  .modal-header-controls
+    float: right
+    button
+      -webkit-appearance: none
+      padding: 0
+      cursor: pointer
+      background: transparent
+      border: 0
+
+      color: #000
+      text-shadow: 0 1px 0 #fff
+      text-decoration: none
+      cursor: pointer
+      filter: alpha(opacity = 20)
+      opacity: .2
+      font-size: 16px
+      font-weight: bold
+      margin-right: 5px
+
+      &:hover,
+      &:focus
+        color: #000
+        text-decoration: none
+        cursor: pointer
+        filter: alpha(opacity = 50)
+        opacity: .5
+
+/*
   .close
     float: right
     font-size: 21px
@@ -11,7 +38,6 @@
     text-shadow: 0 1px 0 #fff
     filter: alpha(opacity = 20)
     opacity: .2
-
   .close:hover,
   .close:focus
     color: #000
@@ -100,9 +126,6 @@ body.modal-open
   border-bottom: 1px solid #e5e5e5
   // background-color: #f0f0f0
 
-.modal-header .close
-  margin-top: -2px
-
 .modal-title
   margin: 0
   line-height: 1.42857143
@@ -162,28 +185,27 @@ body.modal-open
   bottom: $bottom
 
 // side modal style
-.modal.side-modal.in
-  .modal-dialog
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
+.modal-dialog.side-modal
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  margin: 0
+  // set min-width to 600px so that we can use "modal-lg" to override
+  .modal-content
     margin: 0
-    // set min-width to 600px so that we can use "modal-lg" to override
-    .modal-content
-      margin: 0
-      border-radius: 0
-      @include stretch()
-      > .modal-header
-        box-sizing: border-box
-        @include stretch-stick-top(50px)
-      > .modal-body
-        box-sizing: border-box
-        @include stretch-stick-middle(50px, 64px)
-        overflow: auto
-      > .modal-footer
-        box-sizing: border-box
-        @include stretch-stick-bottom(64px)
+    border-radius: 0
+    @include stretch()
+    > .modal-header
+      box-sizing: border-box
+      @include stretch-stick-top(50px)
+    > .modal-body
+      box-sizing: border-box
+      @include stretch-stick-middle(50px, 64px)
+      overflow: auto
+    > .modal-footer
+      box-sizing: border-box
+      @include stretch-stick-bottom(64px)
 
 .modal-body .message
   margin: 0

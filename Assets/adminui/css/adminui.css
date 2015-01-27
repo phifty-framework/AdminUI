@@ -1615,29 +1615,52 @@ a {
   display: block;
   list-style: none; }
 
-.modal-header .close {
-  float: right;
-  font-size: 21px;
-  font-weight: bold;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  filter: alpha(opacity=20);
-  opacity: 0.2; }
-.modal-header .close:hover,
-.modal-header .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-  filter: alpha(opacity=50);
-  opacity: 0.5; }
-.modal-header button.close {
-  -webkit-appearance: none;
-  padding: 0;
-  cursor: pointer;
-  background: transparent;
-  border: 0; }
+.modal-header .modal-header-controls {
+  float: right; }
+  .modal-header .modal-header-controls button {
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    text-decoration: none;
+    cursor: pointer;
+    filter: alpha(opacity=20);
+    opacity: 0.2;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px; }
+    .modal-header .modal-header-controls button:hover, .modal-header .modal-header-controls button:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      filter: alpha(opacity=50);
+      opacity: 0.5; }
 
+/* .close
+ *   float: right
+ *   font-size: 21px
+ *   font-weight: bold
+ *   line-height: 1
+ *   color: #000
+ *   text-shadow: 0 1px 0 #fff
+ *   filter: alpha(opacity = 20)
+ *   opacity: .2
+ * .close:hover,
+ * .close:focus
+ *   color: #000
+ *   text-decoration: none
+ *   cursor: pointer
+ *   filter: alpha(opacity = 50)
+ *   opacity: .5
+ * button.close
+ *   -webkit-appearance: none
+ *   padding: 0
+ *   cursor: pointer
+ *   background: transparent
+ *   border: 0 */
 body.modal-open {
   overflow: hidden; }
 
@@ -1709,9 +1732,6 @@ body.modal-open {
   padding: 15px;
   border-bottom: 1px solid #e5e5e5; }
 
-.modal-header .close {
-  margin-top: -2px; }
-
 .modal-title {
   margin: 0;
   line-height: 1.42857; }
@@ -1739,13 +1759,13 @@ body.modal-open {
   height: 50px;
   overflow: scroll; }
 
-.modal.side-modal.in .modal-dialog {
+.modal-dialog.side-modal {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   margin: 0; }
-  .modal.side-modal.in .modal-dialog .modal-content {
+  .modal-dialog.side-modal .modal-content {
     margin: 0;
     border-radius: 0;
     position: absolute;
@@ -1753,14 +1773,14 @@ body.modal-open {
     right: 0;
     left: 0;
     bottom: 0; }
-    .modal.side-modal.in .modal-dialog .modal-content > .modal-header {
+    .modal-dialog.side-modal .modal-content > .modal-header {
       box-sizing: border-box;
       position: absolute;
       top: 0;
       right: 0;
       left: 0;
       height: 50px; }
-    .modal.side-modal.in .modal-dialog .modal-content > .modal-body {
+    .modal-dialog.side-modal .modal-content > .modal-body {
       box-sizing: border-box;
       position: absolute;
       right: 0;
@@ -1768,7 +1788,7 @@ body.modal-open {
       top: 50px;
       bottom: 64px;
       overflow: auto; }
-    .modal.side-modal.in .modal-dialog .modal-content > .modal-footer {
+    .modal-dialog.side-modal .modal-content > .modal-footer {
       box-sizing: border-box;
       position: absolute;
       bottom: 0;

@@ -51,16 +51,36 @@ And the actual HTML structure:
 
 ###
 
+
+class FoldManager
+  constructor: () ->
+    @folds = []
+
+  setContainer: (@container) ->
+
+  fold: ($modalContainer) ->
+    $modalContainer.modal('hide')
+    $dialog = $modal.find('.modal-dialog')
+    $dialog.hide()
+    # find the modal dialog element and move into the container
+    f = {
+      dialog: $dialog
+    }
+    @folds.push(f)
+
+fm = new FoldManager
+
 window.Modal = {}
 
 # Fetch modal content via ajax
 window.Modal.ajax = (url, args, opts) ->
 
-window.Modal.create = (opts) ->
+window.Modal.createContainer = () ->
   modal = document.createElement("div")
   modal.classList.add("modal")
+  return modal
 
-
+window.Modal.createDialog = ($container, opts) ->
   dialog = document.createElement("div")
   dialog.classList.add("modal-dialog")
 
@@ -70,14 +90,28 @@ window.Modal.create = (opts) ->
   header = document.createElement("div")
   header.classList.add("modal-header")
 
+  headerControls = document.createElement("div")
+  headerControls.classList.add("modal-header-controls")
+  header.appendChild(headerControls)
+
+  if 1 or opts.foldable
+    foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn")
+    foldBtn.append( $("<span/>").addClass("fa fa-minus-square") )
+    foldBtn.append( $("<span/>").addClass("sr-only").text('Fold') )
+    foldBtn.appendTo(headerControls)
+    foldBtn.click (e) ->
+      fm.fold($container)
+
   closeBtn = $("<button/>").attr("type", "button").addClass("close")
-  closeBtn.append( $("<span/>").html("&times;") )
+  closeBtn.append( $("<span/>").addClass("fa fa-remove") )
   closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
-  closeBtn.appendTo(header)
-  closeBtn.click (e) -> $(modal).modal("hide")
+  closeBtn.appendTo(headerControls)
+  closeBtn.click (e) ->
+    $container.modal("hide")
 
   if opts?.side
-    modal.classList.add("side-modal")
+    dialog.classList.add("side-modal")
+
   if opts?.size
     if opts.size is "large"
       dialog.classList.add("modal-lg")
@@ -96,7 +130,7 @@ window.Modal.create = (opts) ->
   footer = document.createElement('div')
   footer.classList.add('modal-footer')
 
-  eventPayload = { modal: $(modal), body: $(body), header: $(header) }
+  eventPayload = { modal: $container, body: $(body), header: $(header) }
 
   # $('#myModal').modal('hide')
   if opts.controls
@@ -107,7 +141,7 @@ window.Modal.create = (opts) ->
         $btn.click((e) -> controlOpts.onClick(e, eventPayload) ) if controlOpts.onClick
         if controlOpts.close
           $btn.click (e) ->
-            $(modal).modal('hide')
+            $container.modal('hide')
             controlOpts.onClose(e, eventPayload) if controlOpts.onClose
 
         $btn.appendTo(footer)
@@ -115,21 +149,31 @@ window.Modal.create = (opts) ->
   content.appendChild(header)
   content.appendChild(body)
   content.appendChild(footer)
-
   dialog.appendChild(content)
-  modal.appendChild(dialog)
-
-  document.body.appendChild(modal)
 
   if opts.ajax
     alert("opts.ajax.url is not defined.") if not opts.ajax.url
     $(body).asRegion().load opts.ajax.url, opts.ajax.args, () ->
       opts.ajax.onReady(null, eventPayload) if opts.ajax.onReady
+  return dialog
 
+window.Modal.create = (opts) ->
+  modal = @createContainer()
+  dialog = @createDialog($(modal), opts)
+  modal.appendChild(dialog)
+  document.body.appendChild(modal)
+
+  ###
   $(modal).on 'hidden.bs.modal', (e) ->
     $(modal).remove()
+  ###
   return modal
 
+
+$ ->
+  container = Modal.createContainer()
+  $(document.body).append(container)
+  fm.setContainer(container)
 
 ###
 Modal test code
