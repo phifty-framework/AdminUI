@@ -910,11 +910,10 @@ a {
     color: #333; }
 
 .region-loading {
+  position: relative;
   width: 100%;
-  height: 300px;
-  background: url(../images/bar-spin.gif) center center no-repeat; }
+  min-height: 450px; }
 
-/* .region-loading .text {  display: none; } */
 .region-error {
   color: red; }
 
@@ -2880,7 +2879,7 @@ div.notify {
 .tab-content > .tab-pane {
   display: none;
   visibility: hidden;
-  padding: 20px;
+  padding: 10px;
   border-radius: 3px;
   box-shadow: 0 3px 3px #606060;
   background: #fff; }
@@ -3171,18 +3170,17 @@ textarea {
   0% {
     transform: rotateX(0deg) rotateY(0deg); }
   100% {
-    transform: rotateX(360deg) rotate(720deg); } }
+    transform: rotateX(360deg) rotate(1440deg); } }
 /* Standard syntax */
 @keyframes random-rotate {
   0% {
     transform: rotateX(0deg) rotateY(0deg); }
   100% {
-    transform: rotateX(360deg) rotate(720deg); } }
+    transform: rotateX(360deg) rotate(1440deg); } }
 .pyramid-stage {
   position: relative;
-  top: 90px;
   width: 150px;
-  height: 320px;
+  height: 150px;
   margin: auto;
   -moz-perspective: 1200px;
   -moz-perspective-origin: 50% 50%;
@@ -3191,26 +3189,28 @@ textarea {
   -ms-perspective: 1200px;
   -ms-perspective-origin: 50% 50%;
   -webkit-perspective: 1200px;
-  -webkit-perspective-origin: 50% 50%; }
+  -webkit-perspective-origin: 50% 50%;
+  perspective: 1200px;
+  perspective-origin: 50% 50%; }
 
 .pyramid {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
   margin: 0 auto;
-  -moz-transition: -moz-transform 1s ease;
-  -ms-transition: -ms-transform 1s ease;
-  -o-transition: -o-transform 1s ease;
-  -webkit-transition: -webkit-transform 1s ease;
-  transition: transform 1s ease;
+  -moz-transition: -moz-transform 1s linear;
+  -ms-transition: -ms-transform 1s linear;
+  -o-transition: -o-transform 1s linear;
+  -webkit-transition: -webkit-transform 1s linear;
+  transition: transform 1s linear;
   -moz-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
   -o-transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transform: rotateX(0deg) rotateY(0deg);
-  animation: random-rotate 6s infinite;
-  -webkit-animation: random-rotate 6s infinite; }
+  animation: random-rotate 5s infinite;
+  -webkit-animation: random-rotate 5s infinite; }
 
 .triangle, .square {
   -moz-transform-style: preserve-3d;
@@ -3223,11 +3223,11 @@ textarea {
   -o-transform-origin: left top;
   -webkit-transform-origin: left top;
   transform-origin: left top;
-  -moz-transition: -moz-transform 200ms ease-out;
-  -ms-transition: -ms-transform 200ms ease-out;
-  -o-transition: -o-transform 200ms ease-out;
-  -webkit-transition: -webkit-transform 200ms ease-out;
-  transition: transform 200ms ease-out; }
+  -moz-transition: -moz-transform 200ms ease;
+  -ms-transition: -ms-transform 200ms ease;
+  -o-transition: -o-transform 200ms ease;
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease; }
 
 .triangle {
   width: 0;
@@ -3240,13 +3240,12 @@ textarea {
     width: 0;
     border-style: solid;
     /* border-color: rgba(50, 50, 50, 0.7) transparent transparent transparent; */
-    border-width: 176px 100px 0 100px; }
+    border-width: 43px 25px 0 25px; }
 
-/* note that border dimension includes border set in '.side' CSS Class */
 .square {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
   background: #323232;
   font-size: 1.4em;
   color: #999;
@@ -3271,15 +3270,13 @@ textarea {
   transform: translatex(0) rotatey(125deg) rotatez(90deg); }
 
 .side3 {
-  /* triangle */
-  -moz-transform: translatex(200px) rotatez(90deg) rotatex(55deg);
-  -ms-transform: translatex(200px) rotatez(90deg) rotatex(55deg);
-  -o-transform: translatex(200px) rotatez(90deg) rotatex(55deg);
-  -webkit-transform: translatex(200px) rotatez(90deg) rotatex(55deg);
-  transform: translatex(200px) rotatez(90deg) rotatex(55deg); }
+  -moz-transform: translatex(50px) rotatez(90deg) rotatex(55deg);
+  -ms-transform: translatex(50px) rotatez(90deg) rotatex(55deg);
+  -o-transform: translatex(50px) rotatez(90deg) rotatex(55deg);
+  -webkit-transform: translatex(50px) rotatez(90deg) rotatex(55deg);
+  transform: translatex(50px) rotatez(90deg) rotatex(55deg); }
 
 .side4 {
-  /* triangle */
   -moz-transform: translatez(0) rotatex(55deg);
   -ms-transform: translatez(0) rotatex(55deg);
   -o-transform: translatez(0) rotatex(55deg);
@@ -3287,12 +3284,11 @@ textarea {
   transform: translatez(0) rotatex(55deg); }
 
 .side5 {
-  /* triangle */
-  -moz-transform: translatey(200px) rotatex(125deg);
-  -ms-transform: translatey(200px) rotatex(125deg);
-  -o-transform: translatey(200px) rotatex(125deg);
-  -webkit-transform: translatey(200px) rotatex(125deg);
-  transform: translatey(200px) rotatex(125deg); }
+  -moz-transform: translatey(50px) rotatex(125deg);
+  -ms-transform: translatey(50px) rotatex(125deg);
+  -o-transform: translatey(50px) rotatex(125deg);
+  -webkit-transform: translatey(50px) rotatex(125deg);
+  transform: translatey(50px) rotatex(125deg); }
 
 .side2:before {
   border-color: rgba(91, 195, 213, 0.5) transparent transparent transparent; }
