@@ -185,6 +185,20 @@ body.modal-open
         box-sizing: border-box
         @include stretch-stick-bottom(64px)
 
+.modal-body .message
+  margin: 0
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  border-radius: 0
+  z-index: 999
+  color: #333
+  border: 0
+  &.success
+    background-color: rgba(29, 193, 210, 0.62)
+    text-stroke: rgb(203, 249, 255)
+
 @media (min-width: 768px)
   .modal-dialog
     width: 600px
@@ -198,4 +212,3 @@ body.modal-open
 @media (min-width: 992px)
   .modal-lg
     width: 900px
-

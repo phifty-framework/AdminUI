@@ -1,12 +1,18 @@
 /************* Message styles *************
 .message
-  width: 92%
-  margin: 10px auto
-  padding: 10px 12px
-  @include border-radius(10px)
-  @include box-shadow(#555555 1px 1px 6px)
   position: relative
+  width: 100%
+  margin: 10px auto
+  box-sizing: border-box
+  padding: 10px 12px
+  border-radius: 3px
+  box-shadow: 0px 1px 2px #555555
+  background-color: rgba(255,255,255,0.8)
   font-size: 14px
+  line-height: 28px
+  .icon
+    float: left
+    line-height: 28px
   .text
     margin-left: 25px
   .desc
@@ -22,11 +28,9 @@
     text-shadow: white 1px 1px
   &.success
     border: 1px solid #c5dbec
-    background: #DFEFFC
+    background-color: rgba(29, 193, 210, 0.8)
     color: #333
-    -webkit-text-stroke: white 1px 1px
-    -moz-text-stroke: white 1px 1px
-    @include text-shadow(white 1px 1px)
+    @include text-shadow(rgb(203, 249, 255) 1px 1px)
     .desc
       color: #666
   &.invalid

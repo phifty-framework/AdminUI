@@ -1776,6 +1776,20 @@ body.modal-open {
       left: 0;
       height: 64px; }
 
+.modal-body .message {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0;
+  z-index: 999;
+  color: #333;
+  border: 0; }
+  .modal-body .message.success {
+    background-color: rgba(29, 193, 210, 0.62);
+    text-stroke: #cbf9ff; }
+
 @media (min-width: 768px) {
   .modal-dialog {
     width: 600px;
@@ -2610,17 +2624,19 @@ table.result {
 
 /************* Message styles ************* */
 .message {
-  width: 92%;
-  margin: 10px auto;
-  padding: 10px 12px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  -moz-box-shadow: #555555 1px 1px 6px;
-  -webkit-box-shadow: #555555 1px 1px 6px;
-  box-shadow: #555555 1px 1px 6px;
   position: relative;
-  font-size: 14px; }
+  width: 100%;
+  margin: 10px auto;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px #555555;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 28px; }
+  .message .icon {
+    float: left;
+    line-height: 28px; }
   .message .text {
     margin-left: 25px; }
   .message .desc {
@@ -2636,11 +2652,9 @@ table.result {
     text-shadow: white 1px 1px; }
   .message.success {
     border: 1px solid #c5dbec;
-    background: #DFEFFC;
+    background-color: rgba(29, 193, 210, 0.8);
     color: #333;
-    -webkit-text-stroke: white 1px 1px;
-    -moz-text-stroke: white 1px 1px;
-    text-shadow: white 1px 1px; }
+    text-shadow: #cbf9ff 1px 1px; }
     .message.success .desc {
       color: #666; }
   .message.invalid {
@@ -2651,10 +2665,10 @@ table.result {
     color: #c23e3e; }
 
 div.jGrowl div.jGrowl-notification {
-  background: #34799a;
-  color: #fff;
-  border-radius: 8px;
-  border: 1px solid #1c4051; }
+  background: rgba(29, 193, 210, 0.62);
+  color: #303030;
+  border-radius: 5px;
+  border: 1px solid #1dc1d2; }
 div.jGrowl div.error {
   background: red;
   color: black; }
