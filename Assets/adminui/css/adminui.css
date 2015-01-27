@@ -1631,7 +1631,7 @@ a {
   display: block;
   list-style: none; }
 
-.modal .close {
+.modal-header .close {
   float: right;
   font-size: 21px;
   font-weight: bold;
@@ -1640,14 +1640,14 @@ a {
   text-shadow: 0 1px 0 #fff;
   filter: alpha(opacity=20);
   opacity: 0.2; }
-.modal .close:hover,
-.modal .close:focus {
+.modal-header .close:hover,
+.modal-header .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
   filter: alpha(opacity=50);
   opacity: 0.5; }
-.modal button.close {
+.modal-header button.close {
   -webkit-appearance: none;
   padding: 0;
   cursor: pointer;
@@ -1760,8 +1760,7 @@ body.modal-open {
   top: 0;
   right: 0;
   bottom: 0;
-  margin: 0;
-  width: 600px; }
+  margin: 0; }
   .modal.side-modal.in .modal-dialog .modal-content {
     margin: 0;
     border-radius: 0;

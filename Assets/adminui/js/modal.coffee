@@ -1,36 +1,54 @@
 ###
-# This is a basic wrapper library around bootstrap-modal javascript.
-#
-# The use case is inside DMenu:
-#
-#     sectionModal = Modal.create({
-#       title: if params.id then 'Edit Menu Section' else 'Create Menu Section'
-#       ajax: {
-#         url: '/dmenu/menu_section_form'
-#         args: params
-#         onReady: (e, ui) ->
-#           form = ui.body.find("form").get(0)
-#           Action.form form,
-#             status: true
-#             clear: true
-#             onSuccess: (data) ->
-#               ui.modal.modal('hide')
-#               setTimeout (->
-#                 self.refresh()
-#                 ui.modal.remove()
-#               ), 800
-#               options.onSave() if options and options.onSave
-#       }
-#       controls: [
-#         {
-#           label: 'Save'
-#           onClick: (e,ui) ->
-#             ui.body.find("form").submit()
-#         }
-#       ]
-#     })
-#     $(sectionModal).modal('show')
-#
+This is a basic wrapper library around bootstrap-modal javascript.
+
+The use case is inside DMenu:
+
+    sectionModal = Modal.create({
+      title: if params.id then 'Edit Menu Section' else 'Create Menu Section'
+      ajax: {
+        url: '/dmenu/menu_section_form'
+        args: params
+        onReady: (e, ui) ->
+          form = ui.body.find("form").get(0)
+          Action.form form,
+            status: true
+            clear: true
+            onSuccess: (data) ->
+              ui.modal.modal('hide')
+              setTimeout (->
+                self.refresh()
+                ui.modal.remove()
+              ), 800
+              options.onSave() if options and options.onSave
+      }
+      controls: [
+        {
+          label: 'Save'
+          onClick: (e,ui) ->
+            ui.body.find("form").submit()
+        }
+      ]
+    })
+    $(sectionModal).modal('show')
+
+And the actual HTML structure:
+
+<div class="modal in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
 ###
 
 window.Modal = {}
@@ -42,8 +60,6 @@ window.Modal.create = (opts) ->
   modal = document.createElement("div")
   modal.classList.add("modal")
 
-  if opts?.side
-    modal.classList.add("side-modal")
 
   dialog = document.createElement("div")
   dialog.classList.add("modal-dialog")
@@ -59,6 +75,16 @@ window.Modal.create = (opts) ->
   closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
   closeBtn.appendTo(header)
   closeBtn.click (e) -> $(modal).modal("hide")
+
+  if opts?.side
+    modal.classList.add("side-modal")
+  if opts?.size
+    if opts.size is "large"
+      dialog.classList.add("modal-lg")
+    else if opts.size is "small"
+      dialog.classList.add("modal-sm")
+    else if opts.size is "medium"
+      dialog.classList.add("modal-md")
 
   # <h4 class="modal-title">Modal title</h4>
   if opts.title
@@ -95,9 +121,13 @@ window.Modal.create = (opts) ->
 
   document.body.appendChild(modal)
 
-  if opts.ajax and opts.ajax.url
+  if opts.ajax
+    alert("opts.ajax.url is not defined.") if not opts.ajax.url
     $(body).asRegion().load opts.ajax.url, opts.ajax.args, () ->
       opts.ajax.onReady(null, eventPayload) if opts.ajax.onReady
+
+  $(modal).on 'hidden.bs.modal', (e) ->
+    $(modal).remove()
   return modal
 
 

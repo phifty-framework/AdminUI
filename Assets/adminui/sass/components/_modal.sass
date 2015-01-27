@@ -1,7 +1,7 @@
 
 
 // We currently limit the close button style in modal. (the class name was used in elsewhere)
-.modal
+.modal-header
   .close
     float: right
     font-size: 21px
@@ -19,14 +19,12 @@
     cursor: pointer
     filter: alpha(opacity = 50)
     opacity: .5
-
   button.close
     -webkit-appearance: none
     padding: 0
     cursor: pointer
     background: transparent
     border: 0
-
 
 body.modal-open
   overflow: hidden
@@ -171,7 +169,7 @@ body.modal-open
     right: 0
     bottom: 0
     margin: 0
-    width: 600px
+    // set min-width to 600px so that we can use "modal-lg" to override
     .modal-content
       margin: 0
       border-radius: 0
