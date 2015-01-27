@@ -1,0 +1,152 @@
+/*
+    <div class="pyramid-stage">
+        <div class="pyramid">
+            <div class="square side1"></div>
+            <div class="triangle side2"></div>
+            <div class="triangle side3"></div>
+            <div class="triangle side4"></div>
+            <div class="triangle side5"></div>
+        </div>
+    </div>
+@-webkit-keyframes random-rotate
+  0%
+    transform: rotateX(0deg) rotateY(0deg)
+  100%
+    transform:  rotateX(360deg) rotate(720deg)
+
+/* Standard syntax */
+@keyframes random-rotate
+  0%
+    transform: rotateX(0deg) rotateY(0deg)
+  100%
+    transform:  rotateX(360deg) rotate(720deg)
+
+.pyramid-stage
+  position: relative
+  top: 90px
+  width: 150px
+  height: 320px
+  margin: auto
+  -moz-perspective: 1200px
+  -moz-perspective-origin: 50% 50%
+  -o-perspective: 1200px
+  -o-perspective-origin: 50% 50%
+  -ms-perspective: 1200px
+  -ms-perspective-origin: 50% 50%
+  -webkit-perspective: 1200px
+  -webkit-perspective-origin: 50% 50%
+
+.pyramid
+  position: relative
+  width: 200px
+  height: 200px
+  margin: 0 auto
+  -moz-transition: -moz-transform 1s ease
+  -ms-transition: -ms-transform 1s ease
+  -o-transition: -o-transform 1s ease
+  -webkit-transition: -webkit-transform 1s ease
+  transition: transform 1s ease
+  -moz-transform-style: preserve-3d
+  -ms-transform-style: preserve-3d
+  -o-transform-style: preserve-3d
+  -webkit-transform-style: preserve-3d
+  transform-style: preserve-3d
+  transform: rotateX(0deg) rotateY(0deg)
+  animation: random-rotate 6s infinite
+  -webkit-animation: random-rotate 6s infinite
+
+.triangle, .square
+  -moz-transform-style: preserve-3d
+  -o-transform-style: preserve-3d
+  -ms-transform-style: preserve-3d
+  -webkit-transform-style: preserve-3d
+  transform-style: preserve-3d
+  -moz-transform-origin: left top
+  -ms-transform-origin: left top
+  -o-transform-origin: left top
+  -webkit-transform-origin: left top
+  transform-origin: left top
+  -moz-transition: -moz-transform 200ms ease-out
+  -ms-transition: -ms-transform 200ms ease-out
+  -o-transition: -o-transform 200ms ease-out
+  -webkit-transition: -webkit-transform 200ms ease-out
+  transition: transform 200ms ease-out
+
+.triangle
+  width: 0
+  height: 0
+  background: none
+  &:before
+    content: ""
+    position: absolute
+    height: 0
+    width: 0
+    border-style: solid
+    /* border-color: rgba(50, 50, 50, 0.7) transparent transparent transparent;
+    border-width: 176px 100px 0 100px
+
+/* note that border dimension includes border set in '.side' CSS Class
+
+.square
+  position: absolute
+  width: 200px
+  height: 200px
+  background: rgb(50, 50, 50)
+  font-size: 1.4em
+  color: #999
+  cursor: pointer
+
+/* note that translation includes border set in '.side' CSS Class
+
+.side1
+  /* square
+  -moz-transform: translatez(0)
+  -ms-transform: translatez(0)
+  -o-transform: translatez(0)
+  -webkit-transform: translatez(0)
+  transform: translatez(0)
+  background: rgba(24, 96, 123, 0.5)
+
+.side2
+  /* triangle
+  -moz-transform: translatex(0) rotatey(125deg) rotatez(90deg)
+  -ms-transform: translatex(0) rotatey(125deg) rotatez(90deg)
+  -o-transform: translatex(0) rotatey(125deg) rotatez(90deg)
+  -webkit-transform: translatex(0) rotatey(125deg) rotatez(90deg)
+  transform: translatex(0) rotatey(125deg) rotatez(90deg)
+
+.side3
+  /* triangle
+  -moz-transform: translatex(200px) rotatez(90deg) rotatex(55deg)
+  -ms-transform: translatex(200px) rotatez(90deg) rotatex(55deg)
+  -o-transform: translatex(200px) rotatez(90deg) rotatex(55deg)
+  -webkit-transform: translatex(200px) rotatez(90deg) rotatex(55deg)
+  transform: translatex(200px) rotatez(90deg) rotatex(55deg)
+
+.side4
+  /* triangle
+  -moz-transform: translatez(0) rotatex(55deg)
+  -ms-transform: translatez(0) rotatex(55deg)
+  -o-transform: translatez(0) rotatex(55deg)
+  -webkit-transform: translatez(0) rotatex(55deg)
+  transform: translatez(0) rotatex(55deg)
+
+.side5
+  /* triangle
+  -moz-transform: translatey(200px) rotatex(125deg)
+  -ms-transform: translatey(200px) rotatex(125deg)
+  -o-transform: translatey(200px) rotatex(125deg)
+  -webkit-transform: translatey(200px) rotatex(125deg)
+  transform: translatey(200px) rotatex(125deg)
+
+.side2:before
+  border-color: rgba(91, 195, 213, 0.5) transparent transparent transparent
+
+.side3:before
+  border-color: rgba(68, 114, 197, 0.5) transparent transparent transparent
+
+.side4:before
+  border-color: rgba(120, 156, 171, 0.6) transparent transparent transparent
+
+.side5:before
+  border-color: rgba(60, 60, 60, 0.6) transparent transparent transparent
