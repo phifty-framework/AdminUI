@@ -50,37 +50,150 @@ And the actual HTML structure:
 </div>
 
 ###
+class Modal
+  constructor: (@el) ->
 
+jQuery.fn.foldableModal = (options) ->
+  if options is "show"
+    this.removeClass('sink')
+  else if options is "hide"
+    this.addClass('sink')
+  else if options is "close"
+    this.remove()
+  else
+    this.show()
 
-class FoldManager
-  constructor: () ->
-    @folds = []
+window.ModalManager = {}
 
-  setContainer: (@container) ->
+ModalManager.init = () ->
+  @container = document.createElement('div')
+  @container.classList.add("modal-container")
+  document.body.appendChild(@container)
 
-  fold: ($modalContainer) ->
-    $modalContainer.modal('hide')
-    $dialog = $modal.find('.modal-dialog')
-    $dialog.hide()
-    # find the modal dialog element and move into the container
-    f = {
-      dialog: $dialog
-    }
-    @folds.push(f)
-
-fm = new FoldManager
-
-window.Modal = {}
+  @folds = $('<div/>').addClass("fold-container")
+  $(document.body).append(@folds)
 
 # Fetch modal content via ajax
-window.Modal.ajax = (url, args, opts) ->
+ModalManager.ajax = (url, args, opts) ->
 
-window.Modal.createContainer = () ->
+ModalManager.createContainer = () ->
   modal = document.createElement("div")
   modal.classList.add("modal")
   return modal
 
-window.Modal.createDialog = ($container, opts) ->
+ModalManager.fold = (ui) ->
+  ui.dialog.foldableModal('hide')
+  ui.dialog.css('transform', '')
+  ui.dialog.css('webkitTransform', '')
+  ui.dialog.css('zIndex', '')
+
+  # Build fold element
+  if not ui.fold
+    $fold = $('<div/>').addClass("fold")
+    $fold.data('modal-ui', ui)
+
+    title = ui.options?.title or "Untitled"
+
+    $title = $('<div/>').addClass("fold-title").html(title).attr('title', title)
+    $controls = $('<div/>').addClass("fold-controls")
+    $fold.append($title)
+    $fold.append($controls)
+
+    # $awakeBtn = $('<button/>').append( $('<i/>').addClass('fa fa-plus-square'))
+    # $awakeBtn.appendTo($controls)
+    $fold.on "click", (e) -> ModalManager.awake(ui)
+
+    $removeBtn = $('<button/>').append( $('<i/>').addClass('fa fa-remove'))
+    $removeBtn.appendTo($controls)
+    $removeBtn.on "click", (e) ->
+      e.stopPropagation()
+      ModalManager.close(ui)
+    ui.dialog.data('fold', $fold)
+
+    # register fold to "ui"
+    ui.fold = $fold
+    @folds.append($fold)
+  else
+    $fold = ui.fold
+
+  @updateLayout()
+  setTimeout (-> $fold.addClass("floated")), 500
+
+ModalManager.awake = (ui) ->
+  ui.fold.removeClass("floated") if ui.fold
+
+  ui.dialog.css({
+    zIndex: 99
+    transform: ""
+    webkitTransform: ""
+  })
+
+  # Move the modal to the last element
+  @container.appendChild(ui.dialog[0])
+
+  setTimeout (=>
+    # Remove sink class name to show up the dialog
+    ui.dialog.foldableModal('show')
+
+    # Update the layout
+    @updateLayout()
+    # setTimeout (=> @updateLayout()), 1000
+  ), 100
+
+ModalManager.focus = (dialog) ->
+  # Move the offset to the the left side
+  dialog.css({
+    zIndex: 99
+    transform: "translateX(0)"
+    webkitTransform: "translateX(0)"
+  })
+
+  # The time frame was set to 1 second
+  setTimeout (=>
+    # Move the modal element to the end of the list.
+    @container.appendChild(dialog[0])
+
+    # Update the layout based on the element order
+    @updateLayout()
+  ), 1000
+
+ModalManager.close = (ui) ->
+  ui.dialog.foldableModal('close')
+  ui.fold.remove() if ui.fold
+  @updateLayout()
+
+ModalManager.updateLayout = () ->
+  self = this
+  visibleModals = $(@container).find(".modal-dialog").filter (i,el) =>
+    return not $(el).hasClass("sink")
+
+  # Clear the hover event handler
+  visibleModals.unbind('hover')
+  visibleModals.unbind('click')
+
+  zIndex = visibleModals.size()
+  offset = 0
+  for modal in visibleModals.toArray().reverse()
+    do (modal, offset, zIndex) =>
+      $(modal).css({
+        zIndex: zIndex
+        transform: "translateX(#{ offset }px)"
+        webkitTransform: "translateX(#{ offset }px)"
+      })
+      if offset < 0
+        $(modal).click -> self.focus($(modal))
+
+        $(modal).hover (-> $(modal).css({
+          transform: "translateX(#{ offset - 50 }px)"
+          webkitTransform: "translateX(#{ offset - 50 }px)"
+        })), (-> $(modal).css({
+          transform: "translateX(#{ offset }px)"
+          webkitTransform: "translateX(#{ offset }px)"
+        }))
+    zIndex--
+    offset -= 30
+
+ModalManager.createDialog = (opts) ->
   dialog = document.createElement("div")
   dialog.classList.add("modal-dialog")
 
@@ -94,20 +207,32 @@ window.Modal.createDialog = ($container, opts) ->
   headerControls.classList.add("modal-header-controls")
   header.appendChild(headerControls)
 
-  if 1 or opts.foldable
+  modalbody = document.createElement('div')
+  modalbody.classList.add('modal-body')
+
+  footer = document.createElement('div')
+  footer.classList.add('modal-footer')
+
+  content.appendChild(header)
+  content.appendChild(modalbody)
+  content.appendChild(footer)
+  dialog.appendChild(content)
+
+  ui = { dialog: $(dialog), body: $(modalbody), header: $(header), options: opts }
+  if opts.foldable
     foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn")
-    foldBtn.append( $("<span/>").addClass("fa fa-minus-square") )
+    foldBtn.append( $("<span/>").addClass("fa fa-minus") )
     foldBtn.append( $("<span/>").addClass("sr-only").text('Fold') )
     foldBtn.appendTo(headerControls)
     foldBtn.click (e) ->
-      fm.fold($container)
+      $(dialog).trigger('dialog.fold', [ui])
 
   closeBtn = $("<button/>").attr("type", "button").addClass("close")
   closeBtn.append( $("<span/>").addClass("fa fa-remove") )
   closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
   closeBtn.appendTo(headerControls)
   closeBtn.click (e) ->
-    $container.modal("hide")
+    $(dialog).trigger('dialog.close',[ui])
 
   if opts?.side
     dialog.classList.add("side-modal")
@@ -124,56 +249,66 @@ window.Modal.createDialog = ($container, opts) ->
   if opts.title
     $('<h4/>').text(opts.title).addClass('modal-title').appendTo(header)
 
-  body = document.createElement('div')
-  body.classList.add('modal-body')
 
-  footer = document.createElement('div')
-  footer.classList.add('modal-footer')
-
-  eventPayload = { modal: $container, body: $(body), header: $(header) }
-
-  # $('#myModal').modal('hide')
   if opts.controls
     for controlOpts in opts.controls
       do (controlOpts) =>
         $btn = $('<button/>').text(controlOpts.label).addClass('btn')
         $btn.addClass('btn-primary') if controlOpts.primary
-        $btn.click((e) -> controlOpts.onClick(e, eventPayload) ) if controlOpts.onClick
+        $btn.click((e) -> controlOpts.onClick(e, ui) ) if controlOpts.onClick
         if controlOpts.close
           $btn.click (e) ->
-            $container.modal('hide')
-            controlOpts.onClose(e, eventPayload) if controlOpts.onClose
-
+            $(dialog).trigger('dialog.close',[ui])
         $btn.appendTo(footer)
-
-  content.appendChild(header)
-  content.appendChild(body)
-  content.appendChild(footer)
-  dialog.appendChild(content)
 
   if opts.ajax
     alert("opts.ajax.url is not defined.") if not opts.ajax.url
-    $(body).asRegion().load opts.ajax.url, opts.ajax.args, () ->
-      opts.ajax.onReady(null, eventPayload) if opts.ajax.onReady
-  return dialog
+    $(modalbody).asRegion().load opts.ajax.url, opts.ajax.args, () ->
+      $(dialog).trigger('dialog.ajax.done', [ui])
+      # opts.ajax.onReady(null, ui) if opts.ajax.onReady
+  return ui
 
-window.Modal.create = (opts) ->
-  modal = @createContainer()
-  dialog = @createDialog($(modal), opts)
-  modal.appendChild(dialog)
-  document.body.appendChild(modal)
+# Create a foldable modal
+ModalManager.create = (opts) ->
+  opts.foldable = 1
+  ui = @createDialog(opts)
+  # Append the dialog element to .modal-container
+  $(@container).append(ui.dialog)
 
-  ###
-  $(modal).on 'hidden.bs.modal', (e) ->
-    $(modal).remove()
-  ###
-  return modal
+  ui.dialog.on "dialog.close", (e, ui) -> ModalManager.close(ui)
+  ui.dialog.on "dialog.fold", (e, ui) -> ModalManager.fold(ui)
 
+  ui.container = $(@container)
+
+  if not opts.side
+    $(dialog).css({
+      position: 'fixed'
+      left: ($(window).width() - $(dialog).width()) / 2
+      top: '10%'
+    })
+  return ui
+
+
+# Create a blocking and isolated modal.
+ModalManager.createBlock = (opts) ->
+  $isolatedContainer = $(document.createElement('div'))
+  $isolatedContainer.addClass("modal")
+  $(document.body).append($isolatedContainer)
+  ui = @createDialog(opts)
+
+  $isolatedContainer.append(ui.dialog)
+
+  # Connecting ui.dialog to bootstrap modal event
+  ui.dialog.on "hidden.bs.modal", (e, ui) ->
+    $isolatedContainer.remove()
+
+  ui.dialog.on "dialog.close", (e, ui) ->
+    $isolatedContainer.modal('hide')
+  ui.container = $isolatedContainer
+  return ui
 
 $ ->
-  container = Modal.createContainer()
-  $(document.body).append(container)
-  fm.setContainer(container)
+  ModalManager.init()
 
 ###
 Modal test code
@@ -186,5 +321,5 @@ $ ->
       { label: 'Close', primary: true, close: true, onClose: (e, ui) -> console.log(e, ui) }
     ]
   }
-  $(testModal).modal('show')
+  $(testModal).foldableModal('show')
 ###

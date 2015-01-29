@@ -1615,6 +1615,66 @@ a {
   display: block;
   list-style: none; }
 
+.fold-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px; }
+  .fold-container > .fold {
+    position: relative;
+    border: 1px solid #999;
+    padding: 3px 10px;
+    color: #303030;
+    text-shadow: 0 1px #D6E6EC;
+    font-size: 13px;
+    background-color: #60C6CA;
+    background: linear-gradient(#60c6ca, #a5e4ef);
+    display: inline-block;
+    margin-left: 14px;
+    transition: all ease 1s;
+    transform: translateY(100%);
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    height: 28px;
+    min-width: 100px;
+    border-width: 1px 1px 0 1px;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0px 3px 5px #333; }
+    .fold-container > .fold.floated {
+      transform: translateY(0); }
+  .fold-container .fold-title {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    vertical-align: middle;
+    line-height: 28px;
+    position: absolute;
+    left: 10px;
+    top: 0;
+    height: 28px;
+    right: 30px; }
+  .fold-container .fold-controls {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 6px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle; }
+    .fold-container .fold-controls button {
+      -webkit-appearance: none;
+      padding: 0;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      margin-left: 5px; }
+
 .modal-header .modal-header-controls {
   float: right; }
   .modal-header .modal-header-controls button {
@@ -1629,9 +1689,15 @@ a {
     cursor: pointer;
     filter: alpha(opacity=20);
     opacity: 0.2;
-    font-size: 16px;
     font-weight: bold;
-    margin-right: 5px; }
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 12px;
+    vertical-align: top; }
+    .modal-header .modal-header-controls button:first-child {
+      margin-right: 3px; }
+    .modal-header .modal-header-controls button .fa {
+      vertical-align: top; }
     .modal-header .modal-header-controls button:hover, .modal-header .modal-header-controls button:focus {
       color: #000;
       text-decoration: none;
@@ -1671,25 +1737,9 @@ body.modal-open {
   bottom: 0;
   left: 0;
   z-index: 1040;
-  display: none;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   outline: 0; }
-
-.modal.fade .modal-dialog {
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  -o-transition: -o-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-  -webkit-transform: translate(0, -25%);
-  -ms-transform: translate(0, -25%);
-  -o-transform: translate(0, -25%);
-  transform: translate(0, -25%); }
-
-.modal.in .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  -o-transform: translate(0, 0);
-  transform: translate(0, 0); }
 
 .modal-open .modal {
   overflow-x: hidden;
@@ -1698,7 +1748,25 @@ body.modal-open {
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 10px; }
+  margin: 10px;
+  transition: all ease 1s; }
+
+.modal-dialog.fade {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  transform: translate(0, -25%); }
+
+.modal-dialog.in {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0); }
+
+.modal-dialog.sink {
+  transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  -ms-transform: translateY(100%); }
 
 .modal-content {
   position: relative;
@@ -1717,6 +1785,7 @@ body.modal-open {
   top: 0;
   right: 0;
   left: 0;
+  bottom: 0;
   background-color: #000; }
 
 .modal-backdrop.fade {
@@ -1760,7 +1829,7 @@ body.modal-open {
   overflow: scroll; }
 
 .modal-dialog.side-modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -3215,7 +3284,7 @@ textarea {
   position: relative;
   width: 150px;
   height: 150px;
-  margin: auto;
+  margin: 100px auto;
   -moz-perspective: 1200px;
   -moz-perspective-origin: 50% 50%;
   -o-perspective: 1200px;

@@ -53,47 +53,173 @@ And the actual HTML structure:
  */
 
 (function() {
-  var FoldManager, fm;
+  var Modal;
 
-  FoldManager = (function() {
-    function FoldManager() {
-      this.folds = [];
+  Modal = (function() {
+    function Modal(el) {
+      this.el = el;
     }
 
-    FoldManager.prototype.setContainer = function(container) {
-      this.container = container;
-    };
-
-    FoldManager.prototype.fold = function($modalContainer) {
-      var $dialog, f;
-      $modalContainer.modal('hide');
-      $dialog = $modal.find('.modal-dialog');
-      $dialog.hide();
-      f = {
-        dialog: $dialog
-      };
-      return this.folds.push(f);
-    };
-
-    return FoldManager;
+    return Modal;
 
   })();
 
-  fm = new FoldManager;
+  jQuery.fn.foldableModal = function(options) {
+    if (options === "show") {
+      return this.removeClass('sink');
+    } else if (options === "hide") {
+      return this.addClass('sink');
+    } else if (options === "close") {
+      return this.remove();
+    } else {
+      return this.show();
+    }
+  };
 
-  window.Modal = {};
+  window.ModalManager = {};
 
-  window.Modal.ajax = function(url, args, opts) {};
+  ModalManager.init = function() {
+    this.container = document.createElement('div');
+    this.container.classList.add("modal-container");
+    document.body.appendChild(this.container);
+    this.folds = $('<div/>').addClass("fold-container");
+    return $(document.body).append(this.folds);
+  };
 
-  window.Modal.createContainer = function() {
+  ModalManager.ajax = function(url, args, opts) {};
+
+  ModalManager.createContainer = function() {
     var modal;
     modal = document.createElement("div");
     modal.classList.add("modal");
     return modal;
   };
 
-  window.Modal.createDialog = function($container, opts) {
-    var body, closeBtn, content, controlOpts, dialog, eventPayload, foldBtn, footer, header, headerControls, _fn, _i, _len, _ref;
+  ModalManager.fold = function(ui) {
+    var $controls, $fold, $removeBtn, $title, title, _ref;
+    ui.dialog.foldableModal('hide');
+    ui.dialog.css('transform', '');
+    ui.dialog.css('webkitTransform', '');
+    ui.dialog.css('zIndex', '');
+    if (!ui.fold) {
+      $fold = $('<div/>').addClass("fold");
+      $fold.data('modal-ui', ui);
+      title = ((_ref = ui.options) != null ? _ref.title : void 0) || "Untitled";
+      $title = $('<div/>').addClass("fold-title").html(title).attr('title', title);
+      $controls = $('<div/>').addClass("fold-controls");
+      $fold.append($title);
+      $fold.append($controls);
+      $fold.on("click", function(e) {
+        return ModalManager.awake(ui);
+      });
+      $removeBtn = $('<button/>').append($('<i/>').addClass('fa fa-remove'));
+      $removeBtn.appendTo($controls);
+      $removeBtn.on("click", function(e) {
+        e.stopPropagation();
+        return ModalManager.close(ui);
+      });
+      ui.dialog.data('fold', $fold);
+      ui.fold = $fold;
+      this.folds.append($fold);
+    } else {
+      $fold = ui.fold;
+    }
+    this.updateLayout();
+    return setTimeout((function() {
+      return $fold.addClass("floated");
+    }), 500);
+  };
+
+  ModalManager.awake = function(ui) {
+    if (ui.fold) {
+      ui.fold.removeClass("floated");
+    }
+    ui.dialog.css({
+      zIndex: 99,
+      transform: "",
+      webkitTransform: ""
+    });
+    this.container.appendChild(ui.dialog[0]);
+    return setTimeout(((function(_this) {
+      return function() {
+        ui.dialog.foldableModal('show');
+        return _this.updateLayout();
+      };
+    })(this)), 100);
+  };
+
+  ModalManager.focus = function(dialog) {
+    dialog.css({
+      zIndex: 99,
+      transform: "translateX(0)",
+      webkitTransform: "translateX(0)"
+    });
+    return setTimeout(((function(_this) {
+      return function() {
+        _this.container.appendChild(dialog[0]);
+        return _this.updateLayout();
+      };
+    })(this)), 1000);
+  };
+
+  ModalManager.close = function(ui) {
+    ui.dialog.foldableModal('close');
+    if (ui.fold) {
+      ui.fold.remove();
+    }
+    return this.updateLayout();
+  };
+
+  ModalManager.updateLayout = function() {
+    var modal, offset, self, visibleModals, zIndex, _fn, _i, _len, _ref, _results;
+    self = this;
+    visibleModals = $(this.container).find(".modal-dialog").filter((function(_this) {
+      return function(i, el) {
+        return !$(el).hasClass("sink");
+      };
+    })(this));
+    visibleModals.unbind('hover');
+    visibleModals.unbind('click');
+    zIndex = visibleModals.size();
+    offset = 0;
+    _ref = visibleModals.toArray().reverse();
+    _fn = (function(_this) {
+      return function(modal, offset, zIndex) {
+        $(modal).css({
+          zIndex: zIndex,
+          transform: "translateX(" + offset + "px)",
+          webkitTransform: "translateX(" + offset + "px)"
+        });
+        if (offset < 0) {
+          $(modal).click(function() {
+            return self.focus($(modal));
+          });
+          return $(modal).hover((function() {
+            return $(modal).css({
+              transform: "translateX(" + (offset - 50) + "px)",
+              webkitTransform: "translateX(" + (offset - 50) + "px)"
+            });
+          }), (function() {
+            return $(modal).css({
+              transform: "translateX(" + offset + "px)",
+              webkitTransform: "translateX(" + offset + "px)"
+            });
+          }));
+        }
+      };
+    })(this);
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      modal = _ref[_i];
+      _fn(modal, offset, zIndex);
+      zIndex--;
+      _results.push(offset -= 30);
+    }
+    return _results;
+  };
+
+  ModalManager.createDialog = function(opts) {
+    var closeBtn, content, controlOpts, dialog, foldBtn, footer, header, headerControls, modalbody, ui, _fn, _i, _len, _ref;
     dialog = document.createElement("div");
     dialog.classList.add("modal-dialog");
     content = document.createElement("div");
@@ -103,13 +229,27 @@ And the actual HTML structure:
     headerControls = document.createElement("div");
     headerControls.classList.add("modal-header-controls");
     header.appendChild(headerControls);
-    if (1 || opts.foldable) {
+    modalbody = document.createElement('div');
+    modalbody.classList.add('modal-body');
+    footer = document.createElement('div');
+    footer.classList.add('modal-footer');
+    content.appendChild(header);
+    content.appendChild(modalbody);
+    content.appendChild(footer);
+    dialog.appendChild(content);
+    ui = {
+      dialog: $(dialog),
+      body: $(modalbody),
+      header: $(header),
+      options: opts
+    };
+    if (opts.foldable) {
       foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn");
-      foldBtn.append($("<span/>").addClass("fa fa-minus-square"));
+      foldBtn.append($("<span/>").addClass("fa fa-minus"));
       foldBtn.append($("<span/>").addClass("sr-only").text('Fold'));
       foldBtn.appendTo(headerControls);
       foldBtn.click(function(e) {
-        return fm.fold($container);
+        return $(dialog).trigger('dialog.fold', [ui]);
       });
     }
     closeBtn = $("<button/>").attr("type", "button").addClass("close");
@@ -117,7 +257,7 @@ And the actual HTML structure:
     closeBtn.append($("<span/>").addClass("sr-only").text('Close'));
     closeBtn.appendTo(headerControls);
     closeBtn.click(function(e) {
-      return $container.modal("hide");
+      return $(dialog).trigger('dialog.close', [ui]);
     });
     if (opts != null ? opts.side : void 0) {
       dialog.classList.add("side-modal");
@@ -134,15 +274,6 @@ And the actual HTML structure:
     if (opts.title) {
       $('<h4/>').text(opts.title).addClass('modal-title').appendTo(header);
     }
-    body = document.createElement('div');
-    body.classList.add('modal-body');
-    footer = document.createElement('div');
-    footer.classList.add('modal-footer');
-    eventPayload = {
-      modal: $container,
-      body: $(body),
-      header: $(header)
-    };
     if (opts.controls) {
       _ref = opts.controls;
       _fn = (function(_this) {
@@ -154,15 +285,12 @@ And the actual HTML structure:
           }
           if (controlOpts.onClick) {
             $btn.click(function(e) {
-              return controlOpts.onClick(e, eventPayload);
+              return controlOpts.onClick(e, ui);
             });
           }
           if (controlOpts.close) {
             $btn.click(function(e) {
-              $container.modal('hide');
-              if (controlOpts.onClose) {
-                return controlOpts.onClose(e, eventPayload);
-              }
+              return $(dialog).trigger('dialog.close', [ui]);
             });
           }
           return $btn.appendTo(footer);
@@ -173,42 +301,58 @@ And the actual HTML structure:
         _fn(controlOpts);
       }
     }
-    content.appendChild(header);
-    content.appendChild(body);
-    content.appendChild(footer);
-    dialog.appendChild(content);
     if (opts.ajax) {
       if (!opts.ajax.url) {
         alert("opts.ajax.url is not defined.");
       }
-      $(body).asRegion().load(opts.ajax.url, opts.ajax.args, function() {
-        if (opts.ajax.onReady) {
-          return opts.ajax.onReady(null, eventPayload);
-        }
+      $(modalbody).asRegion().load(opts.ajax.url, opts.ajax.args, function() {
+        return $(dialog).trigger('dialog.ajax.done', [ui]);
       });
     }
-    return dialog;
+    return ui;
   };
 
-  window.Modal.create = function(opts) {
-    var dialog, modal;
-    modal = this.createContainer();
-    dialog = this.createDialog($(modal), opts);
-    modal.appendChild(dialog);
-    document.body.appendChild(modal);
+  ModalManager.create = function(opts) {
+    var ui;
+    opts.foldable = 1;
+    ui = this.createDialog(opts);
+    $(this.container).append(ui.dialog);
+    ui.dialog.on("dialog.close", function(e, ui) {
+      return ModalManager.close(ui);
+    });
+    ui.dialog.on("dialog.fold", function(e, ui) {
+      return ModalManager.fold(ui);
+    });
+    ui.container = $(this.container);
+    if (!opts.side) {
+      $(dialog).css({
+        position: 'fixed',
+        left: ($(window).width() - $(dialog).width()) / 2,
+        top: '10%'
+      });
+    }
+    return ui;
+  };
 
-    /*
-    $(modal).on 'hidden.bs.modal', (e) ->
-      $(modal).remove()
-     */
-    return modal;
+  ModalManager.createBlock = function(opts) {
+    var $isolatedContainer, ui;
+    $isolatedContainer = $(document.createElement('div'));
+    $isolatedContainer.addClass("modal");
+    $(document.body).append($isolatedContainer);
+    ui = this.createDialog(opts);
+    $isolatedContainer.append(ui.dialog);
+    ui.dialog.on("hidden.bs.modal", function(e, ui) {
+      return $isolatedContainer.remove();
+    });
+    ui.dialog.on("dialog.close", function(e, ui) {
+      return $isolatedContainer.modal('hide');
+    });
+    ui.container = $isolatedContainer;
+    return ui;
   };
 
   $(function() {
-    var container;
-    container = Modal.createContainer();
-    $(document.body).append(container);
-    return fm.setContainer(container);
+    return ModalManager.init();
   });
 
 
@@ -223,7 +367,7 @@ And the actual HTML structure:
         { label: 'Close', primary: true, close: true, onClose: (e, ui) -> console.log(e, ui) }
       ]
     }
-    $(testModal).modal('show')
+    $(testModal).foldableModal('show')
    */
 
 }).call(this);
