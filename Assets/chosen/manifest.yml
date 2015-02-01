@@ -1,6 +1,6 @@
 ---
 collections:
-  - files:
+  - file:
       - chosen
   - css:
       - chosen/chosen.min.css

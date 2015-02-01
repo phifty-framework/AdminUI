@@ -1,6 +1,6 @@
 ---
 collections:
-  - files:
+  - file:
     - css
   - css:
     - css/phifty/jquery-ui-1.9.2.custom.min.css

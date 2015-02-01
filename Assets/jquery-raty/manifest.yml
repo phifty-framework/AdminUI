@@ -2,5 +2,5 @@
 collections:
   - js:
     - jquery.raty.min.js
-  - files:
+  - file:
     - images

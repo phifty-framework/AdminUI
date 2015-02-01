@@ -10,7 +10,7 @@ collections:
     - jsdatetime/jquery-ui-timepicker-addon.js
 
 # jscolor
-  - files:
+  - file:
     - jscolor/arrow.gif
     - jscolor/cross.gif
     - jscolor/hs.png
