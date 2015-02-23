@@ -2467,6 +2467,8 @@ table.result {
       background: rgba(250, 250, 250, 0.8); }
     table.result tr.old {
       background: rgba(204, 232, 236, 0.5); }
+    table.result tr.deleted {
+      background: rgba(239, 175, 175, 0.8); }
     table.result tr:hover {
       background: rgba(204, 232, 236, 0.8);
       color: #000; }
