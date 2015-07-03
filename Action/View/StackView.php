@@ -65,7 +65,7 @@ class StackView extends ActionKit\View\StackView
     {
         parent::afterBuild();
         $container = $this->getContainer();
-        $signature = new HiddenInput('action',array(
+        $signature = new HiddenInput('__action',array(
             'value' => $this->action->getSignature()
         ));
         $container->addChild( $signature );

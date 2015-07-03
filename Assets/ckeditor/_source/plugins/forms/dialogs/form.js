@@ -100,7 +100,7 @@ CKEDITOR.dialog.add( 'form', function( editor )
 						}
 					},
 					{
-						id : 'action',
+						id : '__action',
 						type : 'text',
 						label : editor.lang.form.action,
 						'default' : '',

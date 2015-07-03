@@ -7,8 +7,8 @@
     <h1>{% trans 'Login' %}</h1>
     <div>
         <form id="loginForm" method="post">
-            {{ forms.action('UserBundle::Action::Login') }}
-
+            {{ action.renderSignatureWidget() | raw }}
+            {{ action.renderCSRFTokenWidget() | raw }}
             {% if goto %}
                 <input type="hidden" name="redirect" value="{{ goto }}"/>
             {% endif %}
