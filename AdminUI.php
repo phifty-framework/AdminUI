@@ -66,7 +66,6 @@ class AdminUI extends Bundle
             // 'ckeditor',
             'jcrop',
             'chosen',
-            'crystal-icons',
             'holder',
             'formkit',
             'fivekit',
