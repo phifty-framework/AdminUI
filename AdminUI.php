@@ -55,22 +55,16 @@ class AdminUI extends Bundle
     {
         return array(
             // 'bootstrap',
-            'font-awesome-4.2',
             'blueprint-light',
-            'jquery-ui-1.11',
             'jquery-bsm-select-js',
             'jquery-collapse-7ea0f00',
-            'jquery-exif',
-            'jquery-oembed',
             'jquery-menu-aim',
-            'coffeekup',
             'facebox',
             'lightbox2',
             // 'ckeditor',
             'jcrop',
             'chosen',
             'holder',
-            'formkit',
             'adminui',
         );
     }
