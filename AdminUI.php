@@ -47,6 +47,10 @@ class AdminUI extends Bundle
         );
     }
 
+
+    /**
+     * Return UI related assets
+     */
     public function assets()
     {
         return array(
@@ -57,7 +61,6 @@ class AdminUI extends Bundle
             'jquery-bsm-select-js',
             'jquery-collapse-7ea0f00',
             'jquery-exif',
-            // 'jquery-easytabs',
             'jquery-oembed',
             'jquery-menu-aim',
             'coffeekup',
@@ -68,7 +71,6 @@ class AdminUI extends Bundle
             'chosen',
             'holder',
             'formkit',
-            'fivekit',
             'adminui',
         );
     }
