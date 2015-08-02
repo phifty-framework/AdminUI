@@ -68,7 +68,9 @@ vim:filetype=htmldjango
 {% block content %}
     <div class="panel-container">
         {% if not Request.param('in_window') %}
-            {% include AdminUI.config('menuTemplate') %}
+            {% if AdminUI.config('menuTemplate') %}
+                {% include AdminUI.config('menuTemplate') %}
+            {% endif %}
         {% endif %}
 
         {# provide #panel, so that we can load by ajax #}
