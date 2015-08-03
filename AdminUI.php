@@ -95,7 +95,7 @@ class AdminUI extends Bundle
         kernel()->event->trigger('adminui.init_menu', $this->menu);
 
         // sort the menu
-        $this->menu->sortMenuFoldersToTop();
+        //$this->menu->sortMenuFoldersToTop();
         return $this->menu;
     }
 

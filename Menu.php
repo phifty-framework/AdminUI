@@ -1,28 +1,11 @@
 <?php
 namespace AdminUI;
 use Phifty\Singleton;
-
-
 /**
  * The Main Menu
  */
-class Menu extends MenuFolder
+class Menu extends \WebUI\Components\Menu\Menu
 {
-    /**
-     * Override the MenuFolder __construct
-     */
-    public function __construct()
-    {
-    }
-
-    static public function getInstance()
-    {
-        static $ins;
-        if ( $ins ) {
-            return $ins;
-        }
-        return $ins = new self;
-    }
 }
 
 
