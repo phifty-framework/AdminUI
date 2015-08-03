@@ -67,14 +67,11 @@ vim:filetype=htmldjango
 
 {% block content %}
     <div class="panel-container">
-    {#
         {% if not Request.param('in_window') %}
             {% if AdminUI.config('menuTemplate') %}
                 {% include AdminUI.config('menuTemplate') with { "AdminUI": AdminUI } %}
             {% endif %}
         {% endif %}
-
-    #}
 
         {{AdminUI.Menu|raw}}
 
