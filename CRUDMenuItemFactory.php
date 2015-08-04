@@ -2,9 +2,9 @@
 namespace AdminUI;
 use WebUI\Components\Menu\MenuItem;
 
-class MenuItemFactory
+class CRUDMenuItemFactory
 {
-    static public function createMenuItemForCRUD($crudId, $label) {
+    static public function create($crudId, $label) {
 
         $menuItem = new MenuItem($label, array(
             'href' => '/bs/' . $crudId,

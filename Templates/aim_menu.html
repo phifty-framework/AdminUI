@@ -7,27 +7,7 @@ vim:filetype=htmldjango:
         <div class="close-menu"><i class="fa fa-angle-double-left"> </i> Menu </div>
     </div>
     -->
-    <ul>
-    {% for menuItem in AdminUI.Menu.menuItems %}
-        {% if menuItem.isMenuFolder() %}
-            <li class="folder">
-                <a href="#">{{menuItem.label}}</a>
-
-                {% if menuItem.menuItems %}
-                <ul>
-                {% for subMenuItem in menuItem.menuItems %}
-                    <li class="menuitem">
-                        <a class="menuitem" {{subMenuItem.renderAttributes()|raw}}>{{subMenuItem.label}}</a>
-                    </li>
-                {% endfor %}
-                </ul>
-                {% endif %}
-            </li>
-        {% elseif menuItem.isMenuItem() %}
-            <li class="menuitem"><a class="menuitem" {{menuItem.renderAttributes()|raw}}>{{menuItem.label}}</a></li>
-        {% endif %}
-    {% endfor %}
-    </ul>
+    
 </div>
 
 {#
