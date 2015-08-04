@@ -53,6 +53,10 @@ class AdminUI extends Bundle
      */
     public function assets()
     {
+        $assetsConfig = $this->config('Assets');
+        if ($assetsConfig) {
+            return $assetsConfig->config;
+        }
         return array(
             // 'bootstrap',
             'blueprint-light',

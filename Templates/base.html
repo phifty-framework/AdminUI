@@ -19,7 +19,7 @@ vim:filetype=htmldjango:
     <script src="/assets/phifty-core/js/tinymce/tiny_mce.js"> </script>
     <script src="/assets/phifty-core/js/tinymce_helper.js"> </script>
 
-    {{ Web.include_loaded_assets('adminui-page') |raw}}
+    {% assets AdminUI.assets() %}
 
     {% endblock %}
 
