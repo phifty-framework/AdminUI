@@ -19,7 +19,9 @@ vim:filetype=htmldjango:
     <script src="/assets/phifty-core/js/tinymce/tiny_mce.js"> </script>
     <script src="/assets/phifty-core/js/tinymce_helper.js"> </script>
 
+    {% assets Kernel.bundle('CoreBundle').assets() %}
     {% assets AdminUI.assets() %}
+    {% assets Kernel.bundle('CRUD').assets() %}
 
     {% endblock %}
 
