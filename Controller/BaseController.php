@@ -1,5 +1,5 @@
 <?php
-namespace AdminUI;
+namespace AdminUI\Controller;
 use Phifty\Bundle;
 use Phifty\Controller;
 
