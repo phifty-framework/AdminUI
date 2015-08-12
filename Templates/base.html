@@ -19,8 +19,13 @@ vim:filetype=htmldjango:
     <script src="/assets/phifty-core/js/tinymce/tiny_mce.js"> </script>
     <script src="/assets/phifty-core/js/tinymce_helper.js"> </script>
 
+    {# include all assets from CoreBundle, they're not UI related. #}
     {% assets Kernel.bundle('CoreBundle').assets() %}
+
+    {# include AdminUI assets #}
     {% assets AdminUI.assets() %}
+
+    {# include assets for CRUD operations, some are UI related. #}
     {% assets Kernel.bundle('CRUD').assets() %}
 
     {% endblock %}

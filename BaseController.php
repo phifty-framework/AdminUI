@@ -20,7 +20,7 @@ class BaseController extends Controller
     public function indexAction()
     {
         $bundle = AdminUI::getInstance();
-        $pageTemplate = $bundle->config('PageTemplate') ?: '@AdminUI/page.html';
+        $pageTemplate = $bundle->getBasePageTemplate();
         return $this->render($pageTemplate);
     }
 }

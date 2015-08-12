@@ -90,7 +90,15 @@ class AdminUI extends Bundle
         return $this->menuBar;
     }
 
+    public function getBasePageTemplate()
+    {
+        return $this->config('BasePageTemplate') ?: '@AdminUI/page.html';
+    }
 
+    public function getLoginPageTemplate()
+    {
+        return $this->config('LoginPageTemplate') ?: '@AdminUI/login.html';
+    }
 
     /**
      * NOTE: The getMenu should be trigger in view,
