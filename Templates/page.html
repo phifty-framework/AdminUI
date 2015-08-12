@@ -30,7 +30,7 @@ vim:filetype=htmldjango
                     <i class="fa fa-home"> </i> {{appname}}
                 </a>
             {% endif %}
-            {% if AdminUI.config('menuStyle') == "aim" or AdminUI.config('menuStyle') == "quickbox" %}
+            {% if AdminUI.config('MenuStyle') == "aim" or AdminUI.config('MenuStyle') == "quickbox" %}
                 <a id="menuBtn" class="btn">
                     <i class="fa fa-list"> </i>
                 </a>
@@ -68,8 +68,8 @@ vim:filetype=htmldjango
 {% block content %}
     <div class="panel-container">
         {% if not Request.param('in_window') %}
-            {% if AdminUI.config('menuTemplate') %}
-                {% include AdminUI.config('menuTemplate') with { "AdminUI": AdminUI } %}
+            {% if AdminUI.config('MenuTemplate') %}
+                {% include AdminUI.config('MenuTemplate') with { "AdminUI": AdminUI } %}
             {% endif %}
         {% endif %}
 

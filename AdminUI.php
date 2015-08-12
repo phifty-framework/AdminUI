@@ -28,13 +28,13 @@ class AdminUI extends Bundle
 
     public function setConfig($config)
     {
-        if ( isset($config['menuStyle']) && ! isset($config['menuTemplate']) ) {
-            if ( $config['menuStyle'] === "aim" ) {
-                $config['menuTemplate'] = '@AdminUI/aim_menu.html';
-            } elseif ( $config['menuStyle'] === "quickbox" ) {
-                $config['menuTemplate'] = '@AdminUI/quickbox.html';
-            } elseif ( $config['menuStyle'] === "standard" ) {
-                $config['menuTemplate'] = '@AdminUI/standard_menu.html';
+        if (isset($config['MenuStyle']) && ! isset($config['MenuTemplate'])) {
+            if ( $config['MenuStyle'] === "aim" ) {
+                $config['MenuTemplate'] = '@AdminUI/aim_menu.html';
+            } elseif ( $config['MenuStyle'] === "quickbox" ) {
+                $config['MenuTemplate'] = '@AdminUI/quickbox.html';
+            } elseif ( $config['MenuStyle'] === "standard" ) {
+                $config['MenuTemplate'] = '@AdminUI/standard_menu.html';
             }
         }
         parent::setConfig($config);
@@ -43,7 +43,7 @@ class AdminUI extends Bundle
     public function defaultConfig()
     {
         return array(
-            'menuStyle' => 'aim', // "standard" or "aim"
+            'MenuStyle' => 'aim', // "standard" or "aim"
         );
     }
 
