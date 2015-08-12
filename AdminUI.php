@@ -69,6 +69,7 @@ class AdminUI extends Bundle
                 'jcrop',
                 'chosen',
                 'holder',
+                'modal-manager',
                 'adminui',
             );
         }
