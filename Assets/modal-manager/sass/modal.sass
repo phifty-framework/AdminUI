@@ -274,13 +274,21 @@ body.modal-open
     @include stretch()
     > .modal-header
       box-sizing: border-box
+      background: #283438
+      padding-top: 15px
+      color: #76AE43
       @include stretch-stick-top(50px)
+    .modal-header-controls
+      button
+        color: rgba(255, 255, 255, 0.91)
     > .modal-body
       box-sizing: border-box
       @include stretch-stick-middle(50px, 64px)
       overflow: auto
     > .modal-footer
       box-sizing: border-box
+      line-height: 64px
+      background: #f0f0f0
       @include stretch-stick-bottom(64px)
 
 .modal-body .message

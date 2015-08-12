@@ -228,11 +228,16 @@ body.modal-open {
     bottom: 0; }
     .modal-dialog.side-modal .modal-content > .modal-header {
       box-sizing: border-box;
+      background: #283438;
+      padding-top: 15px;
+      color: #76AE43;
       position: absolute;
       top: 0;
       right: 0;
       left: 0;
       height: 50px; }
+    .modal-dialog.side-modal .modal-content .modal-header-controls button {
+      color: rgba(255, 255, 255, 0.91); }
     .modal-dialog.side-modal .modal-content > .modal-body {
       box-sizing: border-box;
       position: absolute;
@@ -243,6 +248,8 @@ body.modal-open {
       overflow: auto; }
     .modal-dialog.side-modal .modal-content > .modal-footer {
       box-sizing: border-box;
+      line-height: 64px;
+      background: #f0f0f0;
       position: absolute;
       bottom: 0;
       right: 0;
