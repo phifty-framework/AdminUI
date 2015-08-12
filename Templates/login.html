@@ -1,8 +1,10 @@
-{% extends '@AdminUI/page.html' %}
+{% extends Kernel.bundle('AdminUI').getBasePageTemplate() %}
 {% import '@CoreBundle/phifty/forms.html' as forms %}
 
 {% block title %}{{ parent() }} - Login{% endblock %}
+
 {% block content %}
+
 <div id="result-container" class="w-400" style=" margin: 0 auto; margin-top: 30px;"> </div>
 <div id="login-box" class="center-box w-400">
     <h1>{% trans 'Login' %}</h1>

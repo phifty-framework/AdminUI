@@ -28,7 +28,9 @@ vim:filetype=htmldjango:
     {% endif %}
 
     {# include AdminUI assets #}
-    {% assets AdminUI.getAssets() %}
+    {% if Kernel.bundle('AdminUI') %}
+        {% assets Kernel.bundle('AdminUI').getAssets() %}
+    {% endif %}
 
     {# include assets for CRUD operations, some are UI related. #}
     {% if Kernel.bundle('CRUD') %}
