@@ -5,8 +5,9 @@ use WebUI\Components\Menu\MenuItem;
 class CRUDMenuItemFactory
 {
     static public function create($crudId, $label) {
-
-        $menuItem = new MenuItem($label, array(
+        $menuItem = new MenuItem($label);
+        
+        $menuItem->setLinkAttributes(array(
             'href' => '/bs/' . $crudId,
             'data-crud-id' => $crudId,
             'data-region-path' => "/bs/$crudId/crud/index",
