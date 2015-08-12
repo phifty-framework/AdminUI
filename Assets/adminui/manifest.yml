@@ -9,6 +9,5 @@ collections:
   - js:
     - js/bootstrap3.3/modal.js
     - js/bootstrap3.3/tab.js
-    - js/modal.js
     - js/adminui.js
     - js/quicksearch.js
