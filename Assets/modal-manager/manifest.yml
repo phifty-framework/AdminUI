@@ -1,4 +1,6 @@
 ---
 collections:
+  - css:
+    - css/modal.css
   - js:
     - js/modal.js
