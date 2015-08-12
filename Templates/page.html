@@ -75,11 +75,6 @@ vim:filetype=htmldjango
 
         {{AdminUI.Menu|raw}}
 
-        {# 
-            {{dump( AdminUI.Menu )}}
-
-        #}
-        
         {# provide #panel, so that we can load by ajax #}
         <div id="panel" class="content-panel {% if Request.param('in_window') %}-in-window{% endif %}">
             {% block admin_panel %}
