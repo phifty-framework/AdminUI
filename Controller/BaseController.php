@@ -3,8 +3,6 @@ namespace AdminUI;
 use Phifty\Bundle;
 use Phifty\Controller;
 
-// XXX: deprecated, avoid using this.
-
 class BaseController extends Controller
 {
     public $defaultViewClass = 'AdminUI\\View';
