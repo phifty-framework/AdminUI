@@ -53,31 +53,21 @@ class AdminUI extends Bundle
      */
     public function assets()
     {
-        $assetsConfig = $this->config('Assets');
-        if ($assetsConfig) {
-            $assets =  $assetsConfig->toArray();
-        } else {
-            $assets = array(
-                // 'bootstrap',
-                'blueprint-light',
-                'jquery-bsm-select-js',
-                'jquery-collapse-7ea0f00',
-                'jquery-menu-aim',
-                'facebox',
-                'lightbox2',
-                // 'ckeditor',
-                'jcrop',
-                'chosen',
-                'holder',
-                'modal-manager',
-                'adminui',
-            );
-        }
-        $extraAssetsConfig = $this->config('ExtraAssets');
-        if ($extraAssetsConfig) {
-            $assets =  array_merge($assets, $assetsConfig->toArray());
-        }
-        return $assets;
+        return array(
+            // 'bootstrap',
+            'blueprint-light',
+            'jquery-bsm-select-js',
+            'jquery-collapse-7ea0f00',
+            'jquery-menu-aim',
+            'facebox',
+            'lightbox2',
+            // 'ckeditor',
+            'jcrop',
+            'chosen',
+            'holder',
+            'modal-manager',
+            'adminui',
+        );
     }
 
 
