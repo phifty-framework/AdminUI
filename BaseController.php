@@ -19,6 +19,8 @@ class BaseController extends Controller
     // render dashboard here
     public function indexAction()
     {
-        return $this->render( '@AdminUI/page.html');
+        $bundle = AdminUI::getInstance();
+        $pageTemplate = $bundle->config('PageTemplate') ?: '@AdminUI/page.html';
+        return $this->render($pageTemplate);
     }
 }
