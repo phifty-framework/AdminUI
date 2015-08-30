@@ -10,9 +10,10 @@ vim:filetype=htmldjango:
     {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="content" content="Content-Type: text/html; Charset: UTF-8; " />
-    {#
+
+    {% if Kernel.bundle('AdminUI').config('WebFonts') %}
     <link href='http://fonts.googleapis.com/css?family=Prociono' rel='stylesheet' type='text/css'>
-    #}
+    {% endif %}
 
     <title>{% block title %}{{ title|default(appname) }}{% endblock %}</title>
 
@@ -40,8 +41,8 @@ vim:filetype=htmldjango:
     {% endblock %}
 
     <script>
-    if(typeof jQuery !== 'undefined') {
-        if( typeof FormKit !== 'undefined' ) {
+    if (typeof jQuery !== 'undefined') {
+        if (typeof FormKit !== 'undefined') {
             jQuery(function() { FormKit.install(); });
         }
     }
