@@ -1,0 +1,6 @@
+---
+collections:
+  - javascript:
+    - javascripts/JSXTransformer-0.13.3.js
+    - javascripts/react-0.13.3.min.js
+    - javascripts/react-with-addons-0.13.3.js
