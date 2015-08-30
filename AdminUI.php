@@ -54,6 +54,7 @@ class AdminUI extends Bundle
     public function assets()
     {
         return array(
+            'reactjs',
             // 'bootstrap',
             'blueprint-light',
             'jquery-bsm-select-js',
