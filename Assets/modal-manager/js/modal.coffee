@@ -148,14 +148,21 @@ ModalManager.focus = (dialog) ->
     webkitTransform: "translateX(0)"
   })
 
-  # The time frame was set to 1 second
+  # The transition end require IE10
+  dialog.one 'transitionend webkitTransitionEnd oTransitionEnd',  =>
+    @container.appendChild(dialog[0])
+    @updateLayout()
+
+  ###
+  The time frame was set to 1 second
   setTimeout (=>
     # Move the modal element to the end of the list.
     @container.appendChild(dialog[0])
 
     # Update the layout based on the element order
     @updateLayout()
-  ), 1000
+  ), 1500
+  ###
 
 ModalManager.close = (ui) ->
   ui.dialog.foldableModal('close')
@@ -164,34 +171,47 @@ ModalManager.close = (ui) ->
 
 ModalManager.updateLayout = () ->
   self = this
+
   visibleModals = $(@container).find(".modal-dialog").filter (i,el) =>
     return not $(el).hasClass("sink")
 
+  # console.log("ModalManager:updateLayout", visibleModals)
+
   # Clear the hover event handler
-  visibleModals.unbind('hover')
-  visibleModals.unbind('click')
+  visibleModals.unbind('mouseenter mouseleave click')
 
   zIndex = visibleModals.size()
-  offset = 0
+  offset = 30
+  shiftingOffset = 90
+  index = 0
   for modal in visibleModals.toArray().reverse()
-    do (modal, offset, zIndex) =>
+    do (modal, offset, index, zIndex) =>
+      console.log("Setting modal ", { zindex: zIndex, index: index, modal: modal })
+
+      $(modal).removeAttr('style')
+
       $(modal).css({
         zIndex: zIndex
-        transform: "translateX(#{ offset }px)"
-        webkitTransform: "translateX(#{ offset }px)"
+        transform: "translateX(#{ - offset * index }px)"
+        webkitTransform: "translateX(#{ - offset * index }px)"
       })
-      if offset < 0
-        $(modal).click -> self.focus($(modal))
-
+      if index > 0
+        $(modal).click ->
+          # focus will change the DOM structure, thus we need to remove the event listeners
+          visibleModals.unbind('mouseenter mouseleave click')
+          self.focus($(modal))
         $(modal).hover (-> $(modal).css({
-          transform: "translateX(#{ offset - 50 }px)"
-          webkitTransform: "translateX(#{ offset - 50 }px)"
+          transform: "translateX(#{ - offset * index - shiftingOffset }px)"
+          webkitTransform: "translateX(#{ - offset * index - shiftingOffset }px)"
         })), (-> $(modal).css({
-          transform: "translateX(#{ offset }px)"
-          webkitTransform: "translateX(#{ offset }px)"
+          transform: "translateX(#{ - offset * index }px)"
+          webkitTransform: "translateX(#{ - offset * index }px)"
         }))
+      else
+        $(modal).unbind('hover')
+        $(modal).unbind('click')
+    index++
     zIndex--
-    offset -= 30
 
 ModalManager.createDialog = (opts) ->
   dialog = document.createElement("div")
