@@ -1,8 +1,8 @@
 .fold-container
   position: fixed
   bottom: 0
+  // fold container should be left aligned.
   left: 0
-  right: 0
   height: 32px
   z-index: 9999
   & > .fold
@@ -290,6 +290,11 @@ body.modal-open
       line-height: 64px
       background: #f0f0f0
       @include stretch-stick-bottom(64px)
+
+// put modal container on the top of all container
+body > .modal-container
+  position: fixed
+  z-index: 99999
 
 .modal-body .message
   margin: 0

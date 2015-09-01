@@ -2,7 +2,6 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
   height: 32px;
   z-index: 9999; }
   .fold-container > .fold {
@@ -255,6 +254,10 @@ body.modal-open {
       right: 0;
       left: 0;
       height: 64px; }
+
+body > .modal-container {
+  position: fixed;
+  z-index: 99999; }
 
 .modal-body .message {
   margin: 0;
