@@ -9,7 +9,7 @@ class MenuFolder extends MenuItem
     public $menuItems = array();
     public $attributes = array();
 
-    public function __construct($label , $attributes = array() , $id = null)
+    public function __construct($label, $attributes = array() , $id = null)
     {
         $this->label = $label;
         $this->attributes = $attributes;
@@ -49,9 +49,9 @@ class MenuFolder extends MenuItem
     }
 
 
-    public function createMenuFolder($folderName, $attrs = array(), $id = null)
+    public function createMenuFolder($folderName, $linkAttrs = null, $attrs = array(), $id = null)
     {
-        $folder = new MenuFolder($folderName, $attrs , $id );
+        $folder = new MenuFolder($folderName, $linkAttrs, $attrs , $id );
         $this->menuItems[] = $folder;
         return $folder;
     }
@@ -94,9 +94,9 @@ class MenuFolder extends MenuItem
     }
 
 
-    public function createMenuItem($label, $attributes = array(), $id = null)
+    public function createMenuItem($label, $linkAttrs = null, $attributes = array(), $id = null)
     {
-        $menuItem = new MenuItem($label, $attributes, $id);
+        $menuItem = new MenuItem($label, $linkAttrs, $attributes, $id);
         $this->menuItems[] = $menuItem;
         return $menuItem;
     }
