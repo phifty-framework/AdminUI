@@ -13,7 +13,7 @@ class BaseController extends Controller
     {
         // check user permission
         $cUser = kernel()->currentUser;
-        if( ! $cUser->isLogged() && ! $cUser->hasRole('admin') ) {
+        if( ! $cUser->hasLoggedIn() && ! $cUser->hasRole('admin') ) {
             $this->redirect( '/bs/login?' . http_build_query(array('f' => $_SERVER['PATH_INFO'] )) );
         }
     }

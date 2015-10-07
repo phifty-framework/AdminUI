@@ -11,7 +11,7 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
     {
         # check permission
         $currentUser = kernel()->currentUser;
-        if ( ! $currentUser->isLogged() ) {
+        if ( ! $currentUser->hasLoggedIn() ) {
             // handle action permission
             if ( isset($_REQUEST['__action']) ) {
                 return json_encode(array( 'error' => true, 'message' => _('權限不足，請檢查權限或重新登入') ));

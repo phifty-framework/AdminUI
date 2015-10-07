@@ -55,7 +55,7 @@ vim:filetype=htmldjango
         </form>
         #}
 
-        {% if Kernel.currentUser.isLogged() %}
+        {% if Kernel.currentUser.hasLoggedIn() %}
             <a class="btn" href="/bs/logout">{% trans 'Logout' %}</a>
         {% else %}
             <a class="btn" href="/bs/login">{% trans 'Login' %}</a>
