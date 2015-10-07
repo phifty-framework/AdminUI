@@ -8,11 +8,11 @@ class BaseController extends Controller
 {
     public $defaultViewClass = 'AdminUI\\View';
 
-    public function before()
+    public function prepare()
     {
         // check user permission
         $cUser = kernel()->currentUser;
-        if (! $cUser->hasLoggedIn() || ! $cUser->hasRole('admin')) {
+        if (! $cUser->hasLoggedIn() && ! $cUser->hasRole('admin')) {
             return $this->redirect( '/bs/login?' . http_build_query(array('f' => $_SERVER['PATH_INFO'] )) );
         }
     }
