@@ -11,14 +11,14 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
     {
         # check permission
         $currentUser = kernel()->currentUser;
-        if ( ! $currentUser->hasLoggedIn() ) {
+        if (! $currentUser->hasLoggedIn()) {
             // handle action permission
             if ( isset($_REQUEST['__action']) ) {
                 return json_encode(array( 'error' => true, 'message' => _('權限不足，請檢查權限或重新登入') ));
             }
 
             // redirect full page only
-            $this->redirect( '/bs/login?' . http_build_query(array(
+            return $this->redirect( '/bs/login?' . http_build_query(array(
                 'f' => $_SERVER['PATH_INFO'] )) );
         }
     }

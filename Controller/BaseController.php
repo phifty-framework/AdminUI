@@ -2,6 +2,7 @@
 namespace AdminUI\Controller;
 use Phifty\Bundle;
 use Phifty\Controller;
+use AdminUI\AdminUI;
 
 class BaseController extends Controller
 {
@@ -11,8 +12,8 @@ class BaseController extends Controller
     {
         // check user permission
         $cUser = kernel()->currentUser;
-        if( ! $cUser->hasLoggedIn() && ! $cUser->hasRole('admin') ) {
-            $this->redirect( '/bs/login?' . http_build_query(array('f' => $_SERVER['PATH_INFO'] )) );
+        if (! $cUser->hasLoggedIn() || ! $cUser->hasRole('admin')) {
+            return $this->redirect( '/bs/login?' . http_build_query(array('f' => $_SERVER['PATH_INFO'] )) );
         }
     }
 
