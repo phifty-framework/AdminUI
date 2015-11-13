@@ -1,7 +1,6 @@
 .fold-container
   position: fixed
   bottom: 0
-  // fold container should be left aligned.
   left: 0
   height: 32px
   z-index: 9999
@@ -296,14 +295,19 @@ body > .modal-container
   position: fixed
   z-index: 99999
 
-.modal-body .message
+
+.modal-body .action-result-container
   margin: 0
   position: absolute
   top: 0
   left: 0
   right: 0
-  border-radius: 0
   z-index: 999
+  transition: all ease-out 200ms
+
+.modal-body .message
+  margin: 0
+  border-radius: 0
   color: #333
   border: 0
   &.success

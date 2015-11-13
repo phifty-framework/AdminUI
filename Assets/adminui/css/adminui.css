@@ -1865,12 +1865,14 @@ body.modal-open {
       left: 0;
       height: 64px; }
 
-.modal-body .message {
+.modal-body .action-result-container {
   margin: 0;
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; }
+
+.modal-body .message {
   border-radius: 0;
   z-index: 999;
   color: #333;
