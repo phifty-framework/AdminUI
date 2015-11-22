@@ -8,6 +8,7 @@ use FormKit\Widget\HiddenInput;
 use FormKit\Element\Form;
 use FormKit\Element;
 use FormKit\Widget\SubmitInput;
+use FormKit\Widget\ButtonInput;
 use DOMText;
 
 /**
@@ -26,7 +27,9 @@ use DOMText;
 class StackView extends \ActionKit\View\StackView
 {
     public $ajax = false;
+
     public $method = 'POST';
+
     public $nested = false;
 
     public function createLayout()
