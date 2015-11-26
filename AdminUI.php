@@ -26,7 +26,7 @@ class AdminUI extends Bundle
      */
     public $menuBar;
 
-    public function setConfig($config)
+    public function setConfig(array $config)
     {
         if (isset($config['MenuStyle']) && ! isset($config['MenuTemplate'])) {
             if ( $config['MenuStyle'] === "aim" ) {
