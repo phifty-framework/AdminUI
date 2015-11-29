@@ -5,7 +5,7 @@ This is a basic wrapper library around bootstrap-modal javascript.
 
 The use case is inside DMenu:
 
-    sectionModal = Modal.create({
+    sectionModal = ModalManager.create({
       title: if params.id then 'Edit Menu Section' else 'Create Menu Section'
       ajax: {
         url: '/dmenu/menu_section_form'
@@ -76,7 +76,143 @@ And the actual HTML structure:
     }
   };
 
+
+  /*
+  
+  ModalFactory.create(opts)
+  
+  This method creates DOM structure for bootstrap modal. It doesn't handle the
+  modal operations like close or hide...
+  
+  opts (options)
+  
+    title (string): the modal title in the modal header
+    size (string):  the modal size
+    side (boolean): side modal or not?
+    ajax (object): ajax content modal
+    controls (list): control buttons in the modal footer.
+    foldable (boolean): enable fold button
+  
+  You will have to handle the events if you want to call this API to create modals.
+  The events:
+  
+  - `dialog.close`: function(ui)
+  - `dialog.fold`: function(ui)
+  - `dialog.ajax.done`: function(ui)
+   */
+
+  window.ModalFactory = {};
+
+  ModalFactory.create = function(opts) {
+    var $h4title, closeBtn, content, controlOpts, dialog, fn, foldBtn, footer, header, headerControls, j, len, modalbody, ref, ui;
+    dialog = document.createElement("div");
+    dialog.classList.add("modal-dialog");
+    content = document.createElement("div");
+    content.classList.add("modal-content");
+    header = document.createElement("div");
+    header.classList.add("modal-header");
+    headerControls = document.createElement("div");
+    headerControls.classList.add("modal-header-controls");
+    header.appendChild(headerControls);
+    modalbody = document.createElement('div');
+    modalbody.classList.add('modal-body');
+    footer = document.createElement('div');
+    footer.classList.add('modal-footer');
+    content.appendChild(header);
+    content.appendChild(modalbody);
+    content.appendChild(footer);
+    dialog.appendChild(content);
+    ui = {
+      dialog: $(dialog),
+      body: $(modalbody),
+      header: $(header),
+      options: opts
+    };
+    if (opts.foldable) {
+      foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn");
+      foldBtn.append($("<span/>").addClass("fa fa-minus"));
+      foldBtn.append($("<span/>").addClass("sr-only").text('Fold'));
+      foldBtn.appendTo(headerControls);
+      foldBtn.click(function(e) {
+        return $(dialog).trigger('dialog.fold', [ui]);
+      });
+    }
+    closeBtn = $("<button/>").attr("type", "button").addClass("close");
+    closeBtn.append($("<span/>").addClass("fa fa-remove"));
+    closeBtn.append($("<span/>").addClass("sr-only").text('Close'));
+    closeBtn.appendTo(headerControls);
+    closeBtn.click(function(e) {
+      return $(dialog).trigger('dialog.close', [ui]);
+    });
+    if (opts != null ? opts.side : void 0) {
+      dialog.classList.add("side-modal");
+    }
+    if (opts != null ? opts.size : void 0) {
+      if (opts.size === "large") {
+        dialog.classList.add("modal-lg");
+      } else if (opts.size === "small") {
+        dialog.classList.add("modal-sm");
+      } else if (opts.size === "medium") {
+        dialog.classList.add("modal-md");
+      }
+    }
+    $h4title = $('<h4/>').addClass('modal-title');
+    if (opts.title) {
+      $h4title.text(opts.title);
+    }
+    $h4title.appendTo(header);
+    if (opts.controls) {
+      ref = opts.controls;
+      fn = (function(_this) {
+        return function(controlOpts) {
+          var $btn;
+          $btn = $('<button/>').text(controlOpts.label).addClass('btn');
+          if (controlOpts.primary) {
+            $btn.addClass('btn-primary');
+          }
+          if (controlOpts.onClick) {
+            $btn.click(function(e) {
+              return controlOpts.onClick(e, ui);
+            });
+          }
+          if (controlOpts.close) {
+            $btn.click(function(e) {
+              return $(dialog).trigger('dialog.close', [ui]);
+            });
+          }
+          return $btn.appendTo(footer);
+        };
+      })(this);
+      for (j = 0, len = ref.length; j < len; j++) {
+        controlOpts = ref[j];
+        fn(controlOpts);
+      }
+    }
+    if (opts.ajax) {
+      if (!opts.ajax.url) {
+        alert("opts.ajax.url is not defined.");
+      }
+      $(modalbody).asRegion().load(opts.ajax.url, opts.ajax.args, function() {
+        return $(dialog).trigger('dialog.ajax.done', [ui]);
+      });
+    }
+    return ui;
+  };
+
+  ModalFactory.createContainer = function() {
+    var modal;
+    modal = document.createElement("div");
+    modal.classList.add("modal-container");
+    return modal;
+  };
+
   window.ModalManager = {};
+
+
+  /*
+  
+  init method creates the modal container
+   */
 
   ModalManager.init = function() {
     this.container = document.createElement('div');
@@ -84,15 +220,6 @@ And the actual HTML structure:
     document.body.appendChild(this.container);
     this.folds = $('<div/>').addClass("fold-container");
     return $(document.body).append(this.folds);
-  };
-
-  ModalManager.ajax = function(url, args, opts) {};
-
-  ModalManager.createContainer = function() {
-    var modal;
-    modal = document.createElement("div");
-    modal.classList.add("modal");
-    return modal;
   };
 
   ModalManager.fold = function(ui) {
@@ -174,9 +301,11 @@ And the actual HTML structure:
   };
 
   ModalManager.close = function(ui) {
-    ui.dialog.foldableModal('close');
     if (ui.fold) {
       ui.fold.remove();
+    }
+    if (ui.dialog) {
+      ui.dialog.remove();
     }
     return this.updateLayout();
   };
@@ -189,6 +318,9 @@ And the actual HTML structure:
         return !$(el).hasClass("sink");
       };
     })(this));
+    if (!(visibleModals && visibleModals.length > 0)) {
+      return;
+    }
     visibleModals.unbind('mouseenter mouseleave click');
     zIndex = visibleModals.size();
     offset = 30;
@@ -240,116 +372,29 @@ And the actual HTML structure:
     return results;
   };
 
-  ModalManager.createDialog = function(opts) {
-    var closeBtn, content, controlOpts, dialog, fn, foldBtn, footer, header, headerControls, j, len, modalbody, ref, ui;
-    dialog = document.createElement("div");
-    dialog.classList.add("modal-dialog");
-    content = document.createElement("div");
-    content.classList.add("modal-content");
-    header = document.createElement("div");
-    header.classList.add("modal-header");
-    headerControls = document.createElement("div");
-    headerControls.classList.add("modal-header-controls");
-    header.appendChild(headerControls);
-    modalbody = document.createElement('div');
-    modalbody.classList.add('modal-body');
-    footer = document.createElement('div');
-    footer.classList.add('modal-footer');
-    content.appendChild(header);
-    content.appendChild(modalbody);
-    content.appendChild(footer);
-    dialog.appendChild(content);
-    ui = {
-      dialog: $(dialog),
-      body: $(modalbody),
-      header: $(header),
-      options: opts
-    };
-    if (opts.foldable) {
-      foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn");
-      foldBtn.append($("<span/>").addClass("fa fa-minus"));
-      foldBtn.append($("<span/>").addClass("sr-only").text('Fold'));
-      foldBtn.appendTo(headerControls);
-      foldBtn.click(function(e) {
-        return $(dialog).trigger('dialog.fold', [ui]);
-      });
-    }
-    closeBtn = $("<button/>").attr("type", "button").addClass("close");
-    closeBtn.append($("<span/>").addClass("fa fa-remove"));
-    closeBtn.append($("<span/>").addClass("sr-only").text('Close'));
-    closeBtn.appendTo(headerControls);
-    closeBtn.click(function(e) {
-      return $(dialog).trigger('dialog.close', [ui]);
-    });
-    if (opts != null ? opts.side : void 0) {
-      dialog.classList.add("side-modal");
-    }
-    if (opts != null ? opts.size : void 0) {
-      if (opts.size === "large") {
-        dialog.classList.add("modal-lg");
-      } else if (opts.size === "small") {
-        dialog.classList.add("modal-sm");
-      } else if (opts.size === "medium") {
-        dialog.classList.add("modal-md");
-      }
-    }
-    if (opts.title) {
-      $('<h4/>').text(opts.title).addClass('modal-title').appendTo(header);
-    }
-    if (opts.controls) {
-      ref = opts.controls;
-      fn = (function(_this) {
-        return function(controlOpts) {
-          var $btn;
-          $btn = $('<button/>').text(controlOpts.label).addClass('btn');
-          if (controlOpts.primary) {
-            $btn.addClass('btn-primary');
-          }
-          if (controlOpts.onClick) {
-            $btn.click(function(e) {
-              return controlOpts.onClick(e, ui);
-            });
-          }
-          if (controlOpts.close) {
-            $btn.click(function(e) {
-              return $(dialog).trigger('dialog.close', [ui]);
-            });
-          }
-          return $btn.appendTo(footer);
-        };
-      })(this);
-      for (j = 0, len = ref.length; j < len; j++) {
-        controlOpts = ref[j];
-        fn(controlOpts);
-      }
-    }
-    if (opts.ajax) {
-      if (!opts.ajax.url) {
-        alert("opts.ajax.url is not defined.");
-      }
-      $(modalbody).asRegion().load(opts.ajax.url, opts.ajax.args, function() {
-        return $(dialog).trigger('dialog.ajax.done', [ui]);
-      });
-    }
-    return ui;
-  };
+
+  /*
+  
+  The 'create' method creates a foldable modal and it handles the modal close, fold events
+   */
 
   ModalManager.create = function(opts) {
     var ui;
-    opts.foldable = 1;
-    ui = this.createDialog(opts);
+    ui = ModalFactory.create(opts);
     $(this.container).append(ui.dialog);
     ui.dialog.on("dialog.close", function(e, ui) {
       return ModalManager.close(ui);
     });
-    ui.dialog.on("dialog.fold", function(e, ui) {
-      return ModalManager.fold(ui);
-    });
+    if (opts.foldable) {
+      ui.dialog.on("dialog.fold", function(e, ui) {
+        return ModalManager.fold(ui);
+      });
+    }
     ui.container = $(this.container);
     if (!opts.side) {
-      $(dialog).css({
+      $(ui.dialog).css({
         position: 'fixed',
-        left: ($(window).width() - $(dialog).width()) / 2,
+        left: ($(window).width() - $(ui.dialog).width()) / 2,
         top: '10%'
       });
     }
@@ -361,7 +406,7 @@ And the actual HTML structure:
     $isolatedContainer = $(document.createElement('div'));
     $isolatedContainer.addClass("modal");
     $(document.body).append($isolatedContainer);
-    ui = this.createDialog(opts);
+    ui = ModalFactory.create(opts);
     $isolatedContainer.append(ui.dialog);
     ui.dialog.on("hidden.bs.modal", function(e, ui) {
       return $isolatedContainer.remove();

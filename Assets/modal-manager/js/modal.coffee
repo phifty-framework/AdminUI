@@ -3,7 +3,7 @@ This is a basic wrapper library around bootstrap-modal javascript.
 
 The use case is inside DMenu:
 
-    sectionModal = Modal.create({
+    sectionModal = ModalManager.create({
       title: if params.id then 'Edit Menu Section' else 'Create Menu Section'
       ajax: {
         url: '/dmenu/menu_section_form'
@@ -53,6 +53,8 @@ And the actual HTML structure:
 class Modal
   constructor: (@el) ->
 
+
+
 jQuery.fn.foldableModal = (options) ->
   if options is "show"
     this.removeClass('sink')
@@ -63,8 +65,125 @@ jQuery.fn.foldableModal = (options) ->
   else
     this.show()
 
+
+
+
+###
+
+ModalFactory.create(opts)
+
+This method creates DOM structure for bootstrap modal. It doesn't handle the
+modal operations like close or hide...
+
+opts (options)
+
+  title (string): the modal title in the modal header
+  size (string):  the modal size
+  side (boolean): side modal or not?
+  ajax (object): ajax content modal
+  controls (list): control buttons in the modal footer.
+  foldable (boolean): enable fold button
+
+You will have to handle the events if you want to call this API to create modals.
+The events:
+
+- `dialog.close`: function(ui)
+- `dialog.fold`: function(ui)
+- `dialog.ajax.done`: function(ui)
+
+###
+
+window.ModalFactory = {}
+
+ModalFactory.create = (opts) ->
+  dialog = document.createElement("div")
+  dialog.classList.add("modal-dialog")
+
+  content = document.createElement("div")
+  content.classList.add("modal-content")
+
+  header = document.createElement("div")
+  header.classList.add("modal-header")
+
+  headerControls = document.createElement("div")
+  headerControls.classList.add("modal-header-controls")
+  header.appendChild(headerControls)
+
+  modalbody = document.createElement('div')
+  modalbody.classList.add('modal-body')
+
+  footer = document.createElement('div')
+  footer.classList.add('modal-footer')
+
+  content.appendChild(header)
+  content.appendChild(modalbody)
+  content.appendChild(footer)
+  dialog.appendChild(content)
+
+  ui = { dialog: $(dialog), body: $(modalbody), header: $(header), options: opts }
+  if opts.foldable
+    foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn")
+    foldBtn.append( $("<span/>").addClass("fa fa-minus") )
+    foldBtn.append( $("<span/>").addClass("sr-only").text('Fold') )
+    foldBtn.appendTo(headerControls)
+    foldBtn.click (e) -> $(dialog).trigger('dialog.fold', [ui])
+
+  closeBtn = $("<button/>").attr("type", "button").addClass("close")
+  closeBtn.append( $("<span/>").addClass("fa fa-remove") )
+  closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
+  closeBtn.appendTo(headerControls)
+  closeBtn.click (e) -> $(dialog).trigger('dialog.close',[ui])
+
+  if opts?.side
+    dialog.classList.add("side-modal")
+
+  if opts?.size
+    if opts.size is "large"
+      dialog.classList.add("modal-lg")
+    else if opts.size is "small"
+      dialog.classList.add("modal-sm")
+    else if opts.size is "medium"
+      dialog.classList.add("modal-md")
+
+  # <h4 class="modal-title">Modal title</h4>
+  $h4title = $('<h4/>').addClass('modal-title')
+  $h4title.text(opts.title) if opts.title
+  $h4title.appendTo(header)
+
+
+  if opts.controls
+    for controlOpts in opts.controls
+      do (controlOpts) =>
+        $btn = $('<button/>').text(controlOpts.label).addClass('btn')
+        $btn.addClass('btn-primary') if controlOpts.primary
+        $btn.click((e) -> controlOpts.onClick(e, ui) ) if controlOpts.onClick
+        if controlOpts.close
+          $btn.click (e) -> $(dialog).trigger('dialog.close',[ui])
+        $btn.appendTo(footer)
+
+  if opts.ajax
+    alert("opts.ajax.url is not defined.") if not opts.ajax.url
+    $(modalbody).asRegion().load opts.ajax.url, opts.ajax.args, () ->
+      $(dialog).trigger('dialog.ajax.done', [ui])
+      # opts.ajax.onReady(null, ui) if opts.ajax.onReady
+  return ui
+
+ModalFactory.createContainer = () ->
+  modal = document.createElement("div")
+  modal.classList.add("modal-container")
+  return modal
+
+
+
+
 window.ModalManager = {}
 
+
+###
+
+init method creates the modal container
+
+###
 ModalManager.init = () ->
   @container = document.createElement('div')
   @container.classList.add("modal-container")
@@ -73,13 +192,6 @@ ModalManager.init = () ->
   @folds = $('<div/>').addClass("fold-container")
   $(document.body).append(@folds)
 
-# Fetch modal content via ajax
-ModalManager.ajax = (url, args, opts) ->
-
-ModalManager.createContainer = () ->
-  modal = document.createElement("div")
-  modal.classList.add("modal")
-  return modal
 
 ModalManager.fold = (ui) ->
   ui.dialog.foldableModal('hide')
@@ -165,8 +277,8 @@ ModalManager.focus = (dialog) ->
   ###
 
 ModalManager.close = (ui) ->
-  ui.dialog.foldableModal('close')
   ui.fold.remove() if ui.fold
+  ui.dialog.remove() if ui.dialog
   @updateLayout()
 
 ModalManager.updateLayout = () ->
@@ -175,7 +287,7 @@ ModalManager.updateLayout = () ->
   visibleModals = $(@container).find(".modal-dialog").filter (i,el) =>
     return not $(el).hasClass("sink")
 
-  # console.log("ModalManager:updateLayout", visibleModals)
+  return unless visibleModals and visibleModals.length > 0
 
   # Clear the hover event handler
   visibleModals.unbind('mouseenter mouseleave click')
@@ -213,97 +325,30 @@ ModalManager.updateLayout = () ->
     index++
     zIndex--
 
-ModalManager.createDialog = (opts) ->
-  dialog = document.createElement("div")
-  dialog.classList.add("modal-dialog")
-
-  content = document.createElement("div")
-  content.classList.add("modal-content")
-
-  header = document.createElement("div")
-  header.classList.add("modal-header")
-
-  headerControls = document.createElement("div")
-  headerControls.classList.add("modal-header-controls")
-  header.appendChild(headerControls)
-
-  modalbody = document.createElement('div')
-  modalbody.classList.add('modal-body')
-
-  footer = document.createElement('div')
-  footer.classList.add('modal-footer')
-
-  content.appendChild(header)
-  content.appendChild(modalbody)
-  content.appendChild(footer)
-  dialog.appendChild(content)
-
-  ui = { dialog: $(dialog), body: $(modalbody), header: $(header), options: opts }
-  if opts.foldable
-    foldBtn = $("<button/>").attr("type", "button").addClass("fold-btn")
-    foldBtn.append( $("<span/>").addClass("fa fa-minus") )
-    foldBtn.append( $("<span/>").addClass("sr-only").text('Fold') )
-    foldBtn.appendTo(headerControls)
-    foldBtn.click (e) ->
-      $(dialog).trigger('dialog.fold', [ui])
-
-  closeBtn = $("<button/>").attr("type", "button").addClass("close")
-  closeBtn.append( $("<span/>").addClass("fa fa-remove") )
-  closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
-  closeBtn.appendTo(headerControls)
-  closeBtn.click (e) ->
-    $(dialog).trigger('dialog.close',[ui])
-
-  if opts?.side
-    dialog.classList.add("side-modal")
-
-  if opts?.size
-    if opts.size is "large"
-      dialog.classList.add("modal-lg")
-    else if opts.size is "small"
-      dialog.classList.add("modal-sm")
-    else if opts.size is "medium"
-      dialog.classList.add("modal-md")
-
-  # <h4 class="modal-title">Modal title</h4>
-  if opts.title
-    $('<h4/>').text(opts.title).addClass('modal-title').appendTo(header)
 
 
-  if opts.controls
-    for controlOpts in opts.controls
-      do (controlOpts) =>
-        $btn = $('<button/>').text(controlOpts.label).addClass('btn')
-        $btn.addClass('btn-primary') if controlOpts.primary
-        $btn.click((e) -> controlOpts.onClick(e, ui) ) if controlOpts.onClick
-        if controlOpts.close
-          $btn.click (e) ->
-            $(dialog).trigger('dialog.close',[ui])
-        $btn.appendTo(footer)
+###
 
-  if opts.ajax
-    alert("opts.ajax.url is not defined.") if not opts.ajax.url
-    $(modalbody).asRegion().load opts.ajax.url, opts.ajax.args, () ->
-      $(dialog).trigger('dialog.ajax.done', [ui])
-      # opts.ajax.onReady(null, ui) if opts.ajax.onReady
-  return ui
+The 'create' method creates a foldable modal and it handles the modal close, fold events
 
-# Create a foldable modal
+###
 ModalManager.create = (opts) ->
-  opts.foldable = 1
-  ui = @createDialog(opts)
+  ui = ModalFactory.create(opts)
+
   # Append the dialog element to .modal-container
   $(@container).append(ui.dialog)
 
   ui.dialog.on "dialog.close", (e, ui) -> ModalManager.close(ui)
-  ui.dialog.on "dialog.fold", (e, ui) -> ModalManager.fold(ui)
+
+  if opts.foldable
+    ui.dialog.on "dialog.fold", (e, ui) -> ModalManager.fold(ui)
 
   ui.container = $(@container)
 
   if not opts.side
-    $(dialog).css({
+    $(ui.dialog).css({
       position: 'fixed'
-      left: ($(window).width() - $(dialog).width()) / 2
+      left: ($(window).width() - $(ui.dialog).width()) / 2
       top: '10%'
     })
   return ui
@@ -314,7 +359,7 @@ ModalManager.createBlock = (opts) ->
   $isolatedContainer = $(document.createElement('div'))
   $isolatedContainer.addClass("modal")
   $(document.body).append($isolatedContainer)
-  ui = @createDialog(opts)
+  ui = ModalFactory.create(opts)
 
   $isolatedContainer.append(ui.dialog)
 
