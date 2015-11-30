@@ -7,7 +7,7 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
     public $defaultViewClass = 'AdminUI\\View';
     public $actionViewClass = 'AdminUI\\Action\\View\\StackView';
 
-    public function before()
+    public function prepare()
     {
         # check permission
         $currentUser = kernel()->currentUser;
@@ -18,9 +18,7 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
             }
 
             // redirect full page only
-            return $this->redirect( '/bs/login?' . http_build_query(array(
-                'f' => $_SERVER['PATH_INFO'] )) );
+            return $this->redirect( '/bs/login?' . http_build_query(array('f' => $_SERVER['PATH_INFO'] )));
         }
     }
-
 }
