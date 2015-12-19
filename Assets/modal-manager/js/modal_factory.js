@@ -72,6 +72,18 @@ The events:
     return ui;
   };
 
+  ModalFactory.update = function(ui, opts) {
+    if (opts.title) {
+      this._buildHeader(ui, opts);
+    }
+    if (opts.ajax || opts.content) {
+      this._buildContent(ui, opts);
+    }
+    if (opts.controls) {
+      return this._buildFooter(ui, opts);
+    }
+  };
+
   ModalFactory._buildHeader = function(ui, opts) {
     var $h4title, closeBtn, foldBtn, headerControls;
     ui.header.empty();

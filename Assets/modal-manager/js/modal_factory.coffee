@@ -75,6 +75,10 @@ ModalFactory.create = (opts) ->
   this._buildContent(ui, opts)
   return ui
 
+ModalFactory.update = (ui, opts) ->
+  this._buildHeader(ui, opts) if opts.title
+  this._buildContent(ui, opts) if opts.ajax or opts.content
+  this._buildFooter(ui, opts) if opts.controls
 
 ModalFactory._buildHeader = (ui, opts) ->
   ui.header.empty()
