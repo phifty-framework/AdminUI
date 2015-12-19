@@ -154,6 +154,8 @@ And the actual HTML structure:
         dialog.classList.add("modal-sm");
       } else if (opts.size === "medium") {
         dialog.classList.add("modal-md");
+      } else {
+        dialog.classList.add(opts.size);
       }
     }
     $h4title = $('<h4/>').addClass('modal-title');
@@ -170,14 +172,15 @@ And the actual HTML structure:
           if (controlOpts.primary) {
             $btn.addClass('btn-primary');
           }
-          if (controlOpts.onClick) {
-            $btn.click(function(e) {
-              return controlOpts.onClick(e, ui);
-            });
-          }
           if (controlOpts.close) {
             $btn.click(function(e) {
               return $(dialog).trigger('dialog.close', [ui]);
+            });
+          } else {
+            $btn.click(function(e) {
+              if (controlOpts.onClick) {
+                return controlOpts.onClick(e, ui);
+              }
             });
           }
           return $btn.appendTo(footer);

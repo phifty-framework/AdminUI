@@ -144,6 +144,8 @@ ModalFactory.create = (opts) ->
       dialog.classList.add("modal-sm")
     else if opts.size is "medium"
       dialog.classList.add("modal-md")
+    else if typeof opts.size === "string"
+      dialog.classList.add(opts.size)
 
   # <h4 class="modal-title">Modal title</h4>
   $h4title = $('<h4/>').addClass('modal-title')
@@ -151,14 +153,16 @@ ModalFactory.create = (opts) ->
   $h4title.appendTo(header)
 
 
+  # build modal footer controls
   if opts.controls
     for controlOpts in opts.controls
       do (controlOpts) =>
         $btn = $('<button/>').text(controlOpts.label).addClass('btn')
         $btn.addClass('btn-primary') if controlOpts.primary
-        $btn.click((e) -> controlOpts.onClick(e, ui) ) if controlOpts.onClick
         if controlOpts.close
           $btn.click (e) -> $(dialog).trigger('dialog.close',[ui])
+        else
+          $btn.click (e) -> controlOpts.onClick(e, ui) if controlOpts.onClick
         $btn.appendTo(footer)
 
   if opts.ajax
