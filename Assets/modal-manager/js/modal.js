@@ -154,7 +154,7 @@ And the actual HTML structure:
         dialog.classList.add("modal-sm");
       } else if (opts.size === "medium") {
         dialog.classList.add("modal-md");
-      } else {
+      } else if (typeof opts.size === "string") {
         dialog.classList.add(opts.size);
       }
     }

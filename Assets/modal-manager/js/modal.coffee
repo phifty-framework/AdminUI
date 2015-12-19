@@ -144,7 +144,7 @@ ModalFactory.create = (opts) ->
       dialog.classList.add("modal-sm")
     else if opts.size is "medium"
       dialog.classList.add("modal-md")
-    else if typeof opts.size === "string"
+    else if typeof opts.size is "string"
       dialog.classList.add(opts.size)
 
   # <h4 class="modal-title">Modal title</h4>
