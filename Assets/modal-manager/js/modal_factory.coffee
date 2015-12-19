@@ -71,12 +71,14 @@ ModalFactory.create = (opts) ->
       dialog.classList.add(opts.size)
 
 
-  this._buildFooterControls(ui, opts.controls) if opts.controls
+  this._buildFooter(ui, opts) if opts.controls
   this._buildContent(ui, opts)
   return ui
 
 
 ModalFactory._buildHeader = (ui, opts) ->
+  ui.header.empty()
+
   headerControls = document.createElement("div")
   headerControls.classList.add("modal-header-controls")
   ui.header.append(headerControls)
@@ -99,9 +101,8 @@ ModalFactory._buildHeader = (ui, opts) ->
   $h4title.text(opts.title) if opts.title
   $h4title.appendTo(ui.header)
 
-
-
 ModalFactory._buildContent = (ui, opts) ->
+  ui.body.empty()
   if opts.ajax
     this._buildAjaxContent(ui, opts)
   else if opts.content
@@ -112,8 +113,9 @@ ModalFactory._buildAjaxContent = (ui, opts) ->
   ui.body.asRegion().load opts.ajax.url, opts.ajax.args, () ->
     ui.dialog.trigger('dialog.ajax.done', [ui])
 
-ModalFactory._buildFooterControls = (ui, controls) ->
-  for controlOpts in controls
+ModalFactory._buildFooter = (ui, opts) ->
+  ui.footer.empty()
+  for controlOpts in opts.controls
     do (controlOpts) =>
       $btn = $('<button/>').text(controlOpts.label).addClass('btn')
       $btn.addClass('btn-primary') if controlOpts.primary

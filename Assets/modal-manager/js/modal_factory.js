@@ -66,7 +66,7 @@ The events:
       }
     }
     if (opts.controls) {
-      this._buildFooterControls(ui, opts.controls);
+      this._buildFooter(ui, opts);
     }
     this._buildContent(ui, opts);
     return ui;
@@ -74,6 +74,7 @@ The events:
 
   ModalFactory._buildHeader = function(ui, opts) {
     var $h4title, closeBtn, foldBtn, headerControls;
+    ui.header.empty();
     headerControls = document.createElement("div");
     headerControls.classList.add("modal-header-controls");
     ui.header.append(headerControls);
@@ -101,6 +102,7 @@ The events:
   };
 
   ModalFactory._buildContent = function(ui, opts) {
+    ui.body.empty();
     if (opts.ajax) {
       return this._buildAjaxContent(ui, opts);
     } else if (opts.content) {
@@ -117,11 +119,13 @@ The events:
     });
   };
 
-  ModalFactory._buildFooterControls = function(ui, controls) {
-    var controlOpts, i, len, results;
+  ModalFactory._buildFooter = function(ui, opts) {
+    var controlOpts, i, len, ref, results;
+    ui.footer.empty();
+    ref = opts.controls;
     results = [];
-    for (i = 0, len = controls.length; i < len; i++) {
-      controlOpts = controls[i];
+    for (i = 0, len = ref.length; i < len; i++) {
+      controlOpts = ref[i];
       results.push((function(_this) {
         return function(controlOpts) {
           var $btn;
