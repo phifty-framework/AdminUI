@@ -3,4 +3,5 @@ collections:
   - css:
     - css/modal.css
   - js:
+    - js/modal_factory.js
     - js/modal.js

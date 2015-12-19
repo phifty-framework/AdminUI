@@ -50,7 +50,6 @@ class StackView extends \ActionKit\View\StackView
             $ajaxFlag = new HiddenInput('__ajax_request', array('value' => '1'));
             $form->addChild($ajaxFlag);
         }
-
         return $form;
     }
 
@@ -84,6 +83,13 @@ class StackView extends \ActionKit\View\StackView
             'value' => $this->action->getSignature(),
         ));
         $container->addChild($signature);
+
+        $csrfToken = new HiddenInput($this->action->csrfTokenFieldName, array(
+            'value' => $this->action->getCSRFToken(),
+        ));
+        $container->addChild($csrfToken);
+
+
         $container->addChild($this->buildButtonGroup());
     }
 
