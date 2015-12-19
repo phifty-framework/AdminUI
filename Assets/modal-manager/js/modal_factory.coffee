@@ -47,13 +47,12 @@ ModalFactory.create = (opts) ->
   content.appendChild(footer)
   dialog.appendChild(content)
 
-  ui = {
+  ui =
     dialog: $(dialog)
     body: $(modalbody)
     header: $(header)
     footer: $(footer)
     options: opts
-  }
 
   this._buildHeader(ui, opts)
 
@@ -94,16 +93,16 @@ ModalFactory._buildHeader = (ui, opts) ->
     foldBtn.appendTo(headerControls)
     foldBtn.click (e) -> ui.dialog.trigger('dialog.fold', [ui])
 
-  closeBtn = $("<button/>").attr("type", "button").addClass("close")
-  closeBtn.append( $("<span/>").addClass("fa fa-remove") )
-  closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
-  closeBtn.appendTo(headerControls)
-  closeBtn.click (e) -> ui.dialog.trigger('dialog.close',[ui])
+  $closeBtn = $("<button/>").attr("type", "button").addClass("close")
+  $closeBtn.append( $("<span/>").addClass("fa fa-remove") )
+  $closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
+  $closeBtn.appendTo(headerControls)
+  $closeBtn.click (e) -> ui.dialog.trigger('dialog.close',[ui])
 
   # <h4 class="modal-title">Modal title</h4>
-  $h4title = $('<h4/>').addClass('modal-title')
-  $h4title.text(opts.title) if opts.title
-  $h4title.appendTo(ui.header)
+  $title = $('<h4/>').addClass('modal-title')
+  $title.text(opts.title) if opts.title
+  $title.appendTo(ui.header)
 
 ModalFactory._buildContent = (ui, opts) ->
   ui.body.empty()

@@ -85,7 +85,7 @@ The events:
   };
 
   ModalFactory._buildHeader = function(ui, opts) {
-    var $h4title, closeBtn, foldBtn, headerControls;
+    var $closeBtn, $title, foldBtn, headerControls;
     ui.header.empty();
     headerControls = document.createElement("div");
     headerControls.classList.add("modal-header-controls");
@@ -99,18 +99,18 @@ The events:
         return ui.dialog.trigger('dialog.fold', [ui]);
       });
     }
-    closeBtn = $("<button/>").attr("type", "button").addClass("close");
-    closeBtn.append($("<span/>").addClass("fa fa-remove"));
-    closeBtn.append($("<span/>").addClass("sr-only").text('Close'));
-    closeBtn.appendTo(headerControls);
-    closeBtn.click(function(e) {
+    $closeBtn = $("<button/>").attr("type", "button").addClass("close");
+    $closeBtn.append($("<span/>").addClass("fa fa-remove"));
+    $closeBtn.append($("<span/>").addClass("sr-only").text('Close'));
+    $closeBtn.appendTo(headerControls);
+    $closeBtn.click(function(e) {
       return ui.dialog.trigger('dialog.close', [ui]);
     });
-    $h4title = $('<h4/>').addClass('modal-title');
+    $title = $('<h4/>').addClass('modal-title');
     if (opts.title) {
-      $h4title.text(opts.title);
+      $title.text(opts.title);
     }
-    return $h4title.appendTo(ui.header);
+    return $title.appendTo(ui.header);
   };
 
   ModalFactory._buildContent = function(ui, opts) {

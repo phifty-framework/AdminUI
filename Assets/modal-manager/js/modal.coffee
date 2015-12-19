@@ -234,10 +234,8 @@ ModalManager.create = (opts) ->
   $(@container).append(ui.dialog)
 
   ui.dialog.on "dialog.close", (e, ui) -> ModalManager.close(ui)
-
   if opts.foldable
     ui.dialog.on "dialog.fold", (e, ui) -> ModalManager.fold(ui)
-
   ui.container = $(@container)
 
   if not opts.side
