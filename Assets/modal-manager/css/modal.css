@@ -257,7 +257,7 @@ body.modal-open {
 
 body > .modal-container {
   position: fixed;
-  z-index: 99999; }
+  z-index: 9999; }
 
 .modal-body .action-result-container {
   margin: 0;
