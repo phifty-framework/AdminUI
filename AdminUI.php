@@ -113,7 +113,11 @@ class AdminUI extends Bundle
     public function init()
     {
         /* point to the same login action */
-        $this->route('/bs/login', 'LoginController' );
-        $this->route('/bs',       'BaseController'); // TODO: should be dashboard.
+        if ($loginControllerClass = $this->config('LoginController')) {
+            $this->route('/bs/login', $loginControllerClass);
+        }
+        if ($dashboardControllerClass = $this->config('DashboardController')) {
+            $this->route('/bs', $dashboardControllerClass); // TODO: should be dashboard.
+        }
     }
 }
