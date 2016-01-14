@@ -33,8 +33,5 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
         if (! $currentUser->hasLoggedIn()) {
             return $this->reportRequireLogin();
         }
-        if (!$currentUser->isAdmin() && $this->resourceId && false == kernel()->accessControl->can('view', $this->resourceId)) {
-            return $this->reportPermissionDenied();
-        }
     }
 }
