@@ -22,6 +22,22 @@ class LoginController extends Controller
             'Bundle' => $bundle
         ));
     }
+
+    public function modalAction()
+    {
+        $request = $this->getRequest();
+        $adminUI = AdminUI::getInstance();
+        $bundle = UserBundle::getInstance();
+        $action = new Login;
+        $goto = $this->request->param('f'); /* get both from POST and GET */
+        $loginModalTemplate = $adminUI->getLoginModalTemplate();
+        return $this->render($loginModalTemplate, array( 
+            'goto' => $goto,
+            'action' => $action,
+            'Bundle' => $bundle
+        ));
+    }
+
 }
 
 

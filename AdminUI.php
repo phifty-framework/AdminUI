@@ -87,6 +87,11 @@ class AdminUI extends Bundle
         return $this->config('BasePageTemplate') ?: '@AdminUI/page.html';
     }
 
+    public function getLoginModalTemplate()
+    {
+        return $this->config('LoginModalTemplate') ?: '@AdminUI/login_modal.html';
+    }
+
     public function getLoginPageTemplate()
     {
         return $this->config('LoginPageTemplate') ?: '@AdminUI/login.html';
@@ -115,6 +120,7 @@ class AdminUI extends Bundle
         /* point to the same login action */
         if ($loginControllerClass = $this->config('LoginController')) {
             $this->route('/bs/login', $loginControllerClass);
+            $this->route('/bs/login-modal', $loginControllerClass . ':modal');
         }
         if ($dashboardControllerClass = $this->config('DashboardController')) {
             $this->route('/bs', $dashboardControllerClass); // TODO: should be dashboard.
