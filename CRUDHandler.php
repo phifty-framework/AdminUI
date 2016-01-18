@@ -2,6 +2,7 @@
 namespace AdminUI;
 use Phifty\Region;
 
+
 abstract class CRUDHandler extends \CRUD\CRUDHandler 
 {
     public $defaultViewClass = 'AdminUI\\View';
@@ -10,10 +11,21 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
 
     protected $loginUrl = '/bs/login';
 
+    protected function isXmlHttpRequest()
+    {
+        return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest');
+    }
+
     protected function reportRequireLogin()
     {
-        if (isset($_REQUEST['__action'])) {
-            return json_encode(['error' => true, 'message' => '請重新登入', 'redirect' => $this->loginUrl]);
+        if ($this->isXmlHttpRequest() || isset($_REQUEST['__action']))
+        {
+            return json_encode([
+                'error'          => true,
+                'message'        => '請重新登入',
+                'login_required' => $this->loginUrl,
+                'redirect'       => $this->loginUrl,
+            ]);
         }
         return $this->redirect($this->loginUrl . '?' . http_build_query(array('f' => $_SERVER['PATH_INFO'] )));
     }
