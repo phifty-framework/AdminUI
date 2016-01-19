@@ -8,7 +8,7 @@ class BaseController extends Controller
 {
     public $defaultViewClass = 'AdminUI\\View';
 
-    protected $requiredRole = 'admin';
+    protected $requiredRole;
 
     protected $loginUrl = '/bs/login';
 
@@ -51,7 +51,7 @@ class BaseController extends Controller
     {
         // check user permission
         $cUser = kernel()->currentUser;
-        if (! $cUser->hasLoggedIn() && ! $cUser->hasRole($this->requiredRole)) {
+        if (! $cUser->hasLoggedIn() || ($this->requiredRole && ! $cUser->hasRole($this->requiredRole))) {
             return $this->reportLoginRequired();
         }
     }

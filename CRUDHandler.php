@@ -48,7 +48,6 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
     {
         # check permission
         $currentUser = kernel()->currentUser;
-        return $this->reportLoginRequired();
         if (! $currentUser->hasLoggedIn()) {
             return $this->reportLoginRequired();
         }
