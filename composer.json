@@ -1,6 +1,8 @@
 {
     "name": "corneltek/adminui",
     "type": "phifty-bundle",
+    "description": "admin ui bundle for phifty framework application",
+    "license": "proprietary",
     "require": {
         "corneltek/installers": "dev-master"
     },
@@ -10,5 +12,9 @@
             "email": "yoanlin93@gmail.com"
         }
     ],
-    "autoload": { "psr-4":  { "AdminUI\\": "" } }
+    "extra": { "branch-alias": { "dev-master": "3.1.x-dev" } },
+    "autoload": { "psr-4":  { "AdminUI\\": "" } },
+    "repositories": [
+        {"type": "composer", "url": "https://toran.corneltek.com/repo/private/"}
+    ]
 }
