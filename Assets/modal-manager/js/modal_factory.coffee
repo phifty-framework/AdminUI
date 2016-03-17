@@ -96,6 +96,10 @@ ModalFactory._buildHeader = (ui, opts) ->
   $closeBtn = $("<button/>").attr("type", "button").addClass("close")
   $closeBtn.append( $("<span/>").addClass("fa fa-remove") )
   $closeBtn.append( $("<span/>").addClass("sr-only").text('Close') )
+
+  $closeBtn.attr("data-dismiss", "modal")
+  $closeBtn.attr("aria-label", "Close")
+
   $closeBtn.appendTo(headerControls)
   $closeBtn.click (e) -> ui.dialog.trigger('dialog.close',[ui])
 

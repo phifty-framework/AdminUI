@@ -102,6 +102,8 @@ The events:
     $closeBtn = $("<button/>").attr("type", "button").addClass("close");
     $closeBtn.append($("<span/>").addClass("fa fa-remove"));
     $closeBtn.append($("<span/>").addClass("sr-only").text('Close'));
+    $closeBtn.attr("data-dismiss", "modal");
+    $closeBtn.attr("aria-label", "Close");
     $closeBtn.appendTo(headerControls);
     $closeBtn.click(function(e) {
       return ui.dialog.trigger('dialog.close', [ui]);

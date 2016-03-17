@@ -76,7 +76,9 @@ And the actual HTML structure:
     }
   };
 
-  window.ModalManager = {};
+  window.ModalManager = {
+    startZIndex: 9999
+  };
 
 
   /*
@@ -85,11 +87,25 @@ And the actual HTML structure:
    */
 
   ModalManager.init = function() {
-    this.container = document.createElement('div');
-    this.container.classList.add("modal-container");
+    this.container = this.allocateContainer();
     document.body.appendChild(this.container);
     this.folds = $('<div/>').addClass("fold-container");
     return $(document.body).append(this.folds);
+  };
+
+  ModalManager.allocateContainer = function() {
+    var container;
+    container = document.createElement('div');
+    container.classList.add("modal-container");
+    container.style.zIndex = this.startZIndex++;
+    return container;
+  };
+
+  ModalManager.allocateModal = function() {
+    var container;
+    container = document.createElement('div');
+    container.classList.add("modal");
+    return container;
   };
 
   ModalManager.fold = function(ui) {
@@ -272,12 +288,13 @@ And the actual HTML structure:
   };
 
   ModalManager.createBlock = function(opts) {
-    var $isolatedContainer, ui;
-    $isolatedContainer = $(document.createElement('div'));
-    $isolatedContainer.addClass("modal");
+    var $isolatedContainer, $modal, ui;
+    $isolatedContainer = $(this.allocateContainer());
     $(document.body).append($isolatedContainer);
+    $modal = $(this.allocateModal());
     ui = ModalFactory.create(opts);
-    $isolatedContainer.append(ui.dialog);
+    $modal.append(ui.dialog);
+    $isolatedContainer.append($modal);
     ui.dialog.on("hidden.bs.modal", function(e, ui) {
       return $isolatedContainer.remove();
     });

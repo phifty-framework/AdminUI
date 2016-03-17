@@ -118,10 +118,14 @@ body.modal-open {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
+  z-index: 1041;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   outline: 0; }
+  .modal.in {
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; }
 
 .modal-open .modal {
   overflow-x: hidden;
@@ -163,7 +167,7 @@ body.modal-open {
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5); }
 
 .modal-backdrop {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;

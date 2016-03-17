@@ -71,8 +71,10 @@ jQuery.fn.foldableModal = (options) ->
 
 
 
-window.ModalManager = {}
-
+# Greater than the modal-container
+window.ModalManager = {
+  startZIndex: 9999
+}
 
 ###
 
@@ -80,12 +82,23 @@ init method creates the modal container
 
 ###
 ModalManager.init = () ->
-  @container = document.createElement('div')
-  @container.classList.add("modal-container")
+  @container = @allocateContainer()
   document.body.appendChild(@container)
 
   @folds = $('<div/>').addClass("fold-container")
   $(document.body).append(@folds)
+
+
+ModalManager.allocateContainer = () ->
+  container = document.createElement('div')
+  container.classList.add("modal-container")
+  container.style.zIndex = @startZIndex++
+  return container
+
+ModalManager.allocateModal = () ->
+  container = document.createElement('div')
+  container.classList.add("modal")
+  return container
 
 
 ModalManager.fold = (ui) ->
@@ -249,12 +262,16 @@ ModalManager.create = (opts) ->
 
 # Create a blocking and isolated modal.
 ModalManager.createBlock = (opts) ->
-  $isolatedContainer = $(document.createElement('div'))
-  $isolatedContainer.addClass("modal")
+  $isolatedContainer = $ @allocateContainer()
   $(document.body).append($isolatedContainer)
+
+  $modal = $ @allocateModal()
+
   ui = ModalFactory.create(opts)
 
-  $isolatedContainer.append(ui.dialog)
+  $modal.append(ui.dialog)
+
+  $isolatedContainer.append($modal)
 
   # Connecting ui.dialog to bootstrap modal event
   ui.dialog.on "hidden.bs.modal", (e, ui) ->
@@ -267,6 +284,8 @@ ModalManager.createBlock = (opts) ->
 
 $ ->
   ModalManager.init()
+
+
 
 ###
 Modal test code
