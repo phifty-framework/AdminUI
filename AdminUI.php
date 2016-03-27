@@ -2,7 +2,6 @@
 namespace AdminUI;
 use Phifty\Bundle;
 use Phifty\Controller;
-use Phifty\Routing\CRUDHandler;
 use AdminUI\Menu;
 
 /*
