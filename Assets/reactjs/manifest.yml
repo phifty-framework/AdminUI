@@ -1,6 +1,6 @@
 ---
 collections:
   - javascript:
-    - javascripts/react-15.0.1.js
-    - javascripts/react-dom-15.0.1.js
-    - javascripts/react-with-addons-15.0.1.js
+    - javascripts/react-0.13.3.min.js
+    - javascripts/react-with-addons-0.13.3.js
+    - javascripts/JSXTransformer-0.13.3.js
