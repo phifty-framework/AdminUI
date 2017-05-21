@@ -4,8 +4,8 @@
     "description": "admin ui bundle for phifty framework application",
     "license": "proprietary",
     "require": {
-        "phifty/phifty": "^3.1.0",
-        "composer/installers": "dev-master"
+        "phifty/phifty": "4.0.x-dev",
+        "composer/installers": "^1"
     },
     "authors": [
         {
@@ -13,6 +13,6 @@
             "email": "yoanlin93@gmail.com"
         }
     ],
-    "extra": { "branch-alias": { "dev-master": "3.1.x-dev" } },
+    "extra": { "branch-alias": { "dev-master": "4.0.x-dev" } },
     "autoload": { "psr-4":  { "AdminUI\\": "" } }
 }
