@@ -1,11 +1,11 @@
 <?php
+
 namespace AdminUI;
+
 use WebUI\Components\Menu\MenuItem;
 
 class CRUDMenuItemFactory
 {
-
-
     static public function viewRecordPage($crudId, $recordId, $label)
     {
         $queryString = http_build_query([ 'id' => intval($recordId), '_form_controls' => true, ]);

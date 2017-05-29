@@ -1,5 +1,6 @@
 <?php
 namespace AdminUI\Controller;
+
 use Phifty\Bundle;
 use Phifty\Controller;
 use AdminUI\AdminUI;
@@ -21,8 +22,7 @@ class BaseController extends Controller
 
     protected function reportLoginRequired()
     {
-        if ($this->isXmlHttpRequest() || isset($_REQUEST['__action']))
-        {
+        if ($this->isXmlHttpRequest() || isset($_REQUEST['__action'])) {
             return $this->toJson([
                 'error'           => true,
                 'message'         => '請重新登入',

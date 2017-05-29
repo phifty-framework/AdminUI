@@ -2,7 +2,6 @@
 namespace AdminUI;
 use Phifty\Region;
 
-
 abstract class CRUDHandler extends \CRUD\CRUDHandler 
 {
     public $defaultViewClass = 'AdminUI\\View';

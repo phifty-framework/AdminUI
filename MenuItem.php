@@ -1,5 +1,7 @@
 <?php
+
 namespace AdminUI;
+
 use AdminUI\MenuFolder;
 use AdminUI\Menu;
 
@@ -82,4 +84,3 @@ class MenuItem
         return $html;
     }
 }
-
