@@ -1,5 +1,13 @@
 manifest.php
-/Assets/adminui/css/adminui.css.map
+node_modules
 .sass-cache
 .asset-entries.json
-node_modules
+.css.map
+/vendor
+/frameworks
+/bundles
+/.maghead-cli.yml
+/bootstrap.php
+/config/*.php
+/config/database.yml
+/config/framework.yml
