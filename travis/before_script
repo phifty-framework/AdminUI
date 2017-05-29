@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 set -x
-cp -v config/framework.dev.yml config/framework.yml
-cp -v config/database.dev.yml config/database.yml
+
+(cd config && ln -s framework{.dev,}.yml)
+(cd config && ln -s database{.dev,}.yml)
+
 cp -r frameworks/phifty/app .
 
 rm -f bootstrap.php && php vendor/bin/phifty bootstrap && php bootstrap.php
