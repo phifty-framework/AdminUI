@@ -2,7 +2,7 @@
 namespace AdminUI;
 use Phifty\Region;
 
-abstract class CRUDHandler extends \CRUD\CRUDHandler 
+abstract class CRUDHandler extends \CRUD\CRUDHandler
 {
     public $defaultViewClass = 'AdminUI\\View';
     public $actionViewClass = 'AdminUI\\Action\\View\\StackView';
@@ -28,7 +28,7 @@ abstract class CRUDHandler extends \CRUD\CRUDHandler
                 'redirect'        => $this->loginUrl,
             ]);
         }
-        return $this->redirect($this->loginUrl . '?' . http_build_query(array('f' => $_SERVER['PATH_INFO'] )));
+        return $this->redirect($this->loginUrl . '?' . http_build_query(array('f' => $this->environment['PATH_INFO'] )));
     }
 
     protected function reportPermissionDenied()
