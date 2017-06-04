@@ -2,7 +2,7 @@
 namespace AdminUI\Controller;
 
 use Phifty\Bundle;
-use Phifty\Controller;
+use Phifty\Routing\Controller;
 use AdminUI\AdminUI;
 
 class BaseController extends Controller
@@ -46,16 +46,16 @@ class BaseController extends Controller
         return [403, ['Content-Type: text/html;'], '權限不足'];
     }
 
-
-    public function prepare()
+    public function call(array & $environment, array $response)
     {
-        // check user permission
-        $cUser = kernel()->currentUser;
+        $this->context($environment, $response);
+
+        $cUser = $this->kernel->currentUser;
         if (! $cUser->hasLoggedIn() || ($this->requiredRole && ! $cUser->hasRole($this->requiredRole))) {
             return $this->reportLoginRequired();
         }
+        return parent::call($environment, $response);
     }
-
 
     // render dashboard here
     public function indexAction()

@@ -1,7 +1,7 @@
 <?php
 namespace AdminUI;
 use Phifty\Bundle;
-use Phifty\Controller;
+use Phifty\Routing\Controller;
 use AdminUI\Menu;
 
 /*

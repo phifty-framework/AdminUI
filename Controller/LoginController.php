@@ -3,7 +3,7 @@ namespace AdminUI\Controller;
 
 use UserBundle\UserBundle;
 use UserBundle\Action\Login;
-use Phifty\Controller;
+use Phifty\Routing\Controller;
 use AdminUI\AdminUI;
 use OrgBundle\Model\Org;
 
