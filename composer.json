@@ -5,7 +5,8 @@
     "license": "proprietary",
     "require": {
         "composer/installers": "^1",
-        "phifty/phifty": "4.0.x-dev"
+        "phifty/phifty": "4.0.x-dev",
+        "corneltek/webui": "2.0.x-dev"
     },
     "require-dev": {
         "corneltek/cliframework": "@dev",
