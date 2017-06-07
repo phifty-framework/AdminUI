@@ -40,3 +40,14 @@
     TemplateNamespace: "AppCRUD"
 ```
 
+`BasePageTemplate` can be used to configure base page template:
+
+    BasePageTemplate: "@App/page.html.twig"
+
+
+To include the assets from different bundles in the templates:
+
+    {% if Kernel.bundle('I18N') %}
+        {% assets Kernel.bundle('I18N').getAssets() %}
+    {% endif %}
+

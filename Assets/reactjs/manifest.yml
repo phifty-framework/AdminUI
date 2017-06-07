@@ -1,5 +1,0 @@
----
-collections:
-  - javascript:
-    - javascripts/react-with-addons-0.13.3.js
-    - javascripts/JSXTransformer-0.13.3.js

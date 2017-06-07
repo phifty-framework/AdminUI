@@ -40,19 +40,6 @@ vim:filetype=htmldjango:
     {% endif %}
 
     {% endblock %}
-
-    <script>
-    if (typeof jQuery !== 'undefined') {
-        if (typeof FormKit !== 'undefined') {
-            jQuery(function() { FormKit.install(); });
-        }
-    }
-    $(function() {
-        $(document).bind('drop dragover', function (e) {
-            e.preventDefault();
-        });
-    });
-    </script>
 </head>
 <body>
 {% block body %}

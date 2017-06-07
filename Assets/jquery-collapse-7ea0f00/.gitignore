@@ -1,9 +1,0 @@
-*~
-*.diff
-*.patch
-.DS_Store
-.settings
-Guardfile
-Gemfile
-spec/*_spec.js
-TODO

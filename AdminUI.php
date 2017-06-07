@@ -53,19 +53,11 @@ class AdminUI extends Bundle
     public function assets()
     {
         return [
-            'reactjs15',
-            // 'bootstrap',
-            // 'blueprint-light',
-            'jquery-bsm-select-js',
-            'jquery-collapse-7ea0f00',
             'jquery-menu-aim',
             'facebox',
             'lightbox2',
             // 'ckeditor',
             'jcrop',
-            'chosen',
-            'holder',
-            'modal-manager',
             'adminui',
         ];
     }

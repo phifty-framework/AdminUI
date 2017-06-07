@@ -1,6 +1,0 @@
----
-collections:
-  - js:
-      - src/jquery.collapse.js
-      - src/jquery.collapse_storage.js
-      - src/jquery.collapse_cookie_storage.js
