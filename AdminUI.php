@@ -29,11 +29,11 @@ class AdminUI extends Bundle
     {
         if (isset($config['MenuStyle']) && ! isset($config['MenuTemplate'])) {
             if ( $config['MenuStyle'] === "aim" ) {
-                $config['MenuTemplate'] = '@AdminUI/aim_menu.html';
-            } elseif ( $config['MenuStyle'] === "quickbox" ) {
-                $config['MenuTemplate'] = '@AdminUI/quickbox.html';
-            } elseif ( $config['MenuStyle'] === "standard" ) {
-                $config['MenuTemplate'] = '@AdminUI/standard_menu.html';
+                $config['MenuTemplate'] = '@AdminUI/aim_menu.html.twig';
+            } else if ( $config['MenuStyle'] === "quickbox" ) {
+                $config['MenuTemplate'] = '@AdminUI/quickbox.html.twig';
+            } else if ( $config['MenuStyle'] === "standard" ) {
+                $config['MenuTemplate'] = '@AdminUI/standard_menu.html.twig';
             }
         }
         parent::setConfig($config);
@@ -52,10 +52,10 @@ class AdminUI extends Bundle
      */
     public function assets()
     {
-        return array(
+        return [
             'reactjs15',
             // 'bootstrap',
-            'blueprint-light',
+            // 'blueprint-light',
             'jquery-bsm-select-js',
             'jquery-collapse-7ea0f00',
             'jquery-menu-aim',
@@ -67,7 +67,7 @@ class AdminUI extends Bundle
             'holder',
             'modal-manager',
             'adminui',
-        );
+        ];
     }
 
 
@@ -77,23 +77,23 @@ class AdminUI extends Bundle
             return $this->menuBar;
         }
         $this->menuBar = new Menu;
-        kernel()->event->trigger('adminui.init_menubar', $this->menuBar);
+        $this->kernel->event->trigger('adminui.init_menubar', $this->menuBar);
         return $this->menuBar;
     }
 
     public function getBasePageTemplate()
     {
-        return $this->config('BasePageTemplate') ?: '@AdminUI/page.html';
+        return $this->config('BasePageTemplate') ?: '@AdminUI/page.html.twig';
     }
 
     public function getLoginModalTemplate()
     {
-        return $this->config('LoginModalTemplate') ?: '@AdminUI/login_modal.html';
+        return $this->config('LoginModalTemplate') ?: '@AdminUI/login_modal.html.twig';
     }
 
     public function getLoginPageTemplate()
     {
-        return $this->config('LoginPageTemplate') ?: '@AdminUI/login.html';
+        return $this->config('LoginPageTemplate') ?: '@AdminUI/login.html.twig';
     }
 
     /**
@@ -106,7 +106,7 @@ class AdminUI extends Bundle
         }
 
         $this->menu = new Menu;
-        kernel()->event->trigger('adminui.init_menu', $this->menu);
+        $this->kernel->event->trigger('adminui.init_menu', $this->menu);
 
         // sort the menu
         //$this->menu->sortMenuFoldersToTop();
