@@ -1,6 +1,3 @@
-{#
-vim:filetype=htmldjango:
-#}
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -23,19 +20,23 @@ vim:filetype=htmldjango:
     <script src="/assets/phifty-core/js/tinymce_helper.js"> </script>
 
     {# include all assets from CoreBundle, they're not UI related. #}
+    <!-- core bundle assets -->
     {% assets Kernel.bundle('CoreBundle').getAssets() %}
 
     {% if Kernel.bundle('I18N') %}
+        <!-- i18n bundle assets -->
         {% assets Kernel.bundle('I18N').getAssets() %}
     {% endif %}
 
     {# include AdminUI assets #}
     {% if Kernel.bundle('AdminUI') %}
+        <!-- adminui bundle assets -->
         {% assets Kernel.bundle('AdminUI').getAssets() %}
     {% endif %}
 
     {# include assets for CRUD operations, some are UI related. #}
     {% if Kernel.bundle('CRUD') %}
+        <!-- crud bundle assets -->
         {% assets Kernel.bundle('CRUD').getAssets() %}
     {% endif %}
 

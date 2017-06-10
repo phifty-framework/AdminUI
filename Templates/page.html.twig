@@ -3,20 +3,7 @@ vim:filetype=htmldjango
 #}
 {% extends '@AdminUI/base.html.twig' %}
 
-{% block head %}
-    {{ parent() }}
-    <script>
-        $(function() {
-        // initialize Locale (removed for now because we don't have json file right now...
-        // Locale.init({ lang: 'zh_tw' , dict_path: '/static/dict/' });
-        // Action.plug(ActionGrowler);
-        // jQuery("select, input:submit, input:button, input:text, input:checkbox, input:radio, input:file").uniform();
-        });
-    </script>
-{% endblock %}
-
 {% block body %}
-
 
 {% block header %}
 {% endblock %}
