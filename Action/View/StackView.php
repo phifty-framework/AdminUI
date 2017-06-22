@@ -24,7 +24,7 @@ use DOMText;
  * $action->asView( '...', [ fields: [ ] ] )
  * $action->asView( '...', [ skips: [ ] ] ).
  */
-class StackView extends \ActionKit\View\StackView
+class StackView extends \WebAction\View\StackView
 {
     public $ajax = false;
 
